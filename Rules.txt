@@ -1,0 +1,20 @@
+Latex Report (Overleaf) FYP 1
+
+Things we have to work on in template:
+	•	Only add data in placeholders.
+	•	Do not mess with table of content and list of figures directly it is auto updated.
+	•	Ensure no un numbered headings are present, and they are all numbered.
+	•	No bold content which acts like a heading that will be penalised do proper level headings like first level, second level etc with numbered headings.
+	•	Min 150 max 250 word paras, make them consistent.
+	•	Don’t make unnecessary bold,italics and underlines within paras.
+	•	Both abstract and executive summary present in report. Abstract is summary for academia  and executive summary is for business people nothing bold capitalised or underlined in it keep it plain.
+	•	Bullets no more than one line.
+	•	Do not add sub captions in report for tables or figures.
+	•	Do not force figures to be on same page just add reference of figure in paragraph.
+	•	Refer all figures.
+	•	You have to cite everything do not plagiarise
+	•	At least decribe 15 diff projects/papers befote describing your own idea.
+
+Files to work on:
+main.txt
+fypbib.bib

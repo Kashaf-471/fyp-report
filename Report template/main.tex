@@ -1,0 +1,107 @@
+\documentclass{FastFyp}
+\begin{document}
+\newcommand{\supervisor}{SupervisorName}
+\newcommand{\university}{National University of Computer and Emerging Sciences, Lahore}
+\newcommand{\fyptitle}{FYP Report Title}
+\newcommand{\degree}{BS}
+\newcommand{\Studentone}{Name of Student 1     Roll No. 1    BS(CS/DS/SE)} 
+\newcommand{\Studenttwo}{Name of Student 2     Roll No. 2    BS(CS/DS/SE)}
+\newcommand{\Studentthree}{Name of Student 3     Roll No. 3    BS(CS/DS/SE)}
+\date{\today}
+\renewcommand{\contentsname}{Table of Contents}
+
+\makeatletter
+    \begin{titlepage}
+        \includegraphics[width=0.2\linewidth]{Figures/nulogo.png}\hfill
+        \includegraphics[width=0.2\linewidth]{Figures/fast.png}\\
+        \begin{center} 
+            {\large\bfseries \university}\\[7ex]
+            \includegraphics[width=0.4\linewidth]{Figures/fastlogo.png}\\[8ex]
+            {\huge \bfseries  \fyptitle }\\[10ex] 
+            {\Studentone}\\{\Studenttwo}\\{\Studentthree}\\[4ex] 
+            {Supervisor: \supervisor} \\ [10ex]
+            {Final Year Project}\\
+            {\large \@date}
+        \end{center}
+    \end{titlepage}    
+\makeatother
+\frontmatter
+
+\newpage \thispagestyle{empty} \mbox{} \newpage %Aatira
+
+\pagestyle{empty}  %Aatira
+\section*{\begin{center}{Anti-Plagiarism Declaration} \end{center}} %Aatira
+This is to declare that the above publication was produced under the:
+\begin{flushleft}
+\bf Title: \fyptitle
+\end{flushleft}
+
+is the sole contribution of the author(s), and no part hereof has been reproduced as it is the basis (cut and paste) that can be considered Plagiarism. All referenced parts have been used to argue the idea and cited properly. I/We will be responsible and liable for any consequence if a violation of this declaration is determined.
+\\[4ex]
+%% FYPTODO add the date and your names here
+Date: ..........................
+
+\begin{flushright}
+Name: ..........................
+\\[3ex]
+Signature: ..........................
+\\[6ex]
+Name: ..........................
+\\[3ex]
+Signature: ..........................
+\\[6ex]
+Name: ..........................
+\\[3ex]
+Signature: ..........................
+
+\end{flushright} 
+
+\vspace{5 cm} %Aatira
+ 
+\hrule %Aatira
+
+\section*{Author's Declaration}
+This states Authors’ declaration that the work presented in the report is their own, and has not been submitted/presented previously to any other institution or organization.
+\pagebreak
+\section*{Abstract}
+\input{frontmatter/abstract}%
+\pagebreak 
+
+\section*{Executive Summary}
+\input{frontmatter/executive_summary}%
+\pagebreak
+
+
+\pagestyle{fancy} %Aatira
+\tableofcontents
+
+\pagebreak
+\listoffigures	% comment this if there are no figures
+\addcontentsline{toc}{chapter}{List of Figures}
+\pagebreak
+\listoftables % comment this if there are no tables
+\addcontentsline{toc}{chapter}{List of Tables}
+
+\mainmatter
+
+
+\input{chapters/01_introduction}%
+\input{chapters/02_project_vision}%
+\input{chapters/03_literature_review}%
+\input{chapters/04_software_requirement_specifications}%
+\input{chapters/05_proposed_approach_and_methodology}%
+\input{chapters/06_high_level_and_low_level_design}%
+\input{chapters/07_implementation_and_test_cases}%
+\input{chapters/08_user_manual}%
+\input{chapters/09_experimental_results_and_discussion}%
+\input{chapters/10_conclusions}%
+{
+\bibliographystyle{ieeetr}
+\bibliography{fypbib_A,fypbib_B,fypbib_C} %specify your .bib file here
+}
+%ADD APPENDICES IF REQUIRED OTHERWISE COMMENT IT OUT
+\appendix
+\input{chapters/appendix_a_template_examples}%
+\end{document}
+
+

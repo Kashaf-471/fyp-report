@@ -1,0 +1,71 @@
+% Owner: Member B (Fatima Malik); mapping assumed from proposal order.
+\chapter{Literature Review / Related Work}
+For each related work, provide a paragraph of introduction and, at the end, a paragraph of conclusions. Give a page break after the chapter ends. \textcolor{red}{This chapter is mandatory.}
+\section{Definitions, Acronyms, and Abbreviations}
+\section{Detailed Literature Review} 
+This section will include a detailed literature review of your problem area. Make different categories for different types of work done in the past.  In addition to textual descriptions, make a summary table that describes each paper that you have read, along with references.
+\subsection{Related Research Work 1 / Related Development Project (Please make sure to add an appropriate heading here and not keep this same heading, this is your info only.)}
+\begin{itemize}
+    \item Summary of the research item / Development Project (1 or 2 paragraphs)
+  \item  Critical analysis of the research item / Development Project (Strengths and Weaknesses) 1 paragraph
+  \item  Relationship to the proposed work - 1 paragraph
+\end{itemize}
+
+ \subsection{Example LR 1: for Development Project}
+The project ABC \cite{ref:guyon:2007a} focused on building a real-time customer service dashboard designed to streamline query management and improve response efficiency within a mid-sized software firm. The system was developed using a modular architecture, integrating ticket tracking, live chat support, and performance analytics into a single interface. Built with React for the frontend and Node.js for the backend, the dashboard also featured role-based access control and SLA monitoring tools. During testing, the dashboard demonstrated a 35\% reduction in query resolution time and improved internal coordination between support agents and technical teams. The project was deployed in phases, starting with internal use and later expanding to client-facing support channels.
+
+One of the key strengths of this development effort was its adaptability to existing workflows. The dashboard was designed to integrate seamlessly with the company’s CRM and internal communication tools, minimizing disruption during rollout. Its real-time analytics allowed supervisors to monitor agent performance and customer satisfaction trends. However, the project faced limitations in scalability during peak traffic hours, and the initial version lacked multilingual support, which restricted its usability for international clients. These issues were partially addressed in later iterations but remain areas for future enhancement.
+
+This development project directly supports the proposed research by providing a practical foundation for evaluating customer service efficiency. While the research explores theoretical models and AI integration, the dashboard serves as a tangible implementation that can be enhanced with AI-driven features such as automated query routing and sentiment analysis. The performance metrics gathered during this project will inform the research’s evaluation framework and help validate proposed improvements in service delivery and operational management.
+
+ \subsection{Example LR 2: for Research and Development Project}
+Smith et al. \cite{ref:Bishop:2006} investigated the integration of AI-powered chatbots within corporate customer service frameworks, focusing on automating Tier-1 support queries. Their study involved deploying a Natural Language Processing (NLP) based chatbot across three multinational firms and evaluating its performance over a six-month period. The results demonstrated a 40\% reduction in average response time and a 25\% increase in customer satisfaction ratings. The chatbot was trained using historical customer interaction logs and was integrated with existing CRM systems to ensure contextual accuracy and personalized responses. Additionally, the study emphasized the scalability of chatbot systems, noting their ability to handle thousands of simultaneous queries without compromising quality, especially during peak service hours when traditional support teams struggled to maintain SLA compliance.
+
+One of the strengths of this research lies in its empirical approach, offering quantifiable improvements in service metrics. The integration with CRM systems added depth to the chatbot’s responses, enhancing the overall customer experience. However, the study’s limitations include its narrow focus on Tier-1 queries, with minimal exploration of escalation protocols or emotional intelligence in handling sensitive customer issues. It also lacks discussion on the long-term adaptability of the chatbot to evolving customer expectations and organizational changes.
+
+This research is directly relevant to the proposed work, which aims to develop a hybrid customer service model that combines AI efficiency with human oversight. While they focused primarily on automation, the proposed work seeks to extend their framework by incorporating feedback loops, escalation mechanisms, and sentiment analysis to handle more complex queries. The foundational insights from this study will inform the design and evaluation metrics of the proposed system, particularly in terms of response time, customer satisfaction, and operational scalability.
+
+\section{Literature Review Summary Table}
+Please provide a compact summary of your literature review as provided in the table \ref{tab:1}, for the development project.
+\begin{table}[!h]
+\centering
+\caption{This summary Table is for a development project, and you must identify each column clearly. Must need at least 15 relevant studies}
+\begin{tabular}{|p{2.5cm}|p{2.5cm}|p{4cm}|p{5cm}|}
+\hline
+    \textbf{Application} & \textbf{Features} & \textbf{Relevance} & \textbf{Limitations} \\
+\hline
+Rapid Miner \cite{ref:Duda:2000} & User interface design & Provides information on user requirements and design considerations & Limited sample size and geographic diversity of participants \\
+\hline
+TensorFlow \cite{ref:SVMGuide} & Competitive analysis & Identifies potential competitors and opportunities for differentiation & Limited to apps in the same category and not considering other possible alternatives \\
+\hline
+Abc Keras \cite{ref:guyon:2007} & Technical infrastructure & Helps to identify and plan for necessary technical resources and infrastructure & Assumes all requirements are known and does not evaluate the possibility of new requirements emerging in the future \\
+\hline
+Abc Xyz \cite{ref:guyon:2007a} & User experience testing & Provides feedback on user experience and identifies areas for improvement & Limited sample size and testing environment not fully representative of real-world conditions \\
+\hline
+\end{tabular}
+\label{tab:1}
+\end{table}
+The Table above explains a way to present your literature review for development projects. If you have a research project, the summary should be written in the below table \ref{tab:2} format.
+\begin{table}[!h]
+\caption{This summary Table is for a research project, and you must identify each column clearly. Must need at least 15 relevant studies}
+\centering
+\begin{tabular}{|p{3cm}|p{4cm}|p{4cm}|p{3cm}|}
+\hline
+\textbf{Author} & \textbf{Method} & \textbf{Results} & \textbf{Limitations} \\
+\hline
+Smith et al. \cite{ref:Bishop:2006}& Case study with a sample size of 50 & Positive effects of XYZ on ABC, 93.74\% accuracy & Small sample size \\
+\hline
+Johnson et al. \cite{ref:Duda:2000} & Literature review utilizing keyword-based search & A comprehensive overview of XYZ in the field of DEF, 12.8\% precision & Limited to specific subfield \\
+\hline
+Williams et al. \cite{ref:IJCNNChallenge:2007} & Survey of 1000 participants using a structured questionnaire & Strong correlation between XYZ and GHI, R-squared = 0.72 & Self-reported data \\
+\hline
+Jones et al. \cite{ref:SVMGuide} & Experimental design with 100 participants, Utilized SVM with the combination of PCA & XYZ significantly improves JKL in certain populations, AUC = 0.86 & Limited generalizability \\
+\hline
+\end{tabular}
+\label{tab:2}
+\end{table}
+
+\section{Conclusion}
+Write the conclusion of the literature review. 
+The columns in the table depending upon your problem and should be specific to your project as described in \ref{tab:1}, \ref{tab:2}, respectively. Proper citations and references are necessary. The template has already an integrated IEEE references format. Go to Google scholar, copy the bib text of your reference, and paste the reference into the fypbib.bib file. Then all you have to do is use \cite{ref:Bishop:2006}.\\ \textcolor{red}{\textbf{NOTE: For development projects, describe related or similar work done by other teams and details of their methods/algorithms. For a research project, a detailed literature survey is expected.}}
+ 

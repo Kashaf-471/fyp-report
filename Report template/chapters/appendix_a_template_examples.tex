@@ -1,0 +1,97 @@
+% Owner: Member A (Kashaf Ali); mapping assumed from proposal order.
+\chapter{First Appendix if Required}
+If you want to add appendices then make sure you provide a proper title.  Add different appendices by using the chapter command as shown for this one.  They will automatically be added to the table of contents.
+
+\section{References}
+See how .bib file is prepared.  The bibliography would be automatically added by Latex.  So here is how you cite papers (you'll need to view the .bib file to understand).  \cite{ref:Duda:2000} is the correct way to make one citation and \cite{ref:Bishop:2006,ref:SVMGuide} to make multiple citations. You can see various reference styles for manuals \cite{ref:SVMGuide}, conferences \cite{ref:guyon:2007}, websites \cite{ref:IJCNNChallenge:2007} and journal articles \cite{ref:guyon:2007a}.  Also, note that all citations appear in the order in which they appear within text.  They are not sorted according to author names.
+
+\section{Equations}
+Make sure you use the math environment for writing equations.  Again, make sure you do not hard code equation numbers.  Use label and ref commands of Latex to number them and reference them.  Here is an example of (\ref{eq:energy})
+\begin{equation}\label{eq:energy}
+E = mc^2
+\end{equation}
+Note, how the equation is referenced by its equation number within brackets.  
+
+\section{Figures}
+To insert a figure, you can use the following code as template.  Here the figure is referenced using ref command of Latex.  So Figure \ref{fig:fast} is the FAST logo.  DO NOT HARD CODE FIGURE NUMBERS.  Let Latex manage them for you.
+
+\begin{figure}[!hbt]
+\centering
+\includegraphics[width=1in]{Figures/fastlogo.png}
+{\caption {\label{fig:fast}{\textbf{Fast Logo is the Caption.}}}}  
+\end{figure}
+
+\section{Tables}
+Note how tables can be added in Latex.  Also, make sure you use label and ref commands to define and use table numbers.  You can use Table \ref{tbl:SomeTable} as a template to make tables, add captions to them and reference them.  DO NOT HARD CODE TABLE NUMBERS.  Let Latex manage their numbering for you.
+
+If you are having problems in managing Latex tables, you may use Lyx \url{https://www.lyx.org/}. 
+
+
+\begin{table}[hbt]
+
+\begin{center}
+\caption{\label{tbl:SomeTable} \textbf{Give a Caption to the Table.}}
+\begin{tabular}{|l|c|c|} 
+\hline
+\textbf{No.}&\textbf{Column 1}&\textbf{Column 2}\\
+\hline
+1.&Some data&More data\\
+\hline
+2.&Some values&More values\\
+\hline
+\end {tabular}
+
+\end{center}
+
+\end{table}
+
+\section{Pseudo Code}
+When you need to explain an existing algorithm of an algorithm you devised, then you should use pseudo code notation. Given below, algorithm  \ref{algo:one}, is an example. Note how the numbering is managed by the Latex itself.
+
+\begin{algorithm}[H]
+ \KwData{this text}
+ \KwResult{how to write algorithm with \LaTeX2e }
+ initialization\;
+ \While{not at end of this document}{
+  read current\;
+  \eIf{understand}{
+   go to next section\;
+   current section becomes this one\;
+   }{
+   go back to the beginning of current section\;
+  }
+ }
+ \caption{How to write algorithms}
+ \label{algo:one}
+\end{algorithm}
+
+\section{Code of Programming Languages}
+If you need to add C++, Java or any other programming language's code, then you can use ``listings'' package. Following is an example. Normally, the code is only added in the appendices to avoid clutter in the document.
+
+\begin{lstlisting}
+
+#include <stdio.h>
+#define N 10
+/* Block
+ * comment */
+
+int main()
+{
+    int i;
+
+    // Line comment.
+    puts("Hello world!");
+    
+    for (i = 0; i < N; i++)
+    {
+        puts("LaTeX is also great for programmers!");
+    }
+
+    return 0;
+}
+\end{lstlisting}
+
+\section{Recommendations for \LaTeX}
+Here we are providing you with only two Latex source files.  main.tex and fypbib.bib file. You can also start a project at \url{overleaf.com} and upload the zip file of this template there and share the Latex source between your group and supervisor.  This way all of you can work on the Latex files together online.
+
+

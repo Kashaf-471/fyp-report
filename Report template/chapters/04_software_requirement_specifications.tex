@@ -1,0 +1,79 @@
+% Owner: Member A (Kashaf Ali); mapping assumed from proposal order.
+\chapter{Software Requirement Specifications}
+Describe all modules of requirements and design in clear English text along with the necessary diagram and figures.  Anyone reading your report should be able to reproduce your system/results after reading it. It describes functional requirements, design constraints, and other factors necessary to provide a complete and comprehensive description of the requirements for the software.\\
+For each chapter, provide a paragraph of introduction and at the end, a paragraph of conclusions. Make sure no heading/subheading is blank.  Write text to introduce each section as well. 
+\textcolor{red}{NOTE: This Chapter is optional for Research projects but compulsory for Development projects.}
+\section{List of Features}
+List all important features of your system here.
+\section{Functional Requirements}
+The functional requirements fully describe the external behavior of the system. Identify and list each functionality and give a brief description, along with the user of each functionality.
+\section{Quality Attributes}
+
+\section{Non-Functional Requirements}
+This section should describe all the non-functional requirements, including reusability, performance (how many maximum users can access it at a time), extensibility, etc.
+\section{Assumptions}
+List down all the assumptions made for the specification.
+\section{Use Cases}
+This section lists use cases or scenarios from the use-case model if they represent some significant, central functionality of the final system, or if they have a large architectural coverage—they exercise many architectural elements, or if they stress or illustrate a specific, delicate point of the architecture.\\
+The table \ref{tab:2.1} provides a simple use case.
+
+
+\begin{table}[!ht]
+\centering
+\caption{ A sample use case is given in the above table. You have to follow this tabular format for use cases. Following is the description of the content required in this section. \textcolor{red}{No separate heading is required or use case tables. Keep them all under a generic use case heading. Also, In the previous version, usecase tables dont have cpation, in this version, we do have. } }
+\label{tab:2.1}
+\begin{tabular}{|lllll|}
+\hline
+\multicolumn{2}{|l|}{\textbf{Name}} &
+  \multicolumn{3}{l|}{Sample Use Case Name Here} \\ \hline
+\multicolumn{2}{|l|}{\textbf{Actors}} &
+  \multicolumn{3}{l|}{Admin, Business Owner, Store Manager} \\ \hline
+\multicolumn{2}{|l|}{\textbf{Summary}} &
+  \multicolumn{3}{l|}{\begin{tabular}[c]{@{}l@{}}The user shall provide their email and password on the login form, \\ and after successful verification, redirect the user to the home page.\end{tabular}} \\ \hline
+\multicolumn{2}{|l|}{\textbf{Pre-Conditions}} &
+  \multicolumn{3}{l|}{\begin{tabular}[c]{@{}l@{}}The user must be in the database records, either added by any of the\\  authorized users or added manually by a developer.\\ The user must not already be logged in.\end{tabular}} \\ \hline
+\multicolumn{2}{|l|}{\textbf{Post-Conditions}} &
+  \multicolumn{3}{l|}{\begin{tabular}[c]{@{}l@{}}The user’s session is successfully established and shall be redirected\\  to the home page.\end{tabular}} \\ \hline
+\multicolumn{2}{|l|}{\textbf{\begin{tabular}[c]{@{}l@{}}Special\\ Requirements\end{tabular}}} &
+  \multicolumn{3}{l|}{None} \\ \hline
+\multicolumn{5}{|c|}{\textbf{Basic Flow}} \\ \hline
+\multicolumn{3}{|c|}{\textbf{Actor Action}} &
+  \multicolumn{2}{c|}{\textbf{System Response}} \\ \hline
+\multicolumn{1}{|l|}{1} &
+  \multicolumn{2}{l|}{\begin{tabular}[c]{@{}l@{}}The user opens \\ the login page.\end{tabular}} &
+  \multicolumn{1}{l|}{2} &
+  \begin{tabular}[c]{@{}l@{}}The login page is displayed asking for email and\\  password.\end{tabular} \\ \hline
+\multicolumn{1}{|l|}{2} &
+  \multicolumn{2}{l|}{\begin{tabular}[c]{@{}l@{}}The user enters valid\\  email and password.\end{tabular}} &
+  \multicolumn{1}{l|}{4} &
+  \begin{tabular}[c]{@{}l@{}}The system verifies the email and  password, \\ establishes a session for the user and redirects\\  the user to the home page.\end{tabular} \\ \hline
+\multicolumn{5}{|c|}{\textbf{Alternative Flow}} \\ \hline
+\multicolumn{1}{|l|}{3} &
+  \multicolumn{2}{l|}{\begin{tabular}[c]{@{}l@{}}The user enters invalid\\  email or password.\end{tabular}} &
+  \multicolumn{1}{l|}{4-A} &
+  \begin{tabular}[c]{@{}l@{}}The system responds with an error \\ message: Incorrect email or password entered.\end{tabular} \\ \hline
+\end{tabular}
+\end{table}
+
+This section lists use cases or scenarios from the use-case model if they represent some significant, central functionality of the final system, or if they have a large architectural coverage—they exercise many architectural elements or if they stress or illustrate a specific, delicate point of the architecture.\\
+\textbf{Summary:} The description briefly conveys the role and purpose of the use case. A single paragraph will suffice for this description.\\
+\textbf{Basic Flow:} This use case starts when the actor does something. An actor always initiates use cases. The use case describes what the actor does and what the system does in response. It is phrased in the form of a dialog between the actor and the system.\\
+The use case describes what happens inside the system, but not how or why. If information is exchanged, be specific about what is passed back and forth. For example, it is not very illuminating to say that the actor enters customer information. It is better to say the actor enters the customer’s name and address. A Glossary of Terms is often useful to keep the complexity of the use case manageable you may want to define things like customer information there to keep the use case from drowning in details.\\
+Simple alternatives may be presented within the text of the use case. If it only takes a few sentences to describe what happens when there is an alternative, do it directly within the \textbf{Flow of Events} section. If the alternative flow is more complex, use a separate section to describe it. For example, an Alternative Flow subsection explains how to describe more complex alternatives.\\
+A picture is sometimes worth a thousand words, though there is no substitute for clean, clear prose. If it improves clarity, feel free to paste graphical depictions of user interfaces, process flows or other figures into the use case. If a flow chart is useful to present a complex decision process, by all means use it!  Similarly for state-dependent behavior, a state-transition diagram often clarifies the behavior of a system better than pages upon pages of text. Use the right presentation medium for your problem, but be wary of using terminology, notations or figures that your audience may not understand. Remember that your purpose is to clarify, not obscure.\\
+\textbf{First Alternative Flow:} More complex alternatives are described in a separate section, referred to in the Basic Flow subsection of Flow of Events section. Think of the Alternative Flow subsections like alternative behavior each alternative flow represents alternative behavior usually due to exceptions that occur in the main flow. They may be as long as necessary to describe the events associated with the alternative behavior. When an alternative flow ends, the events of the main flow of events are resumed unless otherwise stated.\\
+\textbf{Second Alternative Flow:} There may be, and most likely will be, a number of alternative flows in a use case. Keep each alternative flow separate to improve clarity. Using alternative flows improves the readability of the use case, as well as preventing use cases from being decomposed into hierarchies of use cases. Keep in mind that use cases are just textual descriptions, and their main purpose is to document the behavior of a system in a clear, concise, and understandable way.\\
+\textbf{Special Requirements:} A special requirement is typically a nonfunctional requirement that is specific to a use case, but is not easily or naturally specified in the text of the use case’s event flow. Examples of special requirements include legal and regulatory requirements, application standards, and quality attributes of the system to be built including usability, reliability, performance or supportability requirements. Additionally, other requirements such as operating systems and environments, compatibility requirements, and design constraints should be captured in this section.\\
+\textbf{Pre-Conditions:} A pre-condition of a use case is the state of the system that must be present prior to a use case being performed.\\
+\textbf{Post-Conditions:} A post-condition of a use case is a list of possible states the system can be in immediately after a use case has finished.
+\section{Hardware and Software Requirements}
+List the hardware and software requirements that will be required to develop and deploy the project.
+\subsection{Hardware Requirements}
+\subsection{Software Requirements}
+\section{Graphical User Interface}
+This section should give the GUI dumps of each screen, with reference to the users. The navigation flow of each user is also required, and each GUI should mark the functionality/use case that it covers.
+\section{Database Design (if required; this means if you are using noSQL, you will not provide ER but the other design element and data dictonary should still be there. Explain and elaborate your DB design)}
+\subsection{ER Diagram}
+\subsection{Data Dictionary}
+\section{ Risk Analysis}
+List and explain the risks that may be encountered during the project. For e.g.: technical risks, business risks, etc.

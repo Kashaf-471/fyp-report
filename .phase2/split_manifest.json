@@ -1,0 +1,106 @@
+{
+  "original_hashes": {
+    "FastFyp.cls": "2a44092ed22bb7dc0abbca8c39300752c65dd558650d8a06ecf8cb15ccaa27a8",
+    "Figures/fast.png": "ba2f7f3d41b303bca0954a61657deab12eeb849618a7d1593612a2895e8d4b38",
+    "Figures/fastlogo.png": "0994c9479cca56042101fcea9db0537f872450230b8f85bd8785caa17da4873c",
+    "Figures/nulogo.png": "672bc9d0da0f1ed3abbb1422e8c4a0142b164d4c46cff4b69b56d0e9fc1b94f8",
+    "Figures/Picture1.png": "5f6bd481a257e245493e6d8015ff661b176d91a524fd6b87f644083144a5e128",
+    "fypbib.bib": "bc7aaeb16da41bd21c2aab3f09abbe8257e131e2871a4669b815434f355b2889",
+    "main.tex": "7292705e8c46422d21b0ef756f3c929acf5f54d94da68305496d1c96ab4fd80a"
+  },
+  "main_sha256": "fb9d70d76c5bb08525ad975ec4bd317d5848f7c14536d204c51e7fddba8f39b0",
+  "files": [
+    {
+      "file": "chapters/01_introduction.tex",
+      "owner": "A",
+      "name": "Kashaf Ali",
+      "body_sha256": "69b8058b2742d8d1777cf9a9bd594554f3422756491fdd9aba17934b12bff1f6",
+      "header_bytes": 69
+    },
+    {
+      "file": "chapters/02_project_vision.tex",
+      "owner": "A",
+      "name": "Kashaf Ali",
+      "body_sha256": "1765a124cc6d9bd61f5300f9984e9d228f1921daabaaea913806b94a52cacb3b",
+      "header_bytes": 69
+    },
+    {
+      "file": "chapters/03_literature_review.tex",
+      "owner": "B",
+      "name": "Fatima Malik",
+      "body_sha256": "fb59eab9d20f20847849aaca13572d8957662ae6ef6e710f1c17734fc5c074b5",
+      "header_bytes": 71
+    },
+    {
+      "file": "chapters/04_software_requirement_specifications.tex",
+      "owner": "A",
+      "name": "Kashaf Ali",
+      "body_sha256": "225ad595e2d68914cef28c48e8f0d33ddb6d640f21a0fbfeaf54b13301e738ef",
+      "header_bytes": 69
+    },
+    {
+      "file": "chapters/05_proposed_approach_and_methodology.tex",
+      "owner": "B",
+      "name": "Fatima Malik",
+      "body_sha256": "5a387e59eb53075f277d1f3ffc85f09b9e9ac1a7f2ffe0614b20bda42b474c8a",
+      "header_bytes": 71
+    },
+    {
+      "file": "chapters/06_high_level_and_low_level_design.tex",
+      "owner": "C",
+      "name": "Eesha Irfan",
+      "body_sha256": "16669123e3b00ab04bf40da1fc6afb231b8a7d1f97e1803ed990306bdeed694d",
+      "header_bytes": 70
+    },
+    {
+      "file": "chapters/07_implementation_and_test_cases.tex",
+      "owner": "C",
+      "name": "Eesha Irfan",
+      "body_sha256": "753b8b56af1534f3287075af76805555f1ae0bfef446c89a7885bd5039f87897",
+      "header_bytes": 70
+    },
+    {
+      "file": "chapters/08_user_manual.tex",
+      "owner": "A",
+      "name": "Kashaf Ali",
+      "body_sha256": "81fdc25e7e54b60e6185ec2714d31c51596d0b9d42bfcf3b38a9a9d4149cbe5a",
+      "header_bytes": 69
+    },
+    {
+      "file": "chapters/09_experimental_results_and_discussion.tex",
+      "owner": "B",
+      "name": "Fatima Malik",
+      "body_sha256": "0dedf30d96ac2585e3fadbe5c437b2a0ae792c2b6bf17133bccf534ae33f26ea",
+      "header_bytes": 71
+    },
+    {
+      "file": "chapters/10_conclusions.tex",
+      "owner": "A",
+      "name": "Kashaf Ali",
+      "body_sha256": "cd45b47a2e991f77cf196f97d00bab35056cbe2e2eb28ff94340c29ed54f0488",
+      "header_bytes": 69
+    },
+    {
+      "file": "chapters/appendix_a_template_examples.tex",
+      "owner": "A",
+      "name": "Kashaf Ali",
+      "body_sha256": "a4192a7b6c0849cc4c784e0a673bba15fe5d0695f9fc11d0fb2134ff33389b72",
+      "header_bytes": 69
+    },
+    {
+      "file": "frontmatter/abstract.tex",
+      "owner": "B",
+      "name": "Fatima Malik",
+      "body_sha256": "17efdd80e7a41967f16cda43f094bfc07d0d6d30742f641d2f5ee8c4eaeec34d",
+      "header_bytes": 71
+    },
+    {
+      "file": "frontmatter/executive_summary.tex",
+      "owner": "A",
+      "name": "Kashaf Ali",
+      "body_sha256": "5a5e225adb931e14d306016651e57179b77c54c5ecdd269fba509bd0f3520931",
+      "header_bytes": 69
+    }
+  ],
+  "boundary_note": "Input-line comments suppress additional end-of-line whitespace; document bodies remain byte-identical."
+}
