@@ -4,12 +4,11 @@ You are Member C. Your exclusive working folder is `esha/`.
 
 ## Read first
 
-Read `../README.md`, `../AGENTS.md`, `../PLAN.md`, `../Rules.txt`, `../F26-098.docx`, and the template/class instructions. Sample reports guide presentation only. The proposal alone supplies project facts. Current assumptions are FYP-1 and Research and Development; no prototype has been built.
+Read `../README.md`, `../AGENTS.md`, `../PLAN.md`, `../Rules.txt`, `../F26-098.docx`, and the template/class instructions. Sample reports guide presentation only. The proposal alone supplies project facts. Current deliverable is R&D Deliverable II: Chapters 1 through 6, Abstract, Executive Summary, References and Appendix. No prototype has been built.
 
 ## Your files
 
 - `06_high_level_and_low_level_design.tex`
-- `07_implementation_and_test_cases.tex`
 - `references.bib`: your bibliography, integrated automatically with the other two.
 - `diagrams/`: your PlantUML sources (create them when diagram work is requested).
 - `HANDOFF.md`: your coordination notes, decisions and unresolved dependencies.
@@ -18,9 +17,9 @@ Existing chapter text is template examples/guidance, not completed Zeest prose. 
 
 ## First work and dependencies
 
-Start with a proposed component inventory and design skeleton based on the proposal. Obtain requirement/data meanings from Kashaf and methodology/evaluation contracts from Fatima before treating design as settled. Map planned test cases to stable requirement IDs. Implementation and test execution are not completed.
+Start with a proposed component inventory and Chapter 6 design skeleton. Obtain requirement/data meanings from Kashaf and methodology/evaluation contracts from Fatima before treating design as settled. This deliverable requires proposed design, not a Chapter 7 implementation/test report.
 
-Owned visuals: D07 architecture; D08 agent subsystem; D09 domain/class model; D10 consultation sequence; D11 physician approval state; D12 memory update sequence. Consult PLAN.md for exact placement, owners of tables, descriptions and defense questions. Render images into `../Report template/Figures/` with `esha_` filename prefixes; use descriptive captions and reference every image. Do not modify another person's image.
+Owned visuals: D07 architecture; D08 agent subsystems; D09 domain/class model; D10 consultation sequence; D11 physician approval state; D12 memory update sequence. Consult PLAN.md for exact placement, tables and defense questions. Put PlantUML sources in diagrams/ and rendered images in ../Report template/Figures/ with esha_ prefixes. No other owner may edit your files.
 
 ## Agent prompt
 

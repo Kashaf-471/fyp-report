@@ -4,13 +4,12 @@ You are Member B. Your exclusive working folder is `fatima/`.
 
 ## Read first
 
-Read `../README.md`, `../AGENTS.md`, `../PLAN.md`, `../Rules.txt`, `../F26-098.docx`, and the template/class instructions. Sample reports guide presentation only. The proposal alone supplies project facts. Current assumptions are FYP-1 and Research and Development; no prototype has been built.
+Read `../README.md`, `../AGENTS.md`, `../PLAN.md`, `../Rules.txt`, `../F26-098.docx`, and the template/class instructions. Sample reports guide presentation only. The proposal alone supplies project facts. Current deliverable is R&D Deliverable II: Chapters 1 through 6, Abstract, Executive Summary, References and Appendix. No prototype has been built.
 
 ## Your files
 
 - `03_literature_review.tex`
 - `05_proposed_approach_and_methodology.tex`
-- `09_experimental_results_and_discussion.tex`
 - `abstract.tex`
 - `references.bib`: your bibliography, integrated automatically with the other two.
 - `diagrams/`: your PlantUML sources (create them when diagram work is requested).
@@ -20,9 +19,9 @@ Existing chapter text is template examples/guidance, not completed Zeest prose. 
 
 ## First work and dependencies
 
-Start by verifying actual proposal-listed literature and drafting the review. Share canonical citation keys and findings. Agree methodology, evaluation variants, metric definitions and reference process with Kashaf/Esha. Results remain planned with clear empty placeholders until experiments run. Write Abstract last.
+Start by verifying actual proposal-listed literature and drafting Chapter 3. Share canonical citation keys and findings. Agree Chapter 5 methodology, evaluation variants, proposed metric definitions and reference process with Kashaf/Esha. Describe evaluation as planned; no results chapter or measured chart belongs in this submission. Write Abstract last.
 
-Owned visuals: D04 methodology pipeline; D05 ablation protocol; D06 evidence retrieval; R01 measured results chart only after real data. Consult PLAN.md for exact placement, owners of tables, descriptions and defense questions. Render images into `../Report template/Figures/` with `fatima_` filename prefixes; use descriptive captions and reference every image. Do not modify another person's image.
+Owned visuals: D04 methodology pipeline; D05 planned ablation protocol; D06 evidence retrieval. Consult PLAN.md for exact placement, tables and defense questions. Put PlantUML sources in diagrams/ and rendered images in ../Report template/Figures/ with fatima_ prefixes. No other owner may edit your files.
 
 ## Agent prompt
 

@@ -13,3 +13,7 @@ Record proposal-grounded decisions here when agreed.
 ## Dependencies and open questions
 
 See START_HERE.md and PLAN.md. No dependency is assumed resolved.
+
+## Approved current assignment
+
+Chapters 3 and 5; Abstract. All owners maintain their own references. Current submission is six-chapter R&D Deliverable II; Chapters 7 through 10 are excluded. No chapter writing was done during this scope update.
