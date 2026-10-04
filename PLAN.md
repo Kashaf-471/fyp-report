@@ -1,6 +1,6 @@
 # Zeest FYP report plan — Phase 1
 
-Status: Phase 2 completed after the students' instruction to start setup and make assumptions for open questions. All 39 rendered pages match the local original build. See [PHASE2_SETUP.md](PHASE2_SETUP.md) for evidence and preserved compiler warnings, including font substitutions. Report writing and new diagrams remain a later phase.
+Status: Setup is complete. The user approved the three-person folder structure and path-only assembly changes on 4 October 2026. Read README.md and your own START_HERE.md for current locations. Original setup evidence is archived outside the repository. Chapter writing has not started.
 
 ### Phase 2 working decisions (student-authorized assumptions)
 
@@ -115,7 +115,7 @@ Page estimates are **planning estimates**, not report requirements or measured o
 
 This balances total writing effort rather than chapter counts: B's literature verification is substantial; C's architecture and detailed test specification offset fewer chapters; A handles more short chapters and specification tables. Re-estimate when the stage and classification are confirmed, without splitting any chapter between editors.
 
-Member A owns the demo appendix file for the setup extraction and serves as assembly coordinator. Each member owns only their own `fypbib_A.bib`, `fypbib_B.bib`, or `fypbib_C.bib`. A owns `frontmatter/executive_summary.tex`; B owns `frontmatter/abstract.tex`. The temporary Phase 2 setup operator performs the one authorized mechanical edit of `main.tex`; thereafter nobody edits it. Resolve final metadata in a separately authorized step before declaring that freeze, or keep the original placeholders: setup itself must preserve them.
+Member A owns the demo appendix file for the setup extraction and serves as assembly coordinator. Each member owns only their own `kashaf/references.bib`, `fatima/references.bib`, or `esha/references.bib`. A owns `kashaf/executive_summary.tex`; B owns `fatima/abstract.tex`. The temporary Phase 2 setup operator performs the one authorized mechanical edit of `main.tex`; thereafter nobody edits it. Resolve final metadata in a separately authorized step before declaring that freeze, or keep the original placeholders: setup itself must preserve them.
 
 ### Handoff contracts
 
@@ -134,7 +134,7 @@ Member A owns the demo appendix file for the setup extraction and serves as asse
 
 This is a production list for a **later authorized writing phase**, not an instruction to create graphics in Phase 2. IDs are working asset IDs, not LaTeX figure numbers.
 
-Keep `.puml` files under `Report template/diagrams/` and rendered `.png` files under the existing `Report template/Figures/`. Match basenames, for example `diagrams/D07_system_architecture.puml` and `Figures/D07_system_architecture.png`. Render outside LaTeX and insert through existing `\includegraphics`; no package, shell-escape, or class change. Use chapter-specific labels. Source and image have the same chapter owner.
+Keep `.puml` files under `each owner's diagrams/ folder: ` and rendered `.png` files under the existing `Report template/Figures/`. Match basenames, for example `diagrams/D07_system_architecture.puml` and `Figures/D07_system_architecture.png`. Render outside LaTeX and insert through existing `\includegraphics`; no package, shell-escape, or class change. Use chapter-specific labels. Source and image have the same chapter owner.
 
 All diagrams describe a **proposed** system until verified. Mark proposed diagram descriptions accordingly. Use “proposed”, visible actors/components, arrow meaning, and important branches in the ordinary caption. Avoid unexplained acronyms or a caption that only repeats “Architecture Diagram”.
 
@@ -285,8 +285,8 @@ If a diagram/source appendix is later justified: why was it placed outside the c
 
 1. Resolve stage, project type, and conditional-heading interpretation. Students approve or revise this plan. Inspect any supplied visual asset before reusing it or finalizing its descriptive caption; sample screenshots are not Zeest evidence.
 2. **Phase 2 only after plan approval:** compile the untouched template and retain its PDF, exact sources, class/assets hashes, build recipe, logs, and warnings. If compilation fails, preserve the failed log and report the exact blocker; do not repair the class or add packages.
-3. Split chapter blocks mechanically under `chapters/`, including the demo appendix; split Abstract and Executive Summary under `frontmatter/`. Add exclusive owner comments. Replace content blocks in `main.tex` with `\input` lines in exactly the same positions. Keep whitespace-sensitive boundaries and all existing commands/page breaks intact.
-4. Create the three member bibliography files. For fidelity, copy each original example entry into exactly one of them (suggest A owns the unchanged example set for setup, B/C initially contain comments only). Keep the original `fypbib.bib` as an untouched baseline source. Change only the bibliography database list to `\bibliography{fypbib_A,fypbib_B,fypbib_C}` and retain `ieeetr`.
+3. Split chapter blocks and summary bodies into exclusive owner files. The approved current locations are the root `kashaf/`, `fatima/` and `esha/` folders, including the unchanged demo appendix in `kashaf/`. Add exclusive owner comments. Replace content blocks in `main.tex` with `\input` lines in exactly the same positions. Keep whitespace-sensitive boundaries and all existing commands/page breaks intact.
+4. Create the three member bibliography files. For fidelity, copy each original example entry into exactly one of them (suggest A owns the unchanged example set for setup, B/C initially contain comments only). Keep the original `fypbib.bib` as an untouched baseline source. Change only the bibliography database list to `\bibliography{../kashaf/references,../fatima/references,../esha/references}` and retain `ieeetr`.
 5. Recompile with the same engine, dependency versions, figure paths, date, and auxiliary-file handling. Compare page count, extracted text, headings/order/numbering, bibliography, contents/figure/table lists, page breaks, and page images. Matching file bytes are not required because PDF metadata can differ; visible/textual/layout fidelity is required. Report every discrepancy and pre-existing warning. Only then freeze `main.tex`. No chapter writing or diagram replacement during setup.
 6. **Later writing phase, separately authorized:** A finalizes proposal traceability, terminology, scope and requirements; B verifies literature. Share handoff notes before methods/design become fixed.
 7. B defines proposed procedure and evaluation protocol using verified sources and confirmed resources; A supplies data/use-case meanings; C develops consistent architecture/design. Owners create their own `.puml` sources/images and caption/reference them inside existing headings.
@@ -296,34 +296,16 @@ If a diagram/source appendix is later justified: why was it placed outside the c
 
 Critical path: scope/type/stage → literature/requirements → method/data contracts → architecture → planned implementation/test specification → actual build/evidence → experiments → conclusions/summaries. Requirements and literature may proceed concurrently; full shared-file editing may not.
 
-### Phase 2 file map and safeguards
+### Current approved file map and safeguards
 
 ```text
-Report template/
-  main.tex                      # one setup edit, then frozen
-  FastFyp.cls                   # never edited
-  fypbib.bib                    # original retained
-  fypbib_A.bib                  # Member A
-  fypbib_B.bib                  # Member B
-  fypbib_C.bib                  # Member C
-  frontmatter/
-    abstract.tex                # Member B
-    executive_summary.tex       # Member A
-  chapters/
-    01_introduction.tex                           # Member A
-    02_project_vision.tex                         # Member A
-    03_literature_review.tex                      # Member B
-    04_software_requirement_specifications.tex     # Member A
-    05_proposed_approach_and_methodology.tex       # Member B
-    06_high_level_and_low_level_design.tex        # Member C
-    07_implementation_and_test_cases.tex          # Member C
-    08_user_manual.tex                            # Member A
-    09_experimental_results_and_discussion.tex    # Member B
-    10_conclusions.tex                            # Member A
-    appendix_a_template_examples.tex              # Member A; unchanged demos
-  Figures/                      # existing assets retained
-  baseline/                     # original source snapshot/PDF/logs after approval
+Report template/        # shared frozen main.tex, untouched class, original bib, Figures/
+kashaf/                 # Chapters 1, 2, 4, 8, 10, demo appendix, Executive Summary
+fatima/                 # Chapters 3, 5, 9, Abstract
+esha/                   # Chapters 6, 7
 ```
+
+Each person folder also contains `references.bib`, `START_HERE.md`, `HANDOFF.md`, scoped `AGENTS.md` and `diagrams/`. Read the individual guide for exact filenames. Rendered assets remain in the required shared Figures folder with owner prefixes. Setup tools and original baseline evidence were moved to the external archive recorded in README.md. The approved restructuring updated only assembly paths; main.tex is frozen again.
 
 Put `% Owner: Member A` (or B/C) at the top of each extracted file; add actual student names only after mapping is confirmed. Keep `\appendix` and bibliography positioning as in the original assembly. Extract the original `\chapter` commands with their content so each chapter file remains a complete exclusive editing unit. For summaries, leave the original headings/page breaks in `main.tex` and extract their body text only, preserving front matter exactly.
 

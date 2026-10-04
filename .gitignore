@@ -1,15 +1,21 @@
-# Local build tools and dependency caches (recreated by bootstrap.py).
-/.phase2/tools/
-/.phase2/cache/
-
-# Working LaTeX output; preserve the separate original baseline evidence.
-/Report template/build/
+# Generated LaTeX output
 /Report template/main.pdf
-
-# Disposable verification renderings.
-/.phase2/verification/*.png
-
-# Python/runtime and editor artifacts.
+/Report template/build/
+*.aux
+*.log
+*.out
+*.toc
+*.lof
+*.lot
+*.bbl
+*.blg
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.xdv
+# Local tools and editor/runtime files
+.tools/
+.cache/
 __pycache__/
 *.py[cod]
 .venv/
@@ -17,8 +23,6 @@ __pycache__/
 .idea/
 Thumbs.db
 .DS_Store
-
-# Local credentials and environment settings.
 .env
 .env.*
 !.env.example
