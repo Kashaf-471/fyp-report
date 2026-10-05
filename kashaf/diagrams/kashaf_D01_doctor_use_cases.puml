@@ -1,0 +1,71 @@
+@startuml
+' Owner: Kashaf Ali. Complete-system requirements; design diagram.
+top to bottom direction
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam dpi 180
+skinparam defaultFontName Arial
+skinparam defaultFontSize 16
+skinparam nodesep 12
+skinparam ranksep 20
+actor "Physician" as Doctor
+rectangle "Zeest" {
+ rectangle "Access and patient review" as Access {
+  usecase "UC09\nLog In" as UC09
+  usecase "UC10\nLog Out" as UC10
+  usecase "UC11\nView All Patients" as UC11
+  usecase "UC12\nView Patient Information" as UC12
+  usecase "UC01\nView Encounter History" as UC01
+  usecase "UC13\nOpen an Encounter" as UC13
+ }
+ rectangle "Consultation and inputs" as Inputs {
+  usecase "UC02\nRecord Consultation" as UC02
+  usecase "UC14\nCorrect Consultation Notes" as UC14
+  usecase "UC15\nSupply Imaging Input" as UC15
+  usecase "UC16\nSupply Laboratory Information" as UC16
+  usecase "UC17\nSupply Medication Context" as UC17
+ }
+ rectangle "Clinical review and decisions" as Review {
+  usecase "UC04\nGenerate and\nReview Clinical Draft" as UC04
+  usecase "UC18\nInspect Supporting Evidence" as UC18
+  usecase "UC05\nApprove Clinical Draft" as UC05
+  usecase "UC06\nModify and\nApprove Clinical Draft" as UC06
+  usecase "UC07\nReject Clinical Draft" as UC07
+  usecase "UC08\nInspect Audit History" as UC08
+ }
+}
+Doctor -- UC09
+Doctor -- UC11
+Doctor -- UC12
+Doctor -- UC01
+Doctor -- UC13
+Doctor -- UC02
+Doctor -- UC14
+Doctor -- UC15
+Doctor -- UC16
+Doctor -- UC17
+Doctor -- UC04
+Doctor -- UC18
+Doctor -- UC05
+Doctor -- UC06
+Doctor -- UC07
+Doctor -- UC08
+Doctor -- UC10
+Access -[hidden]right-> Inputs
+Inputs -[hidden]right-> Review
+UC09 -[hidden]down-> UC10
+UC10 -[hidden]down-> UC11
+UC11 -[hidden]down-> UC12
+UC12 -[hidden]down-> UC01
+UC01 -[hidden]down-> UC13
+UC02 -[hidden]down-> UC14
+UC14 -[hidden]down-> UC15
+UC15 -[hidden]down-> UC16
+UC16 -[hidden]down-> UC17
+UC04 -[hidden]down-> UC18
+UC18 -[hidden]down-> UC05
+UC05 -[hidden]down-> UC06
+UC06 -[hidden]down-> UC07
+UC07 -[hidden]down-> UC08
+@enduml
+

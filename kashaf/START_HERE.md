@@ -17,7 +17,7 @@ Read `../README.md`, `../AGENTS.md`, `../PLAN.md`, `../Rules.txt`, `../F26-098.d
 - `diagrams/`: your PlantUML sources (create them when diagram work is requested).
 - `HANDOFF.md`: your coordination notes, decisions and unresolved dependencies.
 
-Existing chapter text is template examples/guidance, not completed Zeest prose. Required headings are governed by PLAN.md and the template. Keep your chapter commands, order and section hierarchy. The demo appendix is preserved until an explicit content decision.
+Chapters 1, 2 and 4 now contain drafted Zeest prose and proposed diagrams/tables. Executive Summary and Appendix still contain template guidance/examples and require a separately approved writing task. Required headings are governed by PLAN.md and the template. Keep your chapter commands, order and section hierarchy. The demo appendix is preserved until an explicit content decision.
 
 ## First work and dependencies
 
@@ -35,4 +35,4 @@ Use a separate clone and branch `report/kashaf`. Consult others' HANDOFF.md file
 
 ## Kashaf approval and style rules
 
-Review two chapters at a time. Obtain approval for the outline before drafting, then show the draft in chat and obtain explicit approval before saving. Do not change shared files during chapter writing. Use Zeest with capital Z; do not use em dashes in authored prose. This setup update does not authorize chapter prose.
+Review two chapters at a time. Obtain approval for the outline before drafting, then show the draft in chat and obtain explicit approval before saving. Do not change shared files during chapter writing. Use Zeest with capital Z; do not use em dashes in authored prose. The user approved direct file writing for Chapters 1, 2 and both halves of Chapter 4. Obtain approval before starting any further writing task.

@@ -1,0 +1,48 @@
+@startuml
+' Owner: Kashaf Ali. Required navigation; GUI images reviewed separately.
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam dpi 180
+skinparam defaultFontName Arial
+skinparam defaultFontSize 16
+start
+:Log in (UC09);
+:View all patients and patient information
+(UC11, UC12);
+:Review history and open encounter
+(UC01, UC13);
+:Record consultation and correct notes
+(UC02, UC14);
+:Supply available imaging, laboratory
+and medication context
+(UC15, UC16, UC17);
+:Generate and review clinical draft
+(UC04);
+:Inspect evidence and critic findings
+(UC18, UC04);
+if (Physician decision?) then (approve)
+ :Approve saved draft revision (UC05);
+else (other action)
+ if (Modify?) then (yes)
+  :Save revised draft (UC06);
+  if (Explicitly approve revision?) then (yes)
+   :Approve reviewed revision (UC06);
+  else (no)
+   :Keep revision pending;
+   :Inspect audit history (UC08);
+   :Log out (UC10);
+   stop
+  endif
+ else (reject)
+  :Reject draft (UC07);
+  :Retain rejection action;
+  :Inspect audit history (UC08);
+  :Log out (UC10);
+  stop
+ endif
+endif
+:Record approved revision and audit action;
+:Inspect audit history (UC08);
+:Log out (UC10);
+stop
+@enduml

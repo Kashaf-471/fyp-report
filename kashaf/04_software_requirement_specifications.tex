@@ -1,79 +1,919 @@
-% Owner: Member A (Kashaf Ali); mapping assumed from proposal order.
+% Owner: Kashaf Ali / Member A. Complete rewrite authorized 5 October 2026.
+% Local font encoding restores the template's Times regular/bold faces under XeTeX.
+\begingroup
+\renewcommand{\encodingdefault}{T1}
+\fontencoding{T1}\selectfont
 \chapter{Software Requirement Specifications}
-Describe all modules of requirements and design in clear English text along with the necessary diagram and figures.  Anyone reading your report should be able to reproduce your system/results after reading it. It describes functional requirements, design constraints, and other factors necessary to provide a complete and comprehensive description of the requirements for the software.\\
-For each chapter, provide a paragraph of introduction and at the end, a paragraph of conclusions. Make sure no heading/subheading is blank.  Write text to introduce each section as well. 
-\textcolor{red}{NOTE: This Chapter is optional for Research projects but compulsory for Development projects.}
+The physician's workflow in Zeest begins with access to the application and the selection of a patient, then follows the case through consultation capture, clinical input processing and recommendation review. Patient and encounter context must remain visible throughout these tasks so that notes, images, laboratory information and medication findings can be interpreted together. The system retrieves relevant history, prepares the clinical case and presents a diagnosis and treatment draft with supporting evidence and critic findings. The physician decides whether to approve, modify or reject that draft, while the recorded decision and audit actions remain linked to the correct encounter. These interactions determine the required system behaviour, its required qualities and the retained information. The requirements distinguish user actions from internal processing and research operations, making each responsibility identifiable. Resource requirements and data relationships support the same workflow, while the risk analysis identifies conditions that could prevent it from operating as intended.
+
 \section{List of Features}
-List all important features of your system here.
+\begin{itemize}
+\item Physician login and logout.
+\item Patient listing, selection and information review.
+\item Encounter history review and encounter selection.
+\item Real-time consultation transcription into structured notes.
+\item Physician review and correction of consultation notes.
+\item Imaging, laboratory and medication input handling.
+\item Longitudinal patient history retrieval through hybrid memory.
+\item Specialised imaging, laboratory and medication analysis.
+\item Clinical guideline retrieval with citations and supporting passages.
+\item Draft diagnosis and treatment plan generation.
+\item Safety and consistency review through the critic agent.
+\item Physician approval, modification and rejection of clinical drafts.
+\item Recording of explicitly approved clinical decisions.
+\item Audit history of physician review actions.
+\item Comparative evaluation of baseline, memory and full-system variants.
+\end{itemize}
+
 \section{Functional Requirements}
-The functional requirements fully describe the external behavior of the system. Identify and list each functionality and give a brief description, along with the user of each functionality.
-\section{Quality Attributes}
+Physicians must be able to navigate from the patient list to a specific encounter and then complete the information and review tasks associated with that case. Each required action has an identifiable result, such as the display of encounter history, the production of structured notes or the persistence of an approved decision. Processing requirements likewise identify the output of the relevant component rather than prescribing an implementation sequence inside a user action. Tables~\ref{tab:kashaf:fr-access} through~\ref{tab:kashaf:fr-review} specify these behaviours using separate requirement identifiers. Patient context links the input and processing requirements, while approval and audit requirements define the decision outcomes. The actor column distinguishes physician interactions from system processing responsibilities. Research requirements appear separately in Table~\ref{tab:kashaf:research-requirements} because configuring a comparison is a project-team task rather than a clinical action. This separation allows the same clinical workflow to be assessed across system variants without introducing an additional user role into the physician interface.
 
-\section{Non-Functional Requirements}
-This section should describe all the non-functional requirements, including reusability, performance (how many maximum users can access it at a time), extensibility, etc.
-\section{Assumptions}
-List down all the assumptions made for the specification.
-\section{Use Cases}
-This section lists use cases or scenarios from the use-case model if they represent some significant, central functionality of the final system, or if they have a large architectural coverage—they exercise many architectural elements, or if they stress or illustrate a specific, delicate point of the architecture.\\
-The table \ref{tab:2.1} provides a simple use case.
-
-
-\begin{table}[!ht]
+\begin{table}[htbp]
 \centering
-\caption{ A sample use case is given in the above table. You have to follow this tabular format for use cases. Following is the description of the content required in this section. \textcolor{red}{No separate heading is required or use case tables. Keep them all under a generic use case heading. Also, In the previous version, usecase tables dont have cpation, in this version, we do have. } }
-\label{tab:2.1}
-\begin{tabular}{|lllll|}
+\small
+\caption{Physician access and patient navigation.}
+\label{tab:kashaf:fr-access}
+\begin{tabular}{|p{0.1\textwidth}|p{0.14\textwidth}|p{0.65\textwidth}|}
 \hline
-\multicolumn{2}{|l|}{\textbf{Name}} &
-  \multicolumn{3}{l|}{Sample Use Case Name Here} \\ \hline
-\multicolumn{2}{|l|}{\textbf{Actors}} &
-  \multicolumn{3}{l|}{Admin, Business Owner, Store Manager} \\ \hline
-\multicolumn{2}{|l|}{\textbf{Summary}} &
-  \multicolumn{3}{l|}{\begin{tabular}[c]{@{}l@{}}The user shall provide their email and password on the login form, \\ and after successful verification, redirect the user to the home page.\end{tabular}} \\ \hline
-\multicolumn{2}{|l|}{\textbf{Pre-Conditions}} &
-  \multicolumn{3}{l|}{\begin{tabular}[c]{@{}l@{}}The user must be in the database records, either added by any of the\\  authorized users or added manually by a developer.\\ The user must not already be logged in.\end{tabular}} \\ \hline
-\multicolumn{2}{|l|}{\textbf{Post-Conditions}} &
-  \multicolumn{3}{l|}{\begin{tabular}[c]{@{}l@{}}The user’s session is successfully established and shall be redirected\\  to the home page.\end{tabular}} \\ \hline
-\multicolumn{2}{|l|}{\textbf{\begin{tabular}[c]{@{}l@{}}Special\\ Requirements\end{tabular}}} &
-  \multicolumn{3}{l|}{None} \\ \hline
-\multicolumn{5}{|c|}{\textbf{Basic Flow}} \\ \hline
-\multicolumn{3}{|c|}{\textbf{Actor Action}} &
-  \multicolumn{2}{c|}{\textbf{System Response}} \\ \hline
-\multicolumn{1}{|l|}{1} &
-  \multicolumn{2}{l|}{\begin{tabular}[c]{@{}l@{}}The user opens \\ the login page.\end{tabular}} &
-  \multicolumn{1}{l|}{2} &
-  \begin{tabular}[c]{@{}l@{}}The login page is displayed asking for email and\\  password.\end{tabular} \\ \hline
-\multicolumn{1}{|l|}{2} &
-  \multicolumn{2}{l|}{\begin{tabular}[c]{@{}l@{}}The user enters valid\\  email and password.\end{tabular}} &
-  \multicolumn{1}{l|}{4} &
-  \begin{tabular}[c]{@{}l@{}}The system verifies the email and  password, \\ establishes a session for the user and redirects\\  the user to the home page.\end{tabular} \\ \hline
-\multicolumn{5}{|c|}{\textbf{Alternative Flow}} \\ \hline
-\multicolumn{1}{|l|}{3} &
-  \multicolumn{2}{l|}{\begin{tabular}[c]{@{}l@{}}The user enters invalid\\  email or password.\end{tabular}} &
-  \multicolumn{1}{l|}{4-A} &
-  \begin{tabular}[c]{@{}l@{}}The system responds with an error \\ message: Incorrect email or password entered.\end{tabular} \\ \hline
+ID & User/actor & Required behaviour \\ \hline
+FR01 & Physician & The system shall allow the physician to log in using an existing account. \\ \hline
+FR02 & Physician & The system shall allow the physician to log out and end the current session. \\ \hline
+FR03 & System & The system shall reject invalid login credentials without establishing a session. \\ \hline
+FR04 & Physician & The system shall allow the physician to view a list of all patients. \\ \hline
+FR05 & Physician & The system shall allow the physician to select a patient from the patient list. \\ \hline
+FR06 & Physician & The system shall display the selected patient's information. \\ \hline
+FR07 & Physician & The system shall display the selected patient's encounter history. \\ \hline
+FR08 & Physician & The system shall allow the physician to open a selected encounter for consultation and review. \\ \hline
 \end{tabular}
 \end{table}
 
-This section lists use cases or scenarios from the use-case model if they represent some significant, central functionality of the final system, or if they have a large architectural coverage—they exercise many architectural elements or if they stress or illustrate a specific, delicate point of the architecture.\\
-\textbf{Summary:} The description briefly conveys the role and purpose of the use case. A single paragraph will suffice for this description.\\
-\textbf{Basic Flow:} This use case starts when the actor does something. An actor always initiates use cases. The use case describes what the actor does and what the system does in response. It is phrased in the form of a dialog between the actor and the system.\\
-The use case describes what happens inside the system, but not how or why. If information is exchanged, be specific about what is passed back and forth. For example, it is not very illuminating to say that the actor enters customer information. It is better to say the actor enters the customer’s name and address. A Glossary of Terms is often useful to keep the complexity of the use case manageable you may want to define things like customer information there to keep the use case from drowning in details.\\
-Simple alternatives may be presented within the text of the use case. If it only takes a few sentences to describe what happens when there is an alternative, do it directly within the \textbf{Flow of Events} section. If the alternative flow is more complex, use a separate section to describe it. For example, an Alternative Flow subsection explains how to describe more complex alternatives.\\
-A picture is sometimes worth a thousand words, though there is no substitute for clean, clear prose. If it improves clarity, feel free to paste graphical depictions of user interfaces, process flows or other figures into the use case. If a flow chart is useful to present a complex decision process, by all means use it!  Similarly for state-dependent behavior, a state-transition diagram often clarifies the behavior of a system better than pages upon pages of text. Use the right presentation medium for your problem, but be wary of using terminology, notations or figures that your audience may not understand. Remember that your purpose is to clarify, not obscure.\\
-\textbf{First Alternative Flow:} More complex alternatives are described in a separate section, referred to in the Basic Flow subsection of Flow of Events section. Think of the Alternative Flow subsections like alternative behavior each alternative flow represents alternative behavior usually due to exceptions that occur in the main flow. They may be as long as necessary to describe the events associated with the alternative behavior. When an alternative flow ends, the events of the main flow of events are resumed unless otherwise stated.\\
-\textbf{Second Alternative Flow:} There may be, and most likely will be, a number of alternative flows in a use case. Keep each alternative flow separate to improve clarity. Using alternative flows improves the readability of the use case, as well as preventing use cases from being decomposed into hierarchies of use cases. Keep in mind that use cases are just textual descriptions, and their main purpose is to document the behavior of a system in a clear, concise, and understandable way.\\
-\textbf{Special Requirements:} A special requirement is typically a nonfunctional requirement that is specific to a use case, but is not easily or naturally specified in the text of the use case’s event flow. Examples of special requirements include legal and regulatory requirements, application standards, and quality attributes of the system to be built including usability, reliability, performance or supportability requirements. Additionally, other requirements such as operating systems and environments, compatibility requirements, and design constraints should be captured in this section.\\
-\textbf{Pre-Conditions:} A pre-condition of a use case is the state of the system that must be present prior to a use case being performed.\\
-\textbf{Post-Conditions:} A post-condition of a use case is a list of possible states the system can be in immediately after a use case has finished.
+\begin{table}[htbp]
+\centering
+\small
+\caption{Consultation recording and clinical inputs.}
+\label{tab:kashaf:fr-input}
+\begin{tabular}{|p{0.1\textwidth}|p{0.14\textwidth}|p{0.65\textwidth}|}
+\hline
+ID & User/actor & Required behaviour \\ \hline
+FR09 & Physician & The system shall allow the physician to start consultation audio capture. \\ \hline
+FR10 & Physician & The system shall allow the physician to stop consultation audio capture. \\ \hline
+FR11 & System & The system shall convert consultation audio into structured clinical notes. \\ \hline
+FR12 & Physician & The system shall display the structured consultation notes for physician review. \\ \hline
+FR13 & Physician & The system shall allow the physician to correct and save structured consultation notes. \\ \hline
+FR14 & Physician & The system shall allow the physician to supply an imaging input for the selected encounter. \\ \hline
+FR15 & Physician & The system shall allow the physician to supply laboratory information for the selected encounter. \\ \hline
+FR16 & Physician & The system shall allow the physician to supply medication context for the selected encounter. \\ \hline
+FR17 & System & The system shall reject unsupported or unusable clinical inputs with an explanatory message. \\ \hline
+\end{tabular}
+\end{table}
+
+\begin{table}[htbp]
+\centering
+\small
+\caption{Memory and specialised case processing.}
+\label{tab:kashaf:fr-processing}
+\begin{tabular}{|p{0.1\textwidth}|p{0.14\textwidth}|p{0.65\textwidth}|}
+\hline
+ID & User/actor & Required behaviour \\ \hline
+FR18 & System & The system shall retain patient information across encounters using relational records and semantic representations. \\ \hline
+FR19 & System & The system shall retrieve relevant history for the selected patient and current encounter. \\ \hline
+FR20 & System & The system shall organise current inputs and retrieved history into the clinical case. \\ \hline
+FR21 & System & The system shall analyse supported imaging inputs using an existing validated pre-trained classification model. \\ \hline
+FR22 & System & The system shall process supplied laboratory information through the Laboratory Agent. \\ \hline
+FR23 & System & The system shall assess medication context through the Medication Safety Agent and an established knowledge resource. \\ \hline
+FR24 & Physician & The system shall display imaging, laboratory and medication findings with their input sources. \\ \hline
+FR25 & System & The system shall display the processing status or failure of a requested clinical analysis. \\ \hline
+\end{tabular}
+\end{table}
+
+\begin{table}[htbp]
+\centering
+\small
+\caption{Draft generation, evidence and critic review.}
+\label{tab:kashaf:fr-reasoning}
+\begin{tabular}{|p{0.1\textwidth}|p{0.14\textwidth}|p{0.65\textwidth}|}
+\hline
+ID & User/actor & Required behaviour \\ \hline
+FR26 & Physician & The system shall allow the physician to request generation of a clinical draft for the selected encounter. \\ \hline
+FR27 & System & The system shall retrieve relevant clinical guidelines through the Evidence and RAG Agent. \\ \hline
+FR28 & System & The system shall generate a draft diagnosis from the prepared case and retrieved evidence. \\ \hline
+FR29 & System & The system shall generate a draft treatment plan for physician review. \\ \hline
+FR30 & System & The system shall submit the clinical draft to the Safety and Critic Agent before physician presentation. \\ \hline
+FR31 & Physician & The system shall display guideline citations and supporting passages alongside the clinical draft. \\ \hline
+FR32 & Physician & The system shall display critic findings alongside the clinical draft. \\ \hline
+\end{tabular}
+\end{table}
+
+\begin{table}[htbp]
+\centering
+\small
+\caption{Physician decisions and audit history.}
+\label{tab:kashaf:fr-review}
+\begin{tabular}{|p{0.1\textwidth}|p{0.14\textwidth}|p{0.65\textwidth}|}
+\hline
+ID & User/actor & Required behaviour \\ \hline
+FR33 & Physician & The system shall allow the physician to explicitly approve a selected clinical draft. \\ \hline
+FR34 & Physician & The system shall allow the physician to edit and save a revised clinical draft. \\ \hline
+FR35 & Physician & The system shall allow the physician to reject a selected clinical draft. \\ \hline
+FR36 & System & The system shall record the explicitly approved draft revision as a clinical decision. \\ \hline
+FR37 & System & The system shall record physician review actions with the actor, time, draft revision and encounter context. \\ \hline
+FR38 & Physician & The system shall allow the physician to inspect the encounter's audit history. \\ \hline
+\end{tabular}
+\end{table}
+
+\begin{table}[htbp]
+\centering
+\small
+\caption{Research requirements for comparing the contribution of system components.}
+\label{tab:kashaf:research-requirements}
+\begin{tabular}{|p{0.1\textwidth}|p{0.79\textwidth}|}
+\hline
+ID & Required behaviour \\ \hline
+RR01 & The evaluation framework shall support a single-LLM baseline, a memory-augmented variant and the full Zeest system. \\ \hline
+RR02 & The evaluation framework shall use the same case inputs and reference process for comparisons between variants. \\ \hline
+RR03 & The evaluation framework shall record the configuration and output associated with each evaluated variant. \\ \hline
+RR04 & The evaluation framework shall support controlled comparisons of critic review and multimodal input contributions. \\ \hline
+\end{tabular}
+\end{table}
+
+\section{Quality Attributes}
+Usability, reliability, security and maintainability shape how the physician can work with Zeest and how its components can be supported over time. A usable interface keeps the selected patient visible and makes the difference between a draft and an approved decision understandable. Reliability concerns consistent processing outcomes and preservation of the relationships between the encounter, inputs and recorded actions. Security concerns access to the workflow and the handling of clinical information, while maintainability concerns the clarity and replaceability of component interfaces. Performance is important because consultation transcription and analysis must fit the intended interaction without hiding unfinished processing. Extensibility allows supported models and data domains to be incorporated without changing the physician-control boundary. Traceability connects the displayed findings and evidence with their sources. The numbered attributes below explain the expected quality of each part of the clinical workflow. They describe the quality expected of system behaviour; the following non-functional requirements specify the constraints through which those expectations can be assessed.
+
+\subsection{Usability}
+The physician interface must make patient review, consultation capture and clinical decisions easy to follow. Patient and encounter context should remain visible so that the physician can identify which case is being reviewed. Navigation must use consistent labels for patient history, consultation and review actions. Structured notes need a readable presentation and a clear means of correcting transcription errors before further processing. Specialist findings and retrieved evidence should be distinguishable from the generated diagnosis and treatment draft. The physician must also understand whether a draft is pending, modified, rejected or approved. Approval, modification and rejection controls require clear labels because they produce different outcomes. Messages should explain unusable inputs and failed operations without suggesting that analysis succeeded. Usability therefore concerns the clarity of the complete workflow, including its less successful paths. A readable layout and consistent interaction should help the physician inspect information, understand its status and choose the intended action.
+
+\subsection{Reliability and Integrity}
+Zeest must preserve the association between each patient, encounter, clinical input and recorded review action. Information retrieved from earlier encounters must retain its source and must not become associated with a different patient during case preparation. Processing components need to return identifiable results or failures so that incomplete analysis cannot be mistaken for completed findings. A generated draft must remain separate from an approved clinical decision, including when the physician edits or rejects it. Approval must refer to the saved revision that the physician reviewed, and the recorded content must match that revision. Audit entries need to preserve the corresponding actor, action and context. These relationships make the outcome of each operation understandable and protect the continuity of the case. Reliability does not mean assuming that generated recommendations are always correct. It means maintaining consistent system behaviour and trustworthy records while the physician evaluates the available information and decides what to accept.
+
+\subsection{Security and Confidentiality}
+Access to patient information and clinical review functions must require an authenticated physician session. Login establishes that session, while logout ends access through it. Invalid credentials must not establish a session or reveal protected case information. Stored account passwords require salted password hashing rather than plaintext storage.\cite{zeestA:owaspPasswords} The handling of clinical information must also respect the use of de-identified or synthetic cases during development and evaluation. These protections address different concerns: account controls restrict application access, while case-data practices limit the exposure of identifying information. Patient and encounter associations must remain intact without introducing unnecessary personal details into generated outputs or evaluation material. Clinical drafts, supporting evidence and audit actions belong to the same protected workflow. Security and confidentiality therefore concern both who can use the application and how its information is handled. Their requirements apply throughout patient browsing, consultation documentation, specialised processing and physician review, rather than being confined to the login screen.
+
+\subsection{Performance}
+The consultation workflow requires timely transcription, history retrieval and clinical processing so that the physician can follow the progress of the encounter. Audio transcription should operate incrementally instead of waiting for the entire consultation to finish. Other processing stages must expose their state so that a pending operation is distinguishable from a completed result or a failure. Performance depends on the selected language model, imaging model, knowledge resources and execution environment. It must therefore be assessed through defined measurements, including transcription delay and the time required for retrieval and analysis. The application must avoid presenting incomplete output as a final result merely to appear responsive. Numerical acceptance limits require an agreed environment and workload before evaluation. Performance quality concerns the relationship between those measured delays and the intended interaction. Visible processing status supports that interaction while the actual work completes, allowing the physician to understand when findings or a clinical draft are available for review.
+
+\subsection{Maintainability and Reusability}
+The components of Zeest need defined responsibilities and consistent interfaces so that the integration can be understood and maintained. Transcription, memory retrieval, specialised analysis, evidence retrieval and clinical reasoning should exchange identifiable inputs, outputs and failure information. A problem in one stage must be distinguishable from a failure elsewhere in the workflow. Existing diagnostic models and knowledge resources form the supporting groundwork, while the integration connects their results to patient context and physician review. Maintaining that connection requires changes to preserve the patient and encounter associations used by downstream components. Reusability concerns retaining these interfaces when a compatible supporting component is replaced. It does not require every model or knowledge resource to be interchangeable without adaptation. The replacement must satisfy the expected information contract and preserve the approval boundary. Clear component responsibilities therefore support troubleshooting and future integration work while keeping the clinical workflow understandable to the team responsible for its development and maintenance.
+
+\subsection{Extensibility}
+Zeest must accommodate compatible clinical data and existing diagnostic models within its established workflow. Extending clinical coverage depends on suitable case information and a validated model for the intended task, rather than on the language model's ability to discuss a condition. A new input or model must supply findings that can be associated with the correct patient, encounter and source. The Clinical Case Agent must be able to organise those findings alongside the supported historical context. Evidence retrieval, clinical reasoning and critic review must continue to operate on identifiable information, and physician approval must remain necessary before a decision is recorded. Extensibility therefore concerns adding compatible capabilities while preserving the relationships and controls already required by the system. It does not change the exclusions concerning autonomous treatment, emergency systems or real-world deployment. The design must make integration responsibilities clear enough for additional supported domains to follow the same preparation, analysis and review process.
+
+\subsection{Traceability}
+The physician must be able to relate a displayed finding or recommendation to the information used in producing it. Clinical inputs need identifiable patient, encounter and source associations, while retrieved guidelines require citations and supporting passages. Specialist findings must remain linked to their input sources so that the physician can distinguish an imaging result from a laboratory or medication finding. The generated diagnosis and treatment draft must retain its supporting evidence and critic findings during review. Physician actions also require identifiable context, including the reviewed revision and the content accepted through approval. An audit entry records what action occurred; it does not itself establish that a draft became an approved decision. Traceability connects these information and review relationships across the workflow. It supports inspection of how the case was prepared and what the physician accepted, while allowing comparative evaluation to associate each system output with its input case and configuration.
+
+\section{Non-Functional Requirements}
+The quality constraints apply across the clinical workflow rather than adding user functions. Patient and encounter identifiers must remain consistent during retrieval, processing and recording, and a failed operation must not be represented as a successful outcome. The interface must use consistent terminology and distinguish processing state from review state. Access restrictions apply to protected actions, while credential handling and de-identified or synthetic case use address different aspects of information protection. Credentials require salted password hashing.\cite{zeestA:owaspPasswords} Component interfaces must support integration changes without altering the approval boundary. Performance requirements identify the consultation timing context and the measurements needed to characterise retrieval and analysis; final numerical limits depend on the selected models and execution environment. Table~\ref{tab:kashaf:nfr} states the non-functional obligations separately from those unresolved values. Maximum concurrent users, processing-delay limits and resource capacities belong to the environment-specific acceptance specification. They require agreement before performance evaluation, whereas the integrity, access and interface-consistency requirements can already be expressed as observable constraints on the complete system.
+
+\begin{table}[htbp]
+\centering
+\small
+\caption{Non-functional requirements for interaction, traceability and component quality.}
+\label{tab:kashaf:nfr}
+\begin{tabular}{|p{0.1\textwidth}|p{0.19\textwidth}|p{0.6\textwidth}|}
+\hline
+ID & Concern & Required constraint \\ \hline
+NFR01 & Performance & The system shall support incremental consultation transcription without waiting for the entire consultation to end. \\ \hline
+NFR02 & Usability & The interface shall use consistent navigation and terminology across patient, consultation and review views. \\ \hline
+NFR03 & Decision integrity & The system shall exclude pending and rejected drafts from approved clinical decisions. \\ \hline
+NFR04 & Traceability & Displayed findings, citations and review actions shall retain their source and encounter relationships. \\ \hline
+NFR05 & Confidentiality & Development and evaluation case information shall be de-identified or synthetic. \\ \hline
+NFR06 & Maintainability & Processing components shall expose defined input, output and failure contracts. \\ \hline
+NFR07 & Extensibility & A new clinical domain shall require compatible case data and a validated existing diagnostic model. \\ \hline
+NFR08 & Access control & Protected clinical operations shall require an authenticated physician session. \\ \hline
+\end{tabular}
+\end{table}
+
+\begin{table}[htbp]
+\centering
+\small
+\caption{Non-functional requirements for access, persistence, performance and decision integrity.}
+\label{tab:kashaf:nfr-integrity}
+\begin{tabular}{|p{0.1\textwidth}|p{0.19\textwidth}|p{0.6\textwidth}|}
+\hline
+ID & Concern & Required constraint \\ \hline
+NFR09 & Credential protection & Stored passwords shall use salted password hashing rather than plaintext storage. \\ \hline
+NFR10 & Case integrity & Processing and retrieval shall preserve the selected patient and encounter associations. \\ \hline
+NFR11 & Failure handling & Failed processing or record persistence shall not display a success outcome or create a falsely approved decision. \\ \hline
+NFR12 & Revision integrity & Approval shall identify the exact saved draft revision and its reviewed content. \\ \hline
+NFR13 & Timing observability & Transcription delay, history retrieval time and analysis duration shall be separately measurable. \\ \hline
+NFR14 & Capacity specification & The supported concurrent-user limit shall be declared for the agreed execution environment. \\ \hline
+NFR15 & Review clarity & The interface shall visibly distinguish pending, approved and rejected clinical drafts. \\ \hline
+NFR16 & Reuse & Replacing a specialist integration shall preserve its agreed interface and the physician-approval boundary. \\ \hline
+\end{tabular}
+\end{table}
+
+
+\textcolor{red}{PLANNED: Timing limits, concurrent-user capacity and resource thresholds will be set for the agreed environment; performance measurements and acceptance tests have not been executed.}
+
+\section{Assumptions}
+The clinical workflow assumes that physicians use an existing account and open the appropriate patient and encounter before supplying consultation information. Patient records and encounters are available from the permitted case collection, and their identifiers provide a consistent reference throughout processing. The physician has the clinical knowledge needed to interpret findings and make the final decision, while the interface supports ordinary web navigation and data-entry tasks. An audio input device and its required permission are available for consultation capture. Supplied clinical inputs conform to the supported representations established for each processing component. External services and knowledge resources are accessible under the conditions needed for their intended use. Table~\ref{tab:kashaf:assumptions} records these operating assumptions and the effect of their absence. Selecting the imaging and transcription models, defining language coverage and assigning orchestration responsibilities are configuration decisions, not evidence that the assumptions are already satisfied. Their resolution determines the specific operating conditions against which the system can be developed and evaluated.
+
+\begin{table}[htbp]
+\centering
+\small
+\caption{Operating assumptions and their effect on the physician workflow.}
+\label{tab:kashaf:assumptions}
+\begin{tabular}{|p{0.09\textwidth}|p{0.44\textwidth}|p{0.35\textwidth}|}
+\hline
+ID & Assumption & Effect if absent \\ \hline
+A01 & The physician has an existing application account. & Access cannot begin until account provisioning is completed. \\ \hline
+A02 & Patient records and encounters have consistent identifiers. & The current case cannot be associated reliably with its history or inputs. \\ \hline
+A03 & The physician can interpret findings and review a clinical draft. & The intended clinical review and approval workflow cannot be completed. \\ \hline
+A04 & The audio device is available and capture permission is granted. & Consultation recording cannot begin; a clear failure state is required. \\ \hline
+A05 & Inputs use representations supported by the selected components. & Unsupported input is rejected rather than treated as analysed information. \\ \hline
+A06 & Required processing services and knowledge resources are accessible. & Affected analysis or retrieval is reported as unavailable. \\ \hline
+A07 & Permitted de-identified or synthetic cases support the selected domain. & The domain cannot be used for the intended development/evaluation. \\ \hline
+\end{tabular}
+\end{table}
+
+\section{Use Cases}
+The physician's goals include access, patient review, consultation documentation, the submission of clinical inputs and decisions about the resulting draft. Each goal has a defined starting context and a visible outcome, making it possible to describe both normal operation and meaningful failure conditions. Figure~\ref{fig:kashaf:use-cases} identifies the physician's participation in these interactions. The descriptions in Tables~\ref{tab:kashaf:uc09} through~\ref{tab:kashaf:uc10} follow the workflow from login to logout, including the selected patient and encounter context. Imaging, laboratory and medication tasks are described separately because they involve different inputs and processing outcomes. Draft review and the inspection of supporting evidence are likewise distinct from the decision actions. The flows retain a direct relationship between the physician's action and the system's response, while preconditions specify the information or access needed before the task begins. Audit inspection completes the review context without changing a clinical decision. Research comparisons are project-team operations and are not additional physician use cases.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.96\textwidth,height=0.78\textheight,keepaspectratio]{Figures/kashaf_D01_doctor_use_cases.png}
+\caption{Physician participation in Zeest use cases, grouped into access and patient review, consultation and inputs, and clinical review and decisions. Association lines indicate participation rather than execution order.}
+\label{fig:kashaf:use-cases}
+\end{figure}
+
+\begin{table}[htbp]
+\centering
+\small
+\caption{UC09: Log In.}
+\label{tab:kashaf:uc09}
+\begin{tabular}{|p{0.035\textwidth}|p{0.19\textwidth}|p{0.18\textwidth}|p{0.035\textwidth}|p{0.36\textwidth}|}
+\hline
+\multicolumn{2}{|p{\dimexpr0.225\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Name} & \multicolumn{3}{p{\dimexpr0.575\textwidth+4\tabcolsep+2\arrayrulewidth\relax}|}{UC09: Log In} \\ \hline
+\multicolumn{2}{|p{\dimexpr0.225\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Actors} & \multicolumn{3}{p{\dimexpr0.575\textwidth+4\tabcolsep+2\arrayrulewidth\relax}|}{Physician} \\ \hline
+\multicolumn{2}{|p{\dimexpr0.225\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Summary} & \multicolumn{3}{p{\dimexpr0.575\textwidth+4\tabcolsep+2\arrayrulewidth\relax}|}{The physician establishes a session using an existing account.} \\ \hline
+\multicolumn{2}{|p{\dimexpr0.225\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Pre-Conditions} & \multicolumn{3}{p{\dimexpr0.575\textwidth+4\tabcolsep+2\arrayrulewidth\relax}|}{The physician has an account and is not logged in.} \\ \hline
+\multicolumn{2}{|p{\dimexpr0.225\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Post-Conditions} & \multicolumn{3}{p{\dimexpr0.575\textwidth+4\tabcolsep+2\arrayrulewidth\relax}|}{An authenticated session is established and the patient list is displayed.} \\ \hline
+\multicolumn{2}{|p{\dimexpr0.225\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Special Requirements} & \multicolumn{3}{p{\dimexpr0.575\textwidth+4\tabcolsep+2\arrayrulewidth\relax}|}{Related requirements: FR01, FR03; NFR08, NFR09.} \\ \hline
+\multicolumn{5}{|c|}{Basic Flow} \\ \hline
+\multicolumn{3}{|c|}{Actor Action} & \multicolumn{2}{c|}{System Response} \\ \hline
+1 & \multicolumn{2}{p{\dimexpr0.37\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Opens Zeest.} & 2 & Displays the login form. \\ \hline
+3 & \multicolumn{2}{p{\dimexpr0.37\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Enters credentials and selects Log In.} & 4 & Validates the credentials, establishes the session and displays the patient list. \\ \hline
+\multicolumn{5}{|c|}{Alternative Flow} \\ \hline
+3 & \multicolumn{2}{p{\dimexpr0.37\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Submits invalid or incomplete credentials.} & 3A & Displays a validation message without creating a session. \\ \hline
+\end{tabular}
+\end{table}
+
+\begin{table}[htbp]
+\centering
+\small
+\caption{UC11: View All Patients.}
+\label{tab:kashaf:uc11}
+\begin{tabular}{|p{0.035\textwidth}|p{0.19\textwidth}|p{0.18\textwidth}|p{0.035\textwidth}|p{0.36\textwidth}|}
+\hline
+\multicolumn{2}{|p{\dimexpr0.225\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Name} & \multicolumn{3}{p{\dimexpr0.575\textwidth+4\tabcolsep+2\arrayrulewidth\relax}|}{UC11: View All Patients} \\ \hline
+\multicolumn{2}{|p{\dimexpr0.225\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Actors} & \multicolumn{3}{p{\dimexpr0.575\textwidth+4\tabcolsep+2\arrayrulewidth\relax}|}{Physician} \\ \hline
+\multicolumn{2}{|p{\dimexpr0.225\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Summary} & \multicolumn{3}{p{\dimexpr0.575\textwidth+4\tabcolsep+2\arrayrulewidth\relax}|}{The physician views the patient list and selects a patient.} \\ \hline
+\multicolumn{2}{|p{\dimexpr0.225\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Pre-Conditions} & \multicolumn{3}{p{\dimexpr0.575\textwidth+4\tabcolsep+2\arrayrulewidth\relax}|}{The physician is logged in.} \\ \hline
+\multicolumn{2}{|p{\dimexpr0.225\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Post-Conditions} & \multicolumn{3}{p{\dimexpr0.575\textwidth+4\tabcolsep+2\arrayrulewidth\relax}|}{The selected patient is available for opening.} \\ \hline
+\multicolumn{2}{|p{\dimexpr0.225\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Special Requirements} & \multicolumn{3}{p{\dimexpr0.575\textwidth+4\tabcolsep+2\arrayrulewidth\relax}|}{Related requirements: FR04, FR05; NFR08.} \\ \hline
+\multicolumn{5}{|c|}{Basic Flow} \\ \hline
+\multicolumn{3}{|c|}{Actor Action} & \multicolumn{2}{c|}{System Response} \\ \hline
+1 & \multicolumn{2}{p{\dimexpr0.37\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Opens the patient list.} & 2 & Retrieves and displays the patient records. \\ \hline
+3 & \multicolumn{2}{p{\dimexpr0.37\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Selects a patient.} & 4 & Identifies the selected patient and provides access to the patient information. \\ \hline
+\multicolumn{5}{|c|}{Alternative Flow} \\ \hline
+1 & \multicolumn{2}{p{\dimexpr0.37\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Opens an empty patient list.} & 1A & Displays an empty-state message without showing fabricated records. \\ \hline
+\end{tabular}
+\end{table}
+
+\begin{table}[htbp]
+\centering
+\small
+\caption{UC12: View Patient Information.}
+\label{tab:kashaf:uc12}
+\begin{tabular}{|p{0.035\textwidth}|p{0.19\textwidth}|p{0.18\textwidth}|p{0.035\textwidth}|p{0.36\textwidth}|}
+\hline
+\multicolumn{2}{|p{\dimexpr0.225\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Name} & \multicolumn{3}{p{\dimexpr0.575\textwidth+4\tabcolsep+2\arrayrulewidth\relax}|}{UC12: View Patient Information} \\ \hline
+\multicolumn{2}{|p{\dimexpr0.225\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Actors} & \multicolumn{3}{p{\dimexpr0.575\textwidth+4\tabcolsep+2\arrayrulewidth\relax}|}{Physician} \\ \hline
+\multicolumn{2}{|p{\dimexpr0.225\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Summary} & \multicolumn{3}{p{\dimexpr0.575\textwidth+4\tabcolsep+2\arrayrulewidth\relax}|}{The physician opens the selected patient's information.} \\ \hline
+\multicolumn{2}{|p{\dimexpr0.225\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Pre-Conditions} & \multicolumn{3}{p{\dimexpr0.575\textwidth+4\tabcolsep+2\arrayrulewidth\relax}|}{The physician is logged in and a patient has been selected.} \\ \hline
+\multicolumn{2}{|p{\dimexpr0.225\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Post-Conditions} & \multicolumn{3}{p{\dimexpr0.575\textwidth+4\tabcolsep+2\arrayrulewidth\relax}|}{Patient information is displayed with the correct patient context.} \\ \hline
+\multicolumn{2}{|p{\dimexpr0.225\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Special Requirements} & \multicolumn{3}{p{\dimexpr0.575\textwidth+4\tabcolsep+2\arrayrulewidth\relax}|}{Related requirements: FR06; NFR10.} \\ \hline
+\multicolumn{5}{|c|}{Basic Flow} \\ \hline
+\multicolumn{3}{|c|}{Actor Action} & \multicolumn{2}{c|}{System Response} \\ \hline
+1 & \multicolumn{2}{p{\dimexpr0.37\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Opens the selected patient.} & 2 & Displays the patient information and encounter navigation. \\ \hline
+3 & \multicolumn{2}{p{\dimexpr0.37\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Reviews the displayed information.} & 4 & Maintains the selected patient context for subsequent actions. \\ \hline
+\multicolumn{5}{|c|}{Alternative Flow} \\ \hline
+1 & \multicolumn{2}{p{\dimexpr0.37\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Attempts to open a patient record that is unavailable.} & 1A & Displays an unavailable-record message and returns to patient selection. \\ \hline
+\end{tabular}
+\end{table}
+
+\begin{table}[htbp]
+\centering
+\small
+\caption{UC01: View Encounter History.}
+\label{tab:kashaf:uc01}
+\begin{tabular}{|p{0.035\textwidth}|p{0.19\textwidth}|p{0.18\textwidth}|p{0.035\textwidth}|p{0.36\textwidth}|}
+\hline
+\multicolumn{2}{|p{\dimexpr0.225\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Name} & \multicolumn{3}{p{\dimexpr0.575\textwidth+4\tabcolsep+2\arrayrulewidth\relax}|}{UC01: View Encounter History} \\ \hline
+\multicolumn{2}{|p{\dimexpr0.225\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Actors} & \multicolumn{3}{p{\dimexpr0.575\textwidth+4\tabcolsep+2\arrayrulewidth\relax}|}{Physician} \\ \hline
+\multicolumn{2}{|p{\dimexpr0.225\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Summary} & \multicolumn{3}{p{\dimexpr0.575\textwidth+4\tabcolsep+2\arrayrulewidth\relax}|}{The physician reviews the patient's previous encounters and clinical context.} \\ \hline
+\multicolumn{2}{|p{\dimexpr0.225\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Pre-Conditions} & \multicolumn{3}{p{\dimexpr0.575\textwidth+4\tabcolsep+2\arrayrulewidth\relax}|}{The physician is logged in and the patient is selected.} \\ \hline
+\multicolumn{2}{|p{\dimexpr0.225\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Post-Conditions} & \multicolumn{3}{p{\dimexpr0.575\textwidth+4\tabcolsep+2\arrayrulewidth\relax}|}{Historical information is displayed for the selected patient.} \\ \hline
+\multicolumn{2}{|p{\dimexpr0.225\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Special Requirements} & \multicolumn{3}{p{\dimexpr0.575\textwidth+4\tabcolsep+2\arrayrulewidth\relax}|}{Related requirements: FR18, FR19, FR07; NFR04, NFR10.} \\ \hline
+\multicolumn{5}{|c|}{Basic Flow} \\ \hline
+\multicolumn{3}{|c|}{Actor Action} & \multicolumn{2}{c|}{System Response} \\ \hline
+1 & \multicolumn{2}{p{\dimexpr0.37\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Opens encounter history.} & 2 & Displays the selected patient's encounter list. \\ \hline
+3 & \multicolumn{2}{p{\dimexpr0.37\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Selects a historical encounter.} & 4 & Displays its notes and available clinical information with source context. \\ \hline
+\multicolumn{5}{|c|}{Alternative Flow} \\ \hline
+1 & \multicolumn{2}{p{\dimexpr0.37\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Opens history for a patient with no previous encounters.} & 1A & Displays an empty history state while retaining the current patient context. \\ \hline
+\end{tabular}
+\end{table}
+
+\begin{table}[htbp]
+\centering
+\small
+\caption{UC13: Open an Encounter.}
+\label{tab:kashaf:uc13}
+\begin{tabular}{|p{0.035\textwidth}|p{0.19\textwidth}|p{0.18\textwidth}|p{0.035\textwidth}|p{0.36\textwidth}|}
+\hline
+\multicolumn{2}{|p{\dimexpr0.225\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Name} & \multicolumn{3}{p{\dimexpr0.575\textwidth+4\tabcolsep+2\arrayrulewidth\relax}|}{UC13: Open an Encounter} \\ \hline
+\multicolumn{2}{|p{\dimexpr0.225\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Actors} & \multicolumn{3}{p{\dimexpr0.575\textwidth+4\tabcolsep+2\arrayrulewidth\relax}|}{Physician} \\ \hline
+\multicolumn{2}{|p{\dimexpr0.225\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Summary} & \multicolumn{3}{p{\dimexpr0.575\textwidth+4\tabcolsep+2\arrayrulewidth\relax}|}{The physician selects the encounter used for consultation and analysis.} \\ \hline
+\multicolumn{2}{|p{\dimexpr0.225\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Pre-Conditions} & \multicolumn{3}{p{\dimexpr0.575\textwidth+4\tabcolsep+2\arrayrulewidth\relax}|}{The physician is logged in and the patient has an encounter record.} \\ \hline
+\multicolumn{2}{|p{\dimexpr0.225\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Post-Conditions} & \multicolumn{3}{p{\dimexpr0.575\textwidth+4\tabcolsep+2\arrayrulewidth\relax}|}{The selected encounter becomes the context for input and review actions.} \\ \hline
+\multicolumn{2}{|p{\dimexpr0.225\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Special Requirements} & \multicolumn{3}{p{\dimexpr0.575\textwidth+4\tabcolsep+2\arrayrulewidth\relax}|}{Related requirements: FR08; NFR10.} \\ \hline
+\multicolumn{5}{|c|}{Basic Flow} \\ \hline
+\multicolumn{3}{|c|}{Actor Action} & \multicolumn{2}{c|}{System Response} \\ \hline
+1 & \multicolumn{2}{p{\dimexpr0.37\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Selects an encounter.} & 2 & Checks its association with the selected patient. \\ \hline
+3 & \multicolumn{2}{p{\dimexpr0.37\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Opens the consultation workspace.} & 4 & Displays the encounter reference and its existing input information. \\ \hline
+\multicolumn{5}{|c|}{Alternative Flow} \\ \hline
+1 & \multicolumn{2}{p{\dimexpr0.37\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Selects an encounter that is unavailable or belongs to another patient.} & 1A & Rejects the selection and requests a valid encounter. \\ \hline
+\end{tabular}
+\end{table}
+
+\begin{table}[htbp]
+\centering
+\small
+\caption{UC02: Record Consultation.}
+\label{tab:kashaf:uc02}
+\begin{tabular}{|p{0.035\textwidth}|p{0.19\textwidth}|p{0.18\textwidth}|p{0.035\textwidth}|p{0.36\textwidth}|}
+\hline
+\multicolumn{2}{|p{\dimexpr0.225\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Name} & \multicolumn{3}{p{\dimexpr0.575\textwidth+4\tabcolsep+2\arrayrulewidth\relax}|}{UC02: Record Consultation} \\ \hline
+\multicolumn{2}{|p{\dimexpr0.225\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Actors} & \multicolumn{3}{p{\dimexpr0.575\textwidth+4\tabcolsep+2\arrayrulewidth\relax}|}{Physician} \\ \hline
+\multicolumn{2}{|p{\dimexpr0.225\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Summary} & \multicolumn{3}{p{\dimexpr0.575\textwidth+4\tabcolsep+2\arrayrulewidth\relax}|}{The physician records consultation audio and reviews the generated notes.} \\ \hline
+\multicolumn{2}{|p{\dimexpr0.225\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Pre-Conditions} & \multicolumn{3}{p{\dimexpr0.575\textwidth+4\tabcolsep+2\arrayrulewidth\relax}|}{The physician is logged in, an encounter is open and audio capture is available.} \\ \hline
+\multicolumn{2}{|p{\dimexpr0.225\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Post-Conditions} & \multicolumn{3}{p{\dimexpr0.575\textwidth+4\tabcolsep+2\arrayrulewidth\relax}|}{Structured notes are associated with the selected encounter.} \\ \hline
+\multicolumn{2}{|p{\dimexpr0.225\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Special Requirements} & \multicolumn{3}{p{\dimexpr0.575\textwidth+4\tabcolsep+2\arrayrulewidth\relax}|}{Related requirements: FR09, FR10, FR11, FR12; NFR01, NFR10.} \\ \hline
+\multicolumn{5}{|c|}{Basic Flow} \\ \hline
+\multicolumn{3}{|c|}{Actor Action} & \multicolumn{2}{c|}{System Response} \\ \hline
+1 & \multicolumn{2}{p{\dimexpr0.37\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Selects Start Audio Capture.} & 2 & Requests capture permission and begins transcription after access is granted. \\ \hline
+3 & \multicolumn{2}{p{\dimexpr0.37\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Conducts the consultation.} & 4 & Captures audio and presents the incoming structured notes. \\ \hline
+5 & \multicolumn{2}{p{\dimexpr0.37\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Selects Stop Audio Capture.} & 6 & Stops capture and presents the resulting notes for review. \\ \hline
+\multicolumn{5}{|c|}{Alternative Flow} \\ \hline
+1 & \multicolumn{2}{p{\dimexpr0.37\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Cannot grant microphone permission or access a device.} & 1A & Displays the capture problem without starting recording. \\ \hline
+3 & \multicolumn{2}{p{\dimexpr0.37\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Continues during a transcription-service failure.} & 3A & Reports the failure and distinguishes incomplete notes from completed processing. \\ \hline
+\end{tabular}
+\end{table}
+
+\begin{table}[htbp]
+\centering
+\small
+\caption{UC14: Correct Consultation Notes.}
+\label{tab:kashaf:uc14}
+\begin{tabular}{|p{0.035\textwidth}|p{0.19\textwidth}|p{0.18\textwidth}|p{0.035\textwidth}|p{0.36\textwidth}|}
+\hline
+\multicolumn{2}{|p{\dimexpr0.225\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Name} & \multicolumn{3}{p{\dimexpr0.575\textwidth+4\tabcolsep+2\arrayrulewidth\relax}|}{UC14: Correct Consultation Notes} \\ \hline
+\multicolumn{2}{|p{\dimexpr0.225\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Actors} & \multicolumn{3}{p{\dimexpr0.575\textwidth+4\tabcolsep+2\arrayrulewidth\relax}|}{Physician} \\ \hline
+\multicolumn{2}{|p{\dimexpr0.225\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Summary} & \multicolumn{3}{p{\dimexpr0.575\textwidth+4\tabcolsep+2\arrayrulewidth\relax}|}{The physician corrects the structured notes before using them for case processing.} \\ \hline
+\multicolumn{2}{|p{\dimexpr0.225\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Pre-Conditions} & \multicolumn{3}{p{\dimexpr0.575\textwidth+4\tabcolsep+2\arrayrulewidth\relax}|}{The physician is logged in and consultation notes exist for the open encounter.} \\ \hline
+\multicolumn{2}{|p{\dimexpr0.225\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Post-Conditions} & \multicolumn{3}{p{\dimexpr0.575\textwidth+4\tabcolsep+2\arrayrulewidth\relax}|}{The saved note revision is available for case preparation.} \\ \hline
+\multicolumn{2}{|p{\dimexpr0.225\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Special Requirements} & \multicolumn{3}{p{\dimexpr0.575\textwidth+4\tabcolsep+2\arrayrulewidth\relax}|}{Related requirements: FR12, FR13; NFR10, NFR11.} \\ \hline
+\multicolumn{5}{|c|}{Basic Flow} \\ \hline
+\multicolumn{3}{|c|}{Actor Action} & \multicolumn{2}{c|}{System Response} \\ \hline
+1 & \multicolumn{2}{p{\dimexpr0.37\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Opens the consultation notes for editing.} & 2 & Displays the saved note content. \\ \hline
+3 & \multicolumn{2}{p{\dimexpr0.37\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Corrects the content and selects Save.} & 4 & Validates and stores the note revision for the same encounter. \\ \hline
+\multicolumn{5}{|c|}{Alternative Flow} \\ \hline
+3 & \multicolumn{2}{p{\dimexpr0.37\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Attempts to save notes when persistence fails.} & 3A & Shows a save failure and does not confirm the revision as stored. \\ \hline
+\end{tabular}
+\end{table}
+
+\begin{table}[htbp]
+\centering
+\small
+\caption{UC15: Supply Imaging Input.}
+\label{tab:kashaf:uc15}
+\begin{tabular}{|p{0.035\textwidth}|p{0.19\textwidth}|p{0.18\textwidth}|p{0.035\textwidth}|p{0.36\textwidth}|}
+\hline
+\multicolumn{2}{|p{\dimexpr0.225\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Name} & \multicolumn{3}{p{\dimexpr0.575\textwidth+4\tabcolsep+2\arrayrulewidth\relax}|}{UC15: Supply Imaging Input} \\ \hline
+\multicolumn{2}{|p{\dimexpr0.225\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Actors} & \multicolumn{3}{p{\dimexpr0.575\textwidth+4\tabcolsep+2\arrayrulewidth\relax}|}{Physician} \\ \hline
+\multicolumn{2}{|p{\dimexpr0.225\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Summary} & \multicolumn{3}{p{\dimexpr0.575\textwidth+4\tabcolsep+2\arrayrulewidth\relax}|}{The physician supplies an image and inspects its classification findings.} \\ \hline
+\multicolumn{2}{|p{\dimexpr0.225\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Pre-Conditions} & \multicolumn{3}{p{\dimexpr0.575\textwidth+4\tabcolsep+2\arrayrulewidth\relax}|}{The physician is logged in and an encounter is open.} \\ \hline
+\multicolumn{2}{|p{\dimexpr0.225\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Post-Conditions} & \multicolumn{3}{p{\dimexpr0.575\textwidth+4\tabcolsep+2\arrayrulewidth\relax}|}{The image and its processing outcome are associated with the encounter.} \\ \hline
+\multicolumn{2}{|p{\dimexpr0.225\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Special Requirements} & \multicolumn{3}{p{\dimexpr0.575\textwidth+4\tabcolsep+2\arrayrulewidth\relax}|}{Related requirements: FR14, FR17, FR21, FR24, FR25; NFR10.} \\ \hline
+\multicolumn{5}{|c|}{Basic Flow} \\ \hline
+\multicolumn{3}{|c|}{Actor Action} & \multicolumn{2}{c|}{System Response} \\ \hline
+1 & \multicolumn{2}{p{\dimexpr0.37\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Selects an imaging input.} & 2 & Checks the input against the supported representation. \\ \hline
+3 & \multicolumn{2}{p{\dimexpr0.37\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Requests imaging analysis.} & 4 & Runs the selected existing model and displays its status and findings. \\ \hline
+\multicolumn{5}{|c|}{Alternative Flow} \\ \hline
+1 & \multicolumn{2}{p{\dimexpr0.37\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Supplies unsupported or unreadable input.} & 1A & Rejects the input and explains the supported conditions. \\ \hline
+3 & \multicolumn{2}{p{\dimexpr0.37\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Requests analysis when the model is unavailable.} & 3A & Reports the failure without presenting an invented classification. \\ \hline
+\end{tabular}
+\end{table}
+
+\begin{table}[htbp]
+\centering
+\small
+\caption{UC16: Supply Laboratory Information.}
+\label{tab:kashaf:uc16}
+\begin{tabular}{|p{0.035\textwidth}|p{0.19\textwidth}|p{0.18\textwidth}|p{0.035\textwidth}|p{0.36\textwidth}|}
+\hline
+\multicolumn{2}{|p{\dimexpr0.225\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Name} & \multicolumn{3}{p{\dimexpr0.575\textwidth+4\tabcolsep+2\arrayrulewidth\relax}|}{UC16: Supply Laboratory Information} \\ \hline
+\multicolumn{2}{|p{\dimexpr0.225\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Actors} & \multicolumn{3}{p{\dimexpr0.575\textwidth+4\tabcolsep+2\arrayrulewidth\relax}|}{Physician} \\ \hline
+\multicolumn{2}{|p{\dimexpr0.225\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Summary} & \multicolumn{3}{p{\dimexpr0.575\textwidth+4\tabcolsep+2\arrayrulewidth\relax}|}{The physician supplies laboratory information and reviews its findings.} \\ \hline
+\multicolumn{2}{|p{\dimexpr0.225\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Pre-Conditions} & \multicolumn{3}{p{\dimexpr0.575\textwidth+4\tabcolsep+2\arrayrulewidth\relax}|}{The physician is logged in and an encounter is open.} \\ \hline
+\multicolumn{2}{|p{\dimexpr0.225\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Post-Conditions} & \multicolumn{3}{p{\dimexpr0.575\textwidth+4\tabcolsep+2\arrayrulewidth\relax}|}{The laboratory information and processing outcome are linked to the encounter.} \\ \hline
+\multicolumn{2}{|p{\dimexpr0.225\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Special Requirements} & \multicolumn{3}{p{\dimexpr0.575\textwidth+4\tabcolsep+2\arrayrulewidth\relax}|}{Related requirements: FR15, FR17, FR22, FR24, FR25; NFR10.} \\ \hline
+\multicolumn{5}{|c|}{Basic Flow} \\ \hline
+\multicolumn{3}{|c|}{Actor Action} & \multicolumn{2}{c|}{System Response} \\ \hline
+1 & \multicolumn{2}{p{\dimexpr0.37\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Supplies laboratory information.} & 2 & Checks the required representation and identifies missing information. \\ \hline
+3 & \multicolumn{2}{p{\dimexpr0.37\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Requests laboratory processing.} & 4 & Invokes the Laboratory Agent and displays findings with their source context. \\ \hline
+\multicolumn{5}{|c|}{Alternative Flow} \\ \hline
+1 & \multicolumn{2}{p{\dimexpr0.37\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Supplies incomplete or unusable information.} & 1A & Requests correction and does not mark the input as analysed. \\ \hline
+\end{tabular}
+\end{table}
+
+\begin{table}[htbp]
+\centering
+\small
+\caption{UC17: Supply Medication Context.}
+\label{tab:kashaf:uc17}
+\begin{tabular}{|p{0.035\textwidth}|p{0.19\textwidth}|p{0.18\textwidth}|p{0.035\textwidth}|p{0.36\textwidth}|}
+\hline
+\multicolumn{2}{|p{\dimexpr0.225\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Name} & \multicolumn{3}{p{\dimexpr0.575\textwidth+4\tabcolsep+2\arrayrulewidth\relax}|}{UC17: Supply Medication Context} \\ \hline
+\multicolumn{2}{|p{\dimexpr0.225\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Actors} & \multicolumn{3}{p{\dimexpr0.575\textwidth+4\tabcolsep+2\arrayrulewidth\relax}|}{Physician} \\ \hline
+\multicolumn{2}{|p{\dimexpr0.225\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Summary} & \multicolumn{3}{p{\dimexpr0.575\textwidth+4\tabcolsep+2\arrayrulewidth\relax}|}{The physician supplies medication information and reviews medication-safety findings.} \\ \hline
+\multicolumn{2}{|p{\dimexpr0.225\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Pre-Conditions} & \multicolumn{3}{p{\dimexpr0.575\textwidth+4\tabcolsep+2\arrayrulewidth\relax}|}{The physician is logged in and an encounter is open.} \\ \hline
+\multicolumn{2}{|p{\dimexpr0.225\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Post-Conditions} & \multicolumn{3}{p{\dimexpr0.575\textwidth+4\tabcolsep+2\arrayrulewidth\relax}|}{Medication context and available safety findings are linked to the case.} \\ \hline
+\multicolumn{2}{|p{\dimexpr0.225\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Special Requirements} & \multicolumn{3}{p{\dimexpr0.575\textwidth+4\tabcolsep+2\arrayrulewidth\relax}|}{Related requirements: FR16, FR17, FR23, FR24, FR25; NFR10.} \\ \hline
+\multicolumn{5}{|c|}{Basic Flow} \\ \hline
+\multicolumn{3}{|c|}{Actor Action} & \multicolumn{2}{c|}{System Response} \\ \hline
+1 & \multicolumn{2}{p{\dimexpr0.37\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Supplies or selects medication context.} & 2 & Associates the information with the encounter. \\ \hline
+3 & \multicolumn{2}{p{\dimexpr0.37\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Requests medication review.} & 4 & Uses the Medication Safety Agent and displays findings from the available knowledge resource. \\ \hline
+\multicolumn{5}{|c|}{Alternative Flow} \\ \hline
+3 & \multicolumn{2}{p{\dimexpr0.37\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Requests review when the knowledge resource is unavailable.} & 3A & Reports that review could not be completed and does not imply medication safety. \\ \hline
+\end{tabular}
+\end{table}
+
+\begin{table}[htbp]
+\centering
+\small
+\caption{UC04: Generate and Review Clinical Draft.}
+\label{tab:kashaf:uc04}
+\begin{tabular}{|p{0.035\textwidth}|p{0.19\textwidth}|p{0.18\textwidth}|p{0.035\textwidth}|p{0.36\textwidth}|}
+\hline
+\multicolumn{2}{|p{\dimexpr0.225\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Name} & \multicolumn{3}{p{\dimexpr0.575\textwidth+4\tabcolsep+2\arrayrulewidth\relax}|}{UC04: Generate and Review Clinical Draft} \\ \hline
+\multicolumn{2}{|p{\dimexpr0.225\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Actors} & \multicolumn{3}{p{\dimexpr0.575\textwidth+4\tabcolsep+2\arrayrulewidth\relax}|}{Physician} \\ \hline
+\multicolumn{2}{|p{\dimexpr0.225\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Summary} & \multicolumn{3}{p{\dimexpr0.575\textwidth+4\tabcolsep+2\arrayrulewidth\relax}|}{The physician requests and reviews a draft diagnosis and treatment plan.} \\ \hline
+\multicolumn{2}{|p{\dimexpr0.225\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Pre-Conditions} & \multicolumn{3}{p{\dimexpr0.575\textwidth+4\tabcolsep+2\arrayrulewidth\relax}|}{The physician is logged in, an encounter is open and usable case information is available.} \\ \hline
+\multicolumn{2}{|p{\dimexpr0.225\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Post-Conditions} & \multicolumn{3}{p{\dimexpr0.575\textwidth+4\tabcolsep+2\arrayrulewidth\relax}|}{A clinical draft and critic findings are available for physician review.} \\ \hline
+\multicolumn{2}{|p{\dimexpr0.225\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Special Requirements} & \multicolumn{3}{p{\dimexpr0.575\textwidth+4\tabcolsep+2\arrayrulewidth\relax}|}{Related requirements: FR26, FR20, FR19, FR28, FR29, FR30, FR32, FR25.} \\ \hline
+\multicolumn{5}{|c|}{Basic Flow} \\ \hline
+\multicolumn{3}{|c|}{Actor Action} & \multicolumn{2}{c|}{System Response} \\ \hline
+1 & \multicolumn{2}{p{\dimexpr0.37\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Requests a clinical draft.} & 2 & Prepares the case using current inputs and relevant patient history. \\ \hline
+3 & \multicolumn{2}{p{\dimexpr0.37\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Inspects the processing status.} & 4 & Generates the diagnosis/treatment draft and completes critic review before presentation. \\ \hline
+5 & \multicolumn{2}{p{\dimexpr0.37\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Reviews the displayed draft.} & 6 & Displays the saved draft revision and critic findings without recording an approved decision. \\ \hline
+\multicolumn{5}{|c|}{Alternative Flow} \\ \hline
+1 & \multicolumn{2}{p{\dimexpr0.37\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Requests a draft with insufficient usable case information.} & 1A & Identifies missing information and does not present a completed draft. \\ \hline
+3 & \multicolumn{2}{p{\dimexpr0.37\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Encounters a generation or critic-service failure.} & 3A & Reports the incomplete stage and withholds a completed-review status. \\ \hline
+\end{tabular}
+\end{table}
+
+\begin{table}[htbp]
+\centering
+\small
+\caption{UC18: Inspect Supporting Evidence.}
+\label{tab:kashaf:uc18}
+\begin{tabular}{|p{0.035\textwidth}|p{0.19\textwidth}|p{0.18\textwidth}|p{0.035\textwidth}|p{0.36\textwidth}|}
+\hline
+\multicolumn{2}{|p{\dimexpr0.225\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Name} & \multicolumn{3}{p{\dimexpr0.575\textwidth+4\tabcolsep+2\arrayrulewidth\relax}|}{UC18: Inspect Supporting Evidence} \\ \hline
+\multicolumn{2}{|p{\dimexpr0.225\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Actors} & \multicolumn{3}{p{\dimexpr0.575\textwidth+4\tabcolsep+2\arrayrulewidth\relax}|}{Physician} \\ \hline
+\multicolumn{2}{|p{\dimexpr0.225\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Summary} & \multicolumn{3}{p{\dimexpr0.575\textwidth+4\tabcolsep+2\arrayrulewidth\relax}|}{The physician examines guideline citations and the passages supporting a clinical draft.} \\ \hline
+\multicolumn{2}{|p{\dimexpr0.225\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Pre-Conditions} & \multicolumn{3}{p{\dimexpr0.575\textwidth+4\tabcolsep+2\arrayrulewidth\relax}|}{The physician is logged in and a clinical draft is available.} \\ \hline
+\multicolumn{2}{|p{\dimexpr0.225\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Post-Conditions} & \multicolumn{3}{p{\dimexpr0.575\textwidth+4\tabcolsep+2\arrayrulewidth\relax}|}{Supporting evidence and its relationship to the draft are displayed.} \\ \hline
+\multicolumn{2}{|p{\dimexpr0.225\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Special Requirements} & \multicolumn{3}{p{\dimexpr0.575\textwidth+4\tabcolsep+2\arrayrulewidth\relax}|}{Related requirements: FR27, FR31; NFR04.} \\ \hline
+\multicolumn{5}{|c|}{Basic Flow} \\ \hline
+\multicolumn{3}{|c|}{Actor Action} & \multicolumn{2}{c|}{System Response} \\ \hline
+1 & \multicolumn{2}{p{\dimexpr0.37\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Opens supporting evidence for the selected draft.} & 2 & Displays retrieved citations and supporting passages. \\ \hline
+3 & \multicolumn{2}{p{\dimexpr0.37\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Reviews the sources and passages.} & 4 & Preserves their association with the selected draft and encounter. \\ \hline
+\multicolumn{5}{|c|}{Alternative Flow} \\ \hline
+1 & \multicolumn{2}{p{\dimexpr0.37\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Opens a draft for which supporting material is unavailable.} & 1A & Displays the evidence limitation without supplying fabricated citations. \\ \hline
+\end{tabular}
+\end{table}
+
+\begin{table}[htbp]
+\centering
+\small
+\caption{UC05: Approve Clinical Draft.}
+\label{tab:kashaf:uc05}
+\begin{tabular}{|p{0.035\textwidth}|p{0.19\textwidth}|p{0.18\textwidth}|p{0.035\textwidth}|p{0.36\textwidth}|}
+\hline
+\multicolumn{2}{|p{\dimexpr0.225\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Name} & \multicolumn{3}{p{\dimexpr0.575\textwidth+4\tabcolsep+2\arrayrulewidth\relax}|}{UC05: Approve Clinical Draft} \\ \hline
+\multicolumn{2}{|p{\dimexpr0.225\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Actors} & \multicolumn{3}{p{\dimexpr0.575\textwidth+4\tabcolsep+2\arrayrulewidth\relax}|}{Physician} \\ \hline
+\multicolumn{2}{|p{\dimexpr0.225\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Summary} & \multicolumn{3}{p{\dimexpr0.575\textwidth+4\tabcolsep+2\arrayrulewidth\relax}|}{The physician explicitly accepts the reviewed draft revision.} \\ \hline
+\multicolumn{2}{|p{\dimexpr0.225\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Pre-Conditions} & \multicolumn{3}{p{\dimexpr0.575\textwidth+4\tabcolsep+2\arrayrulewidth\relax}|}{The physician is logged in and the selected draft revision is pending review.} \\ \hline
+\multicolumn{2}{|p{\dimexpr0.225\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Post-Conditions} & \multicolumn{3}{p{\dimexpr0.575\textwidth+4\tabcolsep+2\arrayrulewidth\relax}|}{The approved content is recorded as a clinical decision and the action is logged.} \\ \hline
+\multicolumn{2}{|p{\dimexpr0.225\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Special Requirements} & \multicolumn{3}{p{\dimexpr0.575\textwidth+4\tabcolsep+2\arrayrulewidth\relax}|}{Related requirements: FR33, FR36, FR37; NFR03, NFR11, NFR12.} \\ \hline
+\multicolumn{5}{|c|}{Basic Flow} \\ \hline
+\multicolumn{3}{|c|}{Actor Action} & \multicolumn{2}{c|}{System Response} \\ \hline
+1 & \multicolumn{2}{p{\dimexpr0.37\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Reviews the saved draft and selects Approve.} & 2 & Identifies the selected revision and presents the approval confirmation. \\ \hline
+3 & \multicolumn{2}{p{\dimexpr0.37\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Confirms approval.} & 4 & Records the exact approved content and its audit action, then displays the confirmed outcome. \\ \hline
+\multicolumn{5}{|c|}{Alternative Flow} \\ \hline
+3 & \multicolumn{2}{p{\dimexpr0.37\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Confirms approval when record persistence fails.} & 3A & Reports the failure and does not display or store a falsely approved outcome. \\ \hline
+\end{tabular}
+\end{table}
+
+\begin{table}[htbp]
+\centering
+\small
+\caption{UC06: Modify and Approve Clinical Draft.}
+\label{tab:kashaf:uc06}
+\begin{tabular}{|p{0.035\textwidth}|p{0.19\textwidth}|p{0.18\textwidth}|p{0.035\textwidth}|p{0.36\textwidth}|}
+\hline
+\multicolumn{2}{|p{\dimexpr0.225\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Name} & \multicolumn{3}{p{\dimexpr0.575\textwidth+4\tabcolsep+2\arrayrulewidth\relax}|}{UC06: Modify and Approve Clinical Draft} \\ \hline
+\multicolumn{2}{|p{\dimexpr0.225\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Actors} & \multicolumn{3}{p{\dimexpr0.575\textwidth+4\tabcolsep+2\arrayrulewidth\relax}|}{Physician} \\ \hline
+\multicolumn{2}{|p{\dimexpr0.225\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Summary} & \multicolumn{3}{p{\dimexpr0.575\textwidth+4\tabcolsep+2\arrayrulewidth\relax}|}{The physician revises the draft and separately approves the saved revision.} \\ \hline
+\multicolumn{2}{|p{\dimexpr0.225\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Pre-Conditions} & \multicolumn{3}{p{\dimexpr0.575\textwidth+4\tabcolsep+2\arrayrulewidth\relax}|}{The physician is logged in and a pending draft is open.} \\ \hline
+\multicolumn{2}{|p{\dimexpr0.225\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Post-Conditions} & \multicolumn{3}{p{\dimexpr0.575\textwidth+4\tabcolsep+2\arrayrulewidth\relax}|}{A saved revision remains pending until explicitly approved; approved content is recorded.} \\ \hline
+\multicolumn{2}{|p{\dimexpr0.225\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Special Requirements} & \multicolumn{3}{p{\dimexpr0.575\textwidth+4\tabcolsep+2\arrayrulewidth\relax}|}{Related requirements: FR34, FR33, FR36, FR37; NFR12.} \\ \hline
+\multicolumn{5}{|c|}{Basic Flow} \\ \hline
+\multicolumn{3}{|c|}{Actor Action} & \multicolumn{2}{c|}{System Response} \\ \hline
+1 & \multicolumn{2}{p{\dimexpr0.37\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Selects Modify and edits the draft.} & 2 & Displays the editable content of the selected revision. \\ \hline
+3 & \multicolumn{2}{p{\dimexpr0.37\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Saves the modification.} & 4 & Stores the new revision and a modification action without approval. \\ \hline
+5 & \multicolumn{2}{p{\dimexpr0.37\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Reviews the saved revision and confirms Approve.} & 6 & Records that revision as an approved decision with its approval action. \\ \hline
+\multicolumn{5}{|c|}{Alternative Flow} \\ \hline
+3 & \multicolumn{2}{p{\dimexpr0.37\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Saves a modification without selecting Approve.} & 3A & Retains a pending revised draft and no approved clinical decision. \\ \hline
+5 & \multicolumn{2}{p{\dimexpr0.37\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Attempts to approve a revision changed since it was displayed.} & 5A & Requests review of the current saved revision before approval. \\ \hline
+\end{tabular}
+\end{table}
+
+\begin{table}[htbp]
+\centering
+\small
+\caption{UC07: Reject Clinical Draft.}
+\label{tab:kashaf:uc07}
+\begin{tabular}{|p{0.035\textwidth}|p{0.19\textwidth}|p{0.18\textwidth}|p{0.035\textwidth}|p{0.36\textwidth}|}
+\hline
+\multicolumn{2}{|p{\dimexpr0.225\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Name} & \multicolumn{3}{p{\dimexpr0.575\textwidth+4\tabcolsep+2\arrayrulewidth\relax}|}{UC07: Reject Clinical Draft} \\ \hline
+\multicolumn{2}{|p{\dimexpr0.225\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Actors} & \multicolumn{3}{p{\dimexpr0.575\textwidth+4\tabcolsep+2\arrayrulewidth\relax}|}{Physician} \\ \hline
+\multicolumn{2}{|p{\dimexpr0.225\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Summary} & \multicolumn{3}{p{\dimexpr0.575\textwidth+4\tabcolsep+2\arrayrulewidth\relax}|}{The physician rejects the selected draft.} \\ \hline
+\multicolumn{2}{|p{\dimexpr0.225\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Pre-Conditions} & \multicolumn{3}{p{\dimexpr0.575\textwidth+4\tabcolsep+2\arrayrulewidth\relax}|}{The physician is logged in and the selected draft is pending review.} \\ \hline
+\multicolumn{2}{|p{\dimexpr0.225\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Post-Conditions} & \multicolumn{3}{p{\dimexpr0.575\textwidth+4\tabcolsep+2\arrayrulewidth\relax}|}{The draft is marked rejected and the rejection is recorded in audit history.} \\ \hline
+\multicolumn{2}{|p{\dimexpr0.225\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Special Requirements} & \multicolumn{3}{p{\dimexpr0.575\textwidth+4\tabcolsep+2\arrayrulewidth\relax}|}{Related requirements: FR35, FR37; NFR03.} \\ \hline
+\multicolumn{5}{|c|}{Basic Flow} \\ \hline
+\multicolumn{3}{|c|}{Actor Action} & \multicolumn{2}{c|}{System Response} \\ \hline
+1 & \multicolumn{2}{p{\dimexpr0.37\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Selects Reject for the displayed draft.} & 2 & Identifies the selected revision and requests confirmation. \\ \hline
+3 & \multicolumn{2}{p{\dimexpr0.37\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Confirms rejection.} & 4 & Records the rejected status and action without adding an approved decision. \\ \hline
+\multicolumn{5}{|c|}{Alternative Flow} \\ \hline
+3 & \multicolumn{2}{p{\dimexpr0.37\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Cancels the rejection confirmation.} & 3A & Keeps the existing review state unchanged. \\ \hline
+\end{tabular}
+\end{table}
+
+\begin{table}[htbp]
+\centering
+\small
+\caption{UC08: Inspect Audit History.}
+\label{tab:kashaf:uc08}
+\begin{tabular}{|p{0.035\textwidth}|p{0.19\textwidth}|p{0.18\textwidth}|p{0.035\textwidth}|p{0.36\textwidth}|}
+\hline
+\multicolumn{2}{|p{\dimexpr0.225\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Name} & \multicolumn{3}{p{\dimexpr0.575\textwidth+4\tabcolsep+2\arrayrulewidth\relax}|}{UC08: Inspect Audit History} \\ \hline
+\multicolumn{2}{|p{\dimexpr0.225\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Actors} & \multicolumn{3}{p{\dimexpr0.575\textwidth+4\tabcolsep+2\arrayrulewidth\relax}|}{Physician} \\ \hline
+\multicolumn{2}{|p{\dimexpr0.225\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Summary} & \multicolumn{3}{p{\dimexpr0.575\textwidth+4\tabcolsep+2\arrayrulewidth\relax}|}{The physician reviews actions associated with the encounter's clinical drafts.} \\ \hline
+\multicolumn{2}{|p{\dimexpr0.225\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Pre-Conditions} & \multicolumn{3}{p{\dimexpr0.575\textwidth+4\tabcolsep+2\arrayrulewidth\relax}|}{The physician is logged in and an encounter is selected.} \\ \hline
+\multicolumn{2}{|p{\dimexpr0.225\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Post-Conditions} & \multicolumn{3}{p{\dimexpr0.575\textwidth+4\tabcolsep+2\arrayrulewidth\relax}|}{The review-action history is displayed without changing a clinical decision.} \\ \hline
+\multicolumn{2}{|p{\dimexpr0.225\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Special Requirements} & \multicolumn{3}{p{\dimexpr0.575\textwidth+4\tabcolsep+2\arrayrulewidth\relax}|}{Related requirements: FR37, FR38; NFR04.} \\ \hline
+\multicolumn{5}{|c|}{Basic Flow} \\ \hline
+\multicolumn{3}{|c|}{Actor Action} & \multicolumn{2}{c|}{System Response} \\ \hline
+1 & \multicolumn{2}{p{\dimexpr0.37\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Opens the encounter's audit history.} & 2 & Displays actions with their time, physician and draft revision. \\ \hline
+3 & \multicolumn{2}{p{\dimexpr0.37\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Inspects an action.} & 4 & Displays its decision context without altering the recorded action. \\ \hline
+\multicolumn{5}{|c|}{Alternative Flow} \\ \hline
+1 & \multicolumn{2}{p{\dimexpr0.37\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Opens an encounter without review actions.} & 1A & Displays an empty audit history state. \\ \hline
+\end{tabular}
+\end{table}
+
+\begin{table}[htbp]
+\centering
+\small
+\caption{UC10: Log Out.}
+\label{tab:kashaf:uc10}
+\begin{tabular}{|p{0.035\textwidth}|p{0.19\textwidth}|p{0.18\textwidth}|p{0.035\textwidth}|p{0.36\textwidth}|}
+\hline
+\multicolumn{2}{|p{\dimexpr0.225\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Name} & \multicolumn{3}{p{\dimexpr0.575\textwidth+4\tabcolsep+2\arrayrulewidth\relax}|}{UC10: Log Out} \\ \hline
+\multicolumn{2}{|p{\dimexpr0.225\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Actors} & \multicolumn{3}{p{\dimexpr0.575\textwidth+4\tabcolsep+2\arrayrulewidth\relax}|}{Physician} \\ \hline
+\multicolumn{2}{|p{\dimexpr0.225\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Summary} & \multicolumn{3}{p{\dimexpr0.575\textwidth+4\tabcolsep+2\arrayrulewidth\relax}|}{The physician ends the current application session.} \\ \hline
+\multicolumn{2}{|p{\dimexpr0.225\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Pre-Conditions} & \multicolumn{3}{p{\dimexpr0.575\textwidth+4\tabcolsep+2\arrayrulewidth\relax}|}{The physician is logged in.} \\ \hline
+\multicolumn{2}{|p{\dimexpr0.225\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Post-Conditions} & \multicolumn{3}{p{\dimexpr0.575\textwidth+4\tabcolsep+2\arrayrulewidth\relax}|}{The session is terminated and protected views require login.} \\ \hline
+\multicolumn{2}{|p{\dimexpr0.225\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Special Requirements} & \multicolumn{3}{p{\dimexpr0.575\textwidth+4\tabcolsep+2\arrayrulewidth\relax}|}{Related requirements: FR02; NFR08.} \\ \hline
+\multicolumn{5}{|c|}{Basic Flow} \\ \hline
+\multicolumn{3}{|c|}{Actor Action} & \multicolumn{2}{c|}{System Response} \\ \hline
+1 & \multicolumn{2}{p{\dimexpr0.37\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Selects Log Out.} & 2 & Ends the session and returns to the login view. \\ \hline
+3 & \multicolumn{2}{p{\dimexpr0.37\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Attempts to reopen a protected view.} & 4 & Requires a new authenticated session. \\ \hline
+\multicolumn{5}{|c|}{Alternative Flow} \\ \hline
+1 & \multicolumn{2}{p{\dimexpr0.37\textwidth+2\tabcolsep+\arrayrulewidth\relax}|}{Requests logout after the session has already ended.} & 1A & Returns to login without restoring access. \\ \hline
+\end{tabular}
+\end{table}
+
+\clearpage
 \section{Hardware and Software Requirements}
-List the hardware and software requirements that will be required to develop and deploy the project.
+Zeest requires resources for the physician interface, backend coordination, clinical processing and hybrid storage. The browser-facing workflow depends on an execution environment that can present patient information and support consultation capture, while the backend must connect the specialist components with the language model and knowledge resources. Imaging and transcription may impose different compute needs depending on the selected models and whether inference runs locally or through a service. Relational records, clinical inputs, semantic representations and audit actions also have different storage requirements. These responsibilities determine the resource categories rather than a fixed hardware purchase list. Tables~\ref{tab:kashaf:hardware} and~\ref{tab:kashaf:software} identify the required resources and their intended roles. Configuration choices must account for the selected clinical domain, input representations and processing arrangements. A reproducible execution environment needs recorded component versions and access conditions, while its measured capacities determine the eventual timing and concurrency limits. The resource inventory therefore connects the application workflow to the environment needed to develop and evaluate it.
+
 \subsection{Hardware Requirements}
+A development computer must support the application services, storage and the tools used to integrate the processing components. The physician interface needs a browser-capable device and an audio input source for consultation capture. Microphone access must be available when the recording workflow is used, and connectivity must support whichever processing services are selected. Storage must retain the permitted case inputs, relational records and associated semantic representations without separating them from their identifying context. Compute and memory requirements depend on the imaging and transcription models, the language-model access arrangement and the size of the case collection. Graphics acceleration may be useful for local model inference, but its necessity cannot be fixed before the model and inference location are selected. Table~\ref{tab:kashaf:hardware} records these resource needs with the configuration values that remain to be established. Those values belong to the execution specification and must support the agreed processing workload rather than being chosen independently of the components.
+
+\begin{table}[htbp]
+\centering
+\small
+\caption{Hardware resources supporting the Zeest workflow.}
+\label{tab:kashaf:hardware}
+\begin{tabular}{|p{0.24\textwidth}|p{0.36\textwidth}|p{0.28\textwidth}|}
+\hline
+Resource & Purpose & Specification \\ \hline
+Development/processing computer & Application services and selected local processing & Processor and RAM: TBD after model selection. \\ \hline
+Physician device & Web interface and review actions & Browser-capable device; supported configurations: TBD. \\ \hline
+Audio input & Consultation capture & Working audio source and capture permission. \\ \hline
+Storage & Clinical inputs, records, audit actions and vectors & Capacity and retention configuration: TBD. \\ \hline
+Graphics acceleration & Local inference where required & GPU requirement depends on the selected model. \\ \hline
+Connectivity & Access to selected processing and evidence services & Connection requirements depend on service arrangement. \\ \hline
+\end{tabular}
+\end{table}
+
 \subsection{Software Requirements}
+FastAPI provides the backend integration layer, while Next.js supports the physician-facing web interface. LangGraph and Google ADK are the named orchestration technologies for coordinating the agent responsibilities, with their exact division to be agreed in the detailed design. Gemini supplies the language-model capability used within the reasoning workflow, and PyTorch supports integration of the selected existing imaging model. PostgreSQL stores patient, encounter and review information, with pgvector providing the semantic representation layer alongside relational records. A transcription component and clinical knowledge resources complete the dependencies needed for consultation capture, guideline retrieval and medication review. Table~\ref{tab:kashaf:software} connects these technologies to their intended responsibilities. Component versions, model identifiers, supported representations and access conditions must be recorded when the environment is selected. Clinical datasets and evidence sources remain separate from installed application software: they supply permitted cases and supporting material, rather than establishing a working integration simply through inclusion in the resource inventory.
+
+\begin{table}[htbp]
+\centering
+\small
+\caption{Software technologies and processing dependencies used in the Zeest design.}
+\label{tab:kashaf:software}
+\begin{tabular}{|p{0.25\textwidth}|p{0.34\textwidth}|p{0.29\textwidth}|}
+\hline
+Technology/resource & Responsibility & Configuration \\ \hline
+FastAPI & Backend integration and application interfaces & Version and interface contracts: TBD. \\ \hline
+Next.js & Physician-facing web application & Version: TBD. \\ \hline
+LangGraph; Google ADK & Agent orchestration & Responsibility division: TBD. \\ \hline
+Gemini & Language-model reasoning & Model and access configuration: TBD. \\ \hline
+PyTorch; existing imaging model & Supported image classification & Validated model and label set: TBD. \\ \hline
+PostgreSQL; pgvector & Relational records and semantic memory & Embedding model, dimension and versions: TBD. \\ \hline
+Transcription component & Audio-to-notes processing & Model, languages and input formats: TBD. \\ \hline
+Guidelines; medication knowledge resource & Evidence retrieval and medication review & Selected resources and use conditions: TBD. \\ \hline
+MIMIC-IV; MIMIC-CXR; PubMed; Synthea; imaging candidates & Clinical/evidence data and synthetic case strategy & Permitted access and final cases/domain: TBD. \\ \hline
+\end{tabular}
+\end{table}
+
 \section{Graphical User Interface}
-This section should give the GUI dumps of each screen, with reference to the users. The navigation flow of each user is also required, and each GUI should mark the functionality/use case that it covers.
+The physician interface must provide a clear, consistent route from patient selection to consultation and clinical review. Existing view designs group the work into patient history, consultation inputs, and draft review with audit history. Figures~\ref{fig:kashaf:history-view}, \ref{fig:kashaf:consultation-view} and~\ref{fig:kashaf:review-view} show these layouts, while Figure~\ref{fig:kashaf:navigation} illustrates the complete clinical navigation. The history layout places encounter information beside its clinical context, the consultation layout pairs audio capture with structured notes and input categories, and the review layout separates the draft from supporting evidence and critic findings. Table~\ref{tab:kashaf:view-map} records their current functional coverage. Login, patient-list entry, note editing and input-specific controls require a subsequent interface review to match the expanded requirements. These additions must preserve the selected patient and encounter context and the distinction between pending and approved content. The current figures remain the established design references until that review, with their captions identifying what is visibly represented rather than claiming complete coverage of every action.
+
+\textcolor{red}{PLANNED: The figures are interface wireframes. GUI revisions for the expanded workflow will be reviewed separately before implementation.}
+
+\begin{table}[htbp]
+\centering
+\small
+\caption{Current GUI view coverage and controls to review in the next interface revision.}
+\label{tab:kashaf:view-map}
+\begin{tabular}{|p{0.08\textwidth}|p{0.28\textwidth}|p{0.21\textwidth}|p{0.3\textwidth}|}
+\hline
+View & Visible content & Related use cases & Review needed \\ \hline
+W01 & Encounter list and clinical history & UC01, UC12 & Patient-list entry and encounter opening. \\ \hline
+W02 & Audio, notes and clinical-input categories & UC02, UC15--UC17 & Stop control, note editing and input-specific actions. \\ \hline
+W03 & Draft, evidence, critic findings and decision/audit controls & UC04--UC08, UC18 & Revision-specific confirmation and action outcomes. \\ \hline
+\end{tabular}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.96\textwidth,height=0.78\textheight,keepaspectratio]{Figures/kashaf_D02_doctor_navigation.png}
+\caption{Physician navigation through login, patient and encounter selection, consultation inputs and clinical review. Only an explicitly approved draft revision becomes a clinical decision; modification and rejection have separate audit outcomes.}
+\label{fig:kashaf:navigation}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.96\textwidth,height=0.53\textheight,keepaspectratio]{Figures/kashaf_W01_history_view.png}
+\caption{W01 physician history wireframe (UC01/UC12): an encounter list appears beside the selected encounter's notes, imaging, laboratory and medication information.}
+\label{fig:kashaf:history-view}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.96\textwidth,height=0.53\textheight,keepaspectratio]{Figures/kashaf_W02_consultation_view.png}
+\caption{W02 consultation wireframe (UC02, UC15--UC17): audio capture and structured-note panels appear above imaging, laboratory and medication input categories.}
+\label{fig:kashaf:consultation-view}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.96\textwidth,height=0.72\textheight,keepaspectratio]{Figures/kashaf_W03_review_audit_view.png}
+\caption{W03 clinical-review wireframe (UC04--UC08, UC18): the draft and modification area appear beside supporting evidence and critic findings, with decision controls and audit history below.}
+\label{fig:kashaf:review-view}
+\end{figure}
+
+\clearpage
 \section{Database Design (if required; this means if you are using noSQL, you will not provide ER but the other design element and data dictonary should still be there. Explain and elaborate your DB design)}
+The database connects patient context, clinical inputs and physician review so that each displayed outcome can be traced to the encounter that produced it. Patient records identify the subject of the case, while Encounter records associate consultations and their inputs with that patient. ClinicalInput stores the supplied information and its source representation. A clinical draft is stored separately from an approved ClinicalDecision, preserving the difference between generated content and accepted content. PhysicianAction records the actor, time, draft revision and reviewed content of each decision-related action. EvidenceItem and ProposalEvidence connect the draft with its retrieved sources, and SemanticMemory links searchable representations to retained inputs or approved decisions. Physician records support account access and identify the person responsible for an action. The logical design follows the approved workflow rather than treating login and signup as clinical entities. Its relationships support case continuity, evidence inspection and revision-specific approval, while the physical storage and transaction strategy remain detailed implementation decisions.
+
+\textcolor{red}{PLANNED: The logical schema below specifies the intended data relationships; physical storage, indexing and transaction implementation will follow detailed design review.}
+
 \subsection{ER Diagram}
+Figure~\ref{fig:kashaf:er} shows the principal relationships of the logical schema. A patient can have several encounters, and an encounter can contain several clinical inputs and drafts. Retrieved evidence can support multiple drafts through the ProposalEvidence relationship. Each physician action identifies its responsible physician and the draft revision being reviewed. The current draft content is stored with a revision number, while the action retains a snapshot of the reviewed content so that a later edit does not erase the meaning of an earlier action. An approved decision references its approval action and revision, allowing accepted content to remain distinguishable from subsequent modifications. Semantic memory identifies its originating input or approved decision rather than treating every generated draft as an accepted fact. These relationships connect source information to processing and review outcomes while retaining the patient and encounter context. The data dictionary defines the complete fields and constraints needed to interpret the key relationships displayed in the diagram.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.96\textwidth,height=0.80\textheight,keepaspectratio]{Figures/kashaf_D03_hybrid_memory_er.png}
+\caption{Logical ER model linking physicians, patients, encounters, clinical inputs, drafts, evidence, review actions, approved decisions and semantic memory. Crow-foot symbols show cardinalities; PK denotes a primary key and FK a foreign key. Approval identifies a specific draft revision and reviewed content.}
+\label{fig:kashaf:er}
+\end{figure}
+
 \subsection{Data Dictionary}
+Each stored record needs an identifier and a clear context association. Patient and encounter keys provide that context for clinical inputs and drafts, while source references identify the material associated with evidence and semantic memory. Review actions need both the physician identity and a snapshot of the selected draft revision so that modification, approval and rejection remain distinguishable. ClinicalDecision retains the accepted content and the matching approval action rather than assuming that the latest displayed draft is the approved version. Required fields express the information needed to preserve these relationships; conditional fields apply only to the relevant input representation or semantic source. Tables~\ref{tab:kashaf:dict-physician} through~\ref{tab:kashaf:dict-semanticmemory} define the entity fields, logical types, keys and meanings. The types establish a consistent logical vocabulary for the design, while the embedding dimension and physical file-storage arrangement depend on the selected components. Cross-record validation must preserve the same patient, encounter and revision throughout a decision's source and approval relationships.
+
+\begin{table}[htbp]
+\centering
+\small
+\caption{Physician fields, logical types, constraints and meanings.}
+\label{tab:kashaf:dict-physician}
+\begin{tabular}{|p{0.23\textwidth}|p{0.15\textwidth}|p{0.18\textwidth}|p{0.31\textwidth}|}
+\hline
+Field & Type & Constraint & Meaning \\ \hline
+\texttt{physician\_id} & UUID & PK; required & Unique physician account identifier. \\ \hline
+\texttt{login\_name} & text & Unique; required & Identifier used to authenticate the account. \\ \hline
+\texttt{password\_hash} & text & Required & Salted password hash; never the plaintext password. \\ \hline
+\end{tabular}
+\end{table}
+
+\begin{table}[htbp]
+\centering
+\small
+\caption{Patient fields, logical types, constraints and meanings.}
+\label{tab:kashaf:dict-patient}
+\begin{tabular}{|p{0.23\textwidth}|p{0.15\textwidth}|p{0.18\textwidth}|p{0.31\textwidth}|}
+\hline
+Field & Type & Constraint & Meaning \\ \hline
+\texttt{patient\_id} & UUID & PK; required & Unique patient record identifier. \\ \hline
+\texttt{patient\_ref} & text & Unique; required & De-identified/synthetic patient reference. \\ \hline
+\texttt{context\_text} & text & Conditional & Patient information available for case review. \\ \hline
+\end{tabular}
+\end{table}
+
+\begin{table}[htbp]
+\centering
+\small
+\caption{Encounter fields, logical types, constraints and meanings.}
+\label{tab:kashaf:dict-encounter}
+\begin{tabular}{|p{0.23\textwidth}|p{0.15\textwidth}|p{0.18\textwidth}|p{0.31\textwidth}|}
+\hline
+Field & Type & Constraint & Meaning \\ \hline
+\texttt{encounter\_id} & UUID & PK; required & Unique encounter identifier. \\ \hline
+\texttt{patient\_id} & UUID & FK; required & Patient associated with the encounter. \\ \hline
+\texttt{recorded\_at} & timestamptz & Required & Encounter date/time in the case representation. \\ \hline
+\end{tabular}
+\end{table}
+
+\begin{table}[htbp]
+\centering
+\small
+\caption{ClinicalInput fields, logical types, constraints and meanings.}
+\label{tab:kashaf:dict-clinicalinput}
+\begin{tabular}{|p{0.23\textwidth}|p{0.15\textwidth}|p{0.18\textwidth}|p{0.31\textwidth}|}
+\hline
+Field & Type & Constraint & Meaning \\ \hline
+\texttt{input\_id} & UUID & PK; required & Unique clinical input identifier. \\ \hline
+\texttt{encounter\_id} & UUID & FK; required & Encounter to which the input belongs. \\ \hline
+\texttt{input\_kind} & text & Required & Notes, imaging, laboratory or medication context. \\ \hline
+\texttt{content\_text} & text & Conditional & Textual representation where applicable. \\ \hline
+\texttt{file\_ref} & text & Conditional & Stored input reference where applicable. \\ \hline
+\texttt{revision\_no} & integer & Required & Saved input revision, including corrected notes. \\ \hline
+\texttt{recorded\_at} & timestamptz & Required & Time the input revision is recorded. \\ \hline
+\end{tabular}
+\end{table}
+
+\begin{table}[htbp]
+\centering
+\small
+\caption{Proposal fields, logical types, constraints and meanings.}
+\label{tab:kashaf:dict-proposal}
+\begin{tabular}{|p{0.23\textwidth}|p{0.15\textwidth}|p{0.18\textwidth}|p{0.31\textwidth}|}
+\hline
+Field & Type & Constraint & Meaning \\ \hline
+\texttt{proposal\_id} & UUID & PK; required & Identifier of the clinical draft. \\ \hline
+\texttt{encounter\_id} & UUID & FK; required & Encounter supplying the clinical case. \\ \hline
+\texttt{revision\_no} & integer & Required & Current saved draft revision. \\ \hline
+\texttt{proposed\_text} & text & Required & Draft diagnosis and treatment content. \\ \hline
+\texttt{critic\_review} & text & Conditional & Critic findings for the reviewed revision. \\ \hline
+\texttt{proposal\_status} & text & Required & Pending, approved or rejected review state. \\ \hline
+\texttt{created\_at} & timestamptz & Required & Time the draft was created. \\ \hline
+\end{tabular}
+\end{table}
+
+\begin{table}[htbp]
+\centering
+\small
+\caption{EvidenceItem fields, logical types, constraints and meanings.}
+\label{tab:kashaf:dict-evidenceitem}
+\begin{tabular}{|p{0.23\textwidth}|p{0.15\textwidth}|p{0.18\textwidth}|p{0.31\textwidth}|}
+\hline
+Field & Type & Constraint & Meaning \\ \hline
+\texttt{evidence\_id} & UUID & PK; required & Unique retrieved evidence identifier. \\ \hline
+\texttt{source\_ref} & text & Required & Citation/source identifying the evidence. \\ \hline
+\texttt{supporting\_text} & text & Required & Retrieved passage presented for inspection. \\ \hline
+\texttt{retrieved\_at} & timestamptz & Required & Time associated with evidence retrieval. \\ \hline
+\end{tabular}
+\end{table}
+
+\begin{table}[htbp]
+\centering
+\small
+\caption{ProposalEvidence fields, logical types, constraints and meanings.}
+\label{tab:kashaf:dict-proposalevidence}
+\begin{tabular}{|p{0.23\textwidth}|p{0.15\textwidth}|p{0.18\textwidth}|p{0.31\textwidth}|}
+\hline
+Field & Type & Constraint & Meaning \\ \hline
+\texttt{proposal\_id} & UUID & PK/FK; required & Draft associated with the evidence. \\ \hline
+\texttt{revision\_no} & integer & PK; required & Draft revision supported by the evidence. \\ \hline
+\texttt{evidence\_id} & UUID & PK/FK; required & Evidence item linked to that revision. \\ \hline
+\end{tabular}
+\end{table}
+
+\begin{table}[htbp]
+\centering
+\small
+\caption{PhysicianAction fields, logical types, constraints and meanings.}
+\label{tab:kashaf:dict-physicianaction}
+\begin{tabular}{|p{0.23\textwidth}|p{0.15\textwidth}|p{0.18\textwidth}|p{0.31\textwidth}|}
+\hline
+Field & Type & Constraint & Meaning \\ \hline
+\texttt{action\_id} & UUID & PK; required & Unique review-action identifier. \\ \hline
+\texttt{proposal\_id} & UUID & FK; required & Draft being reviewed. \\ \hline
+\texttt{physician\_id} & UUID & FK; required & Physician responsible for the action. \\ \hline
+\texttt{revision\_no} & integer & Required & Saved revision targeted by the action. \\ \hline
+\texttt{action\_kind} & text & Required & Modify, approve or reject. \\ \hline
+\texttt{reviewed\_text} & text & Required & Content snapshot associated with the action. \\ \hline
+\texttt{action\_at} & timestamptz & Required & Time the action is recorded. \\ \hline
+\end{tabular}
+\end{table}
+
+\begin{table}[htbp]
+\centering
+\small
+\caption{ClinicalDecision fields, logical types, constraints and meanings.}
+\label{tab:kashaf:dict-clinicaldecision}
+\begin{tabular}{|p{0.23\textwidth}|p{0.15\textwidth}|p{0.18\textwidth}|p{0.31\textwidth}|}
+\hline
+Field & Type & Constraint & Meaning \\ \hline
+\texttt{decision\_id} & UUID & PK; required & Unique accepted clinical decision identifier. \\ \hline
+\texttt{proposal\_id} & UUID & FK; required & Draft from which accepted content originates. \\ \hline
+\texttt{approved\_revision} & integer & Required & Revision explicitly accepted by the physician. \\ \hline
+\texttt{approval\_action\_id} & UUID & Unique FK; required & Matching explicit approval action. \\ \hline
+\texttt{decision\_text} & text & Required & Exact physician-approved content. \\ \hline
+\texttt{recorded\_at} & timestamptz & Required & Time the accepted decision is recorded. \\ \hline
+\end{tabular}
+\end{table}
+
+\begin{table}[htbp]
+\centering
+\small
+\caption{SemanticMemory fields, logical types, constraints and meanings.}
+\label{tab:kashaf:dict-semanticmemory}
+\begin{tabular}{|p{0.23\textwidth}|p{0.15\textwidth}|p{0.18\textwidth}|p{0.31\textwidth}|}
+\hline
+Field & Type & Constraint & Meaning \\ \hline
+\texttt{memory\_id} & UUID & PK; required & Unique semantic-memory item. \\ \hline
+\texttt{input\_id} & UUID & Conditional FK & Input source when the representation is an input. \\ \hline
+\texttt{decision\_id} & UUID & Conditional FK & Approved-decision source when applicable. \\ \hline
+\texttt{embedding} & vector(TBD) & Required & Representation using the selected embedding model. \\ \hline
+\texttt{embedding\_model\_ref} & text & Required & Embedding model identifier/version. \\ \hline
+\texttt{indexed\_at} & timestamptz & Required & Time the representation is indexed. \\ \hline
+\end{tabular}
+\end{table}
+
+Several integrity rules connect the dictionary fields across records. ClinicalInput requires a usable text or file representation, and its encounter must belong to the patient selected for the operation. SemanticMemory has exactly one source reference, allowing a representation to originate from an input or an approved decision without ambiguity. A ClinicalDecision requires an approval action for the same draft and revision, with decision content matching the action's reviewed snapshot. The combination of draft identifier and approved revision identifies an accepted version, preventing a repeated submission from creating duplicate decisions for that version. Saving a modified draft increments its revision and returns the new content to pending review; an earlier approval remains associated with its own recorded content. Retrieved evidence and critic findings must identify the revision they accompany, and an edit must not imply that earlier review automatically applies to changed content. These rules preserve the meaning of historical actions while allowing the physician to revise a clinical draft.
+
 \section{ Risk Analysis}
-List and explain the risks that may be encountered during the project. For e.g.: technical risks, business risks, etc.
+The main project risks concern suitable data and models, the quality of clinical inputs and the correctness of the information relationships used during review. Transcription errors can affect the prepared case, while unavailable services can interrupt analysis or retrieval. Evidence may be insufficient to support a generated recommendation, making critic findings and physician inspection important parts of the workflow. Incorrect patient association would undermine longitudinal retrieval, and ambiguous revision handling could cause the system to record content different from that explicitly approved. Integration risks arise when the named components use incompatible contracts or responsibilities. Evaluation also depends on comparable cases and a justified reference process. Table~\ref{tab:kashaf:risks} connects each risk to a possible consequence and a response directed at the affected requirement. The responses emphasise source validation, visible failures, consistent identifiers and explicit approval rather than assuming that the presence of an agent guarantees correctness. Their effectiveness must be assessed through implementation and an appropriate evaluation process.
+
+\begin{table}[htbp]
+\centering
+\small
+\caption{Project risks, consequences and intended responses.}
+\label{tab:kashaf:risks}
+\begin{tabular}{|p{0.06\textwidth}|p{0.2\textwidth}|p{0.27\textwidth}|p{0.33\textwidth}|}
+\hline
+ID & Risk & Consequence & Response \\ \hline
+R01 & Data/model access & The selected clinical domain cannot be supported. & Confirm permitted cases and validated models before integration. \\ \hline
+R02 & Transcription/input quality & Incomplete or incorrect case information. & Allow note correction and report unusable inputs. \\ \hline
+R03 & Insufficient evidence & Draft recommendations lack inspectable support. & Show retrieved sources and make missing evidence explicit. \\ \hline
+R04 & Unsupported reasoning & Recommendations contain inconsistent findings. & Use critic review and retain physician decision authority. \\ \hline
+R05 & Patient-context mismatch & History or inputs are assigned to the wrong case. & Validate patient/encounter keys across processing and storage. \\ \hline
+R06 & Approval/revision error & Recorded content differs from the physician-approved draft. & Bind approval to the exact revision and content snapshot. \\ \hline
+R07 & Integration/service failure & The processing workflow is incomplete or incompatible. & Define contracts and expose stage-specific failures. \\ \hline
+R08 & Evaluation resources & Variant comparisons cannot answer the research questions. & Agree references, common cases and comparison conditions. \\ \hline
+\end{tabular}
+\end{table}
+
+\textcolor{red}{PLANNED: Risk responses and verification procedures will be assessed during implementation and evaluation; no mitigation outcome is reported.}
+
+The requirements connect the physician's user tasks with the processing needed to complete a patient review. Account access, patient selection and encounter context establish the starting conditions for consultation capture and clinical input analysis. Memory, specialist findings and retrieved evidence support a reviewable diagnosis and treatment draft, while critic review precedes the physician's decision. Functional requirements describe these operations directly, and the quality constraints address usability, access, traceability, timing and decision integrity. The use cases explain the normal and alternative interactions through which the workflow is completed. Resource requirements identify the supporting environment, and the database design preserves source, encounter and revision relationships across review outcomes. The remaining interface review will align the existing layouts with the expanded actions. Together, these specifications provide the contracts needed for the methodology and detailed architecture to connect components consistently and for subsequent verification to examine whether the implemented system preserves the intended information and physician-control boundaries.
+
+\endgroup

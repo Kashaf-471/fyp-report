@@ -1,0 +1,76 @@
+@startuml
+' Owner: Kashaf Ali. Logical schema supporting complete-system requirements.
+top to bottom direction
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam dpi 180
+skinparam defaultFontName Arial
+skinparam defaultFontSize 14
+skinparam nodesep 25
+skinparam ranksep 35
+hide circle
+hide methods
+entity "Physician" {
+ physician_id : UUID <<PK>>
+}
+entity "Patient" {
+ patient_id : UUID <<PK>>
+}
+entity "Encounter" {
+ encounter_id : UUID <<PK>>
+ patient_id : UUID <<FK>>
+}
+entity "ClinicalInput" {
+ input_id : UUID <<PK>>
+ encounter_id : UUID <<FK>>
+ revision_no : integer
+}
+entity "Proposal" {
+ proposal_id : UUID <<PK>>
+ encounter_id : UUID <<FK>>
+ revision_no : integer
+ proposal_status : text
+}
+entity "EvidenceItem" {
+ evidence_id : UUID <<PK>>
+}
+entity "ProposalEvidence" {
+ proposal_id : UUID <<PK,FK>>
+ revision_no : integer <<PK>>
+ evidence_id : UUID <<PK,FK>>
+}
+entity "PhysicianAction" {
+ action_id : UUID <<PK>>
+ proposal_id : UUID <<FK>>
+ physician_id : UUID <<FK>>
+ revision_no : integer
+}
+entity "ClinicalDecision" {
+ decision_id : UUID <<PK>>
+ proposal_id : UUID <<FK>>
+ approved_revision : integer
+ approval_action_id : UUID <<FK,unique>>
+}
+entity "SemanticMemory" {
+ memory_id : UUID <<PK>>
+ input_id : UUID <<FK,optional>>
+ decision_id : UUID <<FK,optional>>
+}
+Patient ||--o{ Encounter
+Encounter ||--o{ ClinicalInput
+Encounter ||--o{ Proposal
+Proposal ||--o{ ProposalEvidence
+EvidenceItem ||--o{ ProposalEvidence
+Proposal ||--o{ PhysicianAction
+Physician ||--o{ PhysicianAction
+Proposal ||--o{ ClinicalDecision
+PhysicianAction ||--o| ClinicalDecision
+ClinicalInput |o--o{ SemanticMemory
+ClinicalDecision |o--o{ SemanticMemory
+legend bottom
+ Approval binds the draft revision and reviewed content.
+ A draft/revision pair identifies an accepted decision version.
+ SemanticMemory has one source: input or approved decision.
+ The data dictionary supplies complete fields and constraints.
+endlegend
+@enduml
