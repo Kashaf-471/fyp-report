@@ -1,0 +1,68 @@
+@startuml esha_D12_memory_update_sequence
+autonumber
+skinparam backgroundColor #FFFFFF
+skinparam shadowing false
+skinparam defaultFontName Arial
+skinparam defaultFontSize 14
+skinparam dpi 160
+skinparam sequence {
+  ArrowColor #2B6CB0
+  ActorBorderColor #2B6CB0
+  LifeLineBorderColor #4A5568
+  LifeLineBackgroundColor #EDF2F7
+  ParticipantBorderColor #2B6CB0
+  ParticipantBackgroundColor #EDF2F7
+  ParticipantFontColor #1A202C
+  ParticipantFontStyle bold
+}
+skinparam note {
+  BackgroundColor #FEFCBF
+  BorderColor #B7791F
+  FontColor #744210
+  FontSize 12
+}
+title Proposed Approval and Patient-Memory Update Sequence (D12)
+
+actor Physician as Doctor
+participant "Next.js\nWeb UI" as UI
+participant "FastAPI\nGateway" as API
+participant "Decision and\nAudit Service" as Decision
+database "PostgreSQL\nClinical Record" as Record
+participant "Memory\nIndexer" as Indexer
+database "pgvector\nPatient Memory" as Memory
+
+== Modify: audit only ==
+Doctor -> UI : Submit modified draft (UC06)
+UI -> API : Save new proposal revision
+API -> Decision : Record revision + MODIFY action
+Decision -> Record : Persist pending revision and audit snapshot
+Record --> Decision : Saved
+Decision --> UI : Return revised PENDING proposal
+note over Record, Memory : Modification does not update the clinical decision or patient memory.
+== Approve: clinical record then memory ==
+Doctor -> UI : Approve reviewed revision (UC05)
+UI -> API : Submit explicit approval
+API -> Decision : Validate physician and revision
+group Atomic approval transaction
+  Decision -> Record : Record APPROVE action (FR37)
+  Decision -> Record : Mark reviewed revision APPROVED
+  Decision -> Record : Create ClinicalDecision (FR36)
+  Record --> Decision : Commit succeeds
+end
+Decision --> UI : Confirm approved clinical decision
+Decision -> Indexer : Send approved decision only
+Indexer -> Indexer : Generate embedding (model TBD)
+Indexer -> Memory : Store semantic memory link
+Memory --> Indexer : Indexed for later retrieval
+== Reject: audit retained, memory unchanged ==
+Doctor -> UI : Reject reviewed proposal (UC07)
+UI -> API : Submit rejection
+API -> Decision : Record REJECT action
+Decision -> Record : Mark rejected + retain audit snapshot (FR35, FR37)
+Record --> Decision : Rejection recorded
+Decision --> UI : Display rejected status
+note over Record, Memory
+  Pending and rejected proposals are excluded from
+  ClinicalDecision and semantic patient memory.
+end note
+@enduml

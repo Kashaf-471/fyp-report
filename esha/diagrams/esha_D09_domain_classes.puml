@@ -1,0 +1,134 @@
+@startuml esha_D09_domain_classes
+top to bottom direction
+skinparam backgroundColor #FFFFFF
+skinparam shadowing false
+skinparam defaultFontName Arial
+skinparam defaultFontSize 14
+skinparam dpi 160
+skinparam nodesep 25
+skinparam ranksep 25
+skinparam class {
+  BackgroundColor #F8F9FA
+  BorderColor #2B6CB0
+  HeaderBackgroundColor #EDF2F7
+  FontColor #1A202C
+  AttributeFontSize 12
+  MethodFontSize 12
+}
+skinparam package {
+  BackgroundColor #FFFFFF
+  BorderColor #4A5568
+  FontColor #1A202C
+  FontStyle bold
+}
+skinparam arrow {
+  Color #4A5568
+  FontColor #2D3748
+  FontSize 12
+}
+title Proposed Zeest Domain Model (D09)
+
+package "Encounter Context" {
+  class Physician {
+    +physician_id : UUID
+    +login_name : String
+  }
+  class Patient {
+    +patient_id : UUID
+    +patient_ref : String
+  }
+  class Encounter {
+    +encounter_id : UUID
+    +recorded_at : Timestamp
+  }
+  class ClinicalInput {
+    +input_id : UUID
+    +input_kind : InputType
+    +content_ref : String
+  }
+}
+
+package "Proposal and Governance" {
+  class Proposal {
+    +proposal_id : UUID
+    +revision_no : Integer
+    +proposed_text : String
+    +status : ProposalStatus
+  }
+  class EvidenceItem {
+    +evidence_id : UUID
+    +source_ref : String
+    +supporting_text : String
+  }
+  class ProposalEvidence {
+    +revision_no : Integer
+  }
+  class PhysicianAction {
+    +action_id : UUID
+    +action_kind : ActionKind
+    +action_at : Timestamp
+  }
+  class ClinicalDecision {
+    +decision_id : UUID
+    +approved_revision : Integer
+    +decision_text : String
+  }
+  class SemanticMemory {
+    +memory_id : UUID
+    +embedding : Vector
+    +embedding_model_ref : String
+  }
+}
+
+package "Domain Services" {
+  class OrchestrationService {
+    +analyseEncounter(id) : Proposal
+  }
+  class MemoryService {
+    +retrieveHistory(patientId)
+    +indexApprovedDecision(decision)
+  }
+  class SafetyCriticService {
+    +critique(proposal, evidence)
+  }
+  class DecisionService {
+    +modify(proposal)
+    +approve(proposal) : ClinicalDecision
+    +reject(proposal)
+  }
+}
+
+enum InputType {
+  NOTES
+  IMAGING
+  LABORATORY
+  MEDICATION
+}
+enum ProposalStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+enum ActionKind {
+  MODIFY
+  APPROVE
+  REJECT
+}
+Patient "1" *-- "0..*" Encounter : history
+Encounter "1" *-- "0..*" ClinicalInput : inputs
+Encounter "1" *-- "0..*" Proposal : proposals
+Proposal "1" o-- "0..*" ProposalEvidence
+ProposalEvidence "0..*" --> "1" EvidenceItem
+Proposal "1" *-- "0..*" PhysicianAction : audit
+Physician "1" --> "0..*" PhysicianAction
+Proposal "1" ..> "0..1" ClinicalDecision : approval only
+PhysicianAction "1" <-- "1" ClinicalDecision
+ClinicalDecision "1" ..> "0..1" SemanticMemory : indexes
+OrchestrationService ..> Encounter
+OrchestrationService ..> SafetyCriticService
+OrchestrationService ..> MemoryService
+DecisionService ..> Proposal
+DecisionService ..> ClinicalDecision
+DecisionService ..> PhysicianAction
+DecisionService ..> MemoryService
+@enduml

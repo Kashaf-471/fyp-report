@@ -1,0 +1,75 @@
+@startuml esha_D08_agent_subsystems
+top to bottom direction
+skinparam backgroundColor #FFFFFF
+skinparam shadowing false
+skinparam defaultFontName Arial
+skinparam defaultFontSize 14
+skinparam dpi 160
+skinparam nodesep 30
+skinparam ranksep 30
+
+skinparam package {
+    BackgroundColor #F8F9FA
+    BorderColor #4A5568
+    BorderThickness 1.2
+    FontColor #1A202C
+    FontStyle bold
+}
+
+skinparam component {
+    BackgroundColor #EDF2F7
+    BorderColor #2B6CB0
+    BorderThickness 1.2
+    FontColor #2D3748
+}
+
+skinparam note {
+    BackgroundColor #FEFCBF
+    BorderColor #B7791F
+    FontColor #744210
+    FontSize 10
+}
+
+skinparam arrow {
+    Color #4A5568
+    Thickness 1.2
+    FontColor #2D3748
+    FontSize 10
+}
+
+title Proposed Specialist Agent Subsystems (D08)
+
+component [Workflow Orchestrator\nShared encounter context and status] as Engine
+
+package "1  Context" as IntakePkg {
+    component [Patient Memory Agent\nPatient ID -> relevant history] as PMAgent
+    component [Clinical Case Agent\nNotes + history -> case summary] as CCAgent
+    PMAgent --> CCAgent : history
+}
+
+package "2  Specialist Analysis" as SpecialistPkg {
+    component [Imaging Agent\nImage -> model findings] as ImgAgent
+    component [Laboratory Agent\nValues -> flags and trends] as LabAgent
+    component [Medication Safety Agent\nMedication list -> safety alerts] as MedAgent
+}
+
+package "3  Evidence, Synthesis and Review" as GovernancePkg {
+    component [Evidence & RAG Agent\nCase query -> cited evidence] as RAGAgent
+    component [Clinical Reasoning Agent\nContext + findings + evidence -> draft] as ReasoningAgent
+    component [Safety & Critic Agent\nDraft + evidence -> review and flags] as CriticAgent
+    RAGAgent --> ReasoningAgent : citations
+    ReasoningAgent --> CriticAgent : draft
+}
+
+Engine --> PMAgent : retrieve
+IntakePkg --> SpecialistPkg : case context
+SpecialistPkg --> GovernancePkg : multimodal findings
+IntakePkg --> GovernancePkg : case context and evidence query
+CriticAgent --> [Physician Review] : reviewed package
+
+note right of Engine
+  Scheduling and failure handling remain proposed.
+  Chapter Table T14 contains the full contracts.
+end note
+
+@enduml

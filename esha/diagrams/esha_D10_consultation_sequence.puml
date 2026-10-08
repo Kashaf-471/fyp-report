@@ -1,0 +1,65 @@
+@startuml esha_D10_consultation_sequence
+autonumber
+skinparam backgroundColor #FFFFFF
+skinparam shadowing false
+skinparam defaultFontName Arial
+skinparam defaultFontSize 14
+skinparam dpi 160
+skinparam sequence {
+  ArrowColor #2B6CB0
+  ActorBorderColor #2B6CB0
+  LifeLineBorderColor #4A5568
+  LifeLineBackgroundColor #EDF2F7
+  ParticipantBorderColor #2B6CB0
+  ParticipantBackgroundColor #EDF2F7
+  ParticipantFontColor #1A202C
+  ParticipantFontStyle bold
+}
+skinparam note {
+  BackgroundColor #FEFCBF
+  BorderColor #B7791F
+  FontColor #744210
+  FontSize 12
+}
+title Proposed Consultation Analysis Sequence (D10)
+
+actor Physician as Doctor
+participant "Physician Application\nNext.js + FastAPI" as App
+participant "Workflow\nOrchestrator" as Orchestrator
+participant "Context and Specialist Agents\nMemory + Case + Imaging + Lab + Medication" as Specialists
+participant "Review Agents\nEvidence + Reasoning + Critic" as Review
+database "PostgreSQL\n+ pgvector" as DB
+
+== Capture and confirmation ==
+Doctor -> App : Start consultation capture (FR09)
+App -> App : Transcribe into structured draft (FR11-FR12)
+Doctor -> App : Confirm notes and multimodal inputs (FR13-FR16)
+== Context and specialist analysis ==
+Doctor -> App : Request proposal (FR26)
+App -> Orchestrator : Start proposed workflow
+activate Orchestrator
+Orchestrator -> Specialists : Retrieve history and assemble case (FR19-FR20)
+Specialists -> DB : Query records and semantic memory
+DB --> Specialists : Relevant longitudinal context
+Specialists --> Orchestrator : Consolidated case
+par Multimodal analysis
+  Orchestrator -> Specialists : Analyse image, labs and medications
+  Specialists --> Orchestrator : Findings, trends and safety alerts
+else Evidence retrieval
+  Orchestrator -> Review : Retrieve cited guidelines (FR27)
+  Review -> DB : Search evidence index
+  DB --> Review : Relevant guideline passages
+end
+== Synthesis and physician review ==
+Orchestrator -> Review : Synthesize draft with evidence (FR28-FR29)
+Review -> Review : Safety and critic review (FR30)
+Review --> Orchestrator : Draft + citations + critic findings
+Orchestrator -> DB : Persist draft as PENDING
+Orchestrator --> App : Return review package
+deactivate Orchestrator
+App --> Doctor : Display draft, citations and critic findings (FR31-FR32)
+note over Doctor, App
+  No proposal becomes a clinical decision or patient memory
+  until explicit physician approval (UC05 / UC06).
+end note
+@enduml

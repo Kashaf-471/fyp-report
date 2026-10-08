@@ -1,0 +1,73 @@
+@startuml esha_D07_system_architecture
+top to bottom direction
+skinparam backgroundColor #FFFFFF
+skinparam shadowing false
+skinparam defaultFontName Arial
+skinparam defaultFontSize 14
+skinparam dpi 160
+skinparam nodesep 35
+skinparam ranksep 35
+skinparam package {
+  BackgroundColor #F8F9FA
+  BorderColor #4A5568
+  FontColor #1A202C
+  FontStyle bold
+}
+skinparam component {
+  BackgroundColor #EDF2F7
+  BorderColor #2B6CB0
+  FontColor #2D3748
+}
+skinparam database {
+  BackgroundColor #EBF8FF
+  BorderColor #2B6CB0
+  FontColor #2C5282
+}
+skinparam arrow {
+  Color #4A5568
+  Thickness 1.2
+  FontColor #2D3748
+  FontSize 12
+}
+
+title Proposed Zeest System Architecture (D07)
+
+package "Physician Application" as ClientLayer {
+  component [Next.js Web Interface\nConsultation | Case | Review | Audit] as WebUI
+  component [FastAPI Gateway\nAuthentication | Validation | Routing] as API
+  WebUI --> API : HTTPS / WebSocket
+}
+
+package "Proposed Agent Layer" as AgentLayer {
+  component [Workflow Orchestrator\nLangGraph / Google ADK role split: TBD] as Orchestrator
+  component [Context Agents\nPatient Memory | Clinical Case] as ContextAgents
+  component [Specialist Agents\nImaging | Laboratory | Medication Safety] as SpecialistAgents
+  component [Review Agents\nEvidence & RAG | Clinical Reasoning | Safety & Critic] as ReviewAgents
+  Orchestrator --> ContextAgents : retrieve and assemble
+  ContextAgents --> SpecialistAgents : case context
+  SpecialistAgents --> ReviewAgents : findings
+}
+
+package "Models and External Evidence" as Models {
+  component [Speech-to-Text\nEngine: TBD] as Transcriber
+  component [Gemini\nReasoning API] as GeminiModel
+  component [Validated Imaging Classifier\nPyTorch checkpoint: TBD] as ImagingModel
+  database "External Clinical Guidelines" as Guidelines
+}
+
+package "Hybrid Patient Memory" as DataLayer {
+  database "PostgreSQL\nEncounters | Proposals | Decisions | Audit" as PostgreSQL
+  database "pgvector\nPatient Memory | Evidence Index" as Pgvector
+}
+
+API --> Orchestrator : Structured case request
+AgentLayer --> Models : Transcription, imaging, reasoning and cited evidence
+Models --> DataLayer : Records, semantic retrieval and evidence index
+API --> PostgreSQL : Approved decision and audit
+PostgreSQL --> Pgvector : Approved memory only
+
+note bottom of AgentLayer
+  PLANNED: components and flows are design specifications;
+  no prototype runtime or model integration exists yet.
+end note
+@enduml
