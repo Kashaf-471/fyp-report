@@ -1,0 +1,20 @@
+graph Attributes {
+graph [layout=neato,overlap=true,splines=line,bgcolor="white",pad="0.20",dpi=200];
+node [fontname="Arial",fontsize=12,pin=true,style=filled,color="#B3C8C0",fillcolor="#F2F8F5",shape=ellipse];
+edge [color="#A1B8AF",penwidth=1.0];
+Physician [shape=box,fillcolor="#DDF0E7",color="#368D7D",fontsize=14,label="Physician",pos="201.6,0.0!",width=1.55,height=.45];
+Physician_0 [label=<<U>physician_id</U>>,pos="0,50.4!",height=.36]; Physician -- Physician_0;
+Physician_1 [label=<full_name>,pos="0,0.0!",height=.36]; Physician -- Physician_1;
+Physician_2 [label=<email>,pos="0,-50.4!",height=.36]; Physician -- Physician_2;
+Physician_3 [label=<password_hash>,pos="403.2,25.2!",height=.36]; Physician -- Physician_3;
+Physician_4 [label=<created_at>,pos="403.2,-25.2!",height=.36]; Physician -- Physician_4;
+Patient [shape=box,fillcolor="#DDF0E7",color="#368D7D",fontsize=14,label="Patient",pos="201.6,-244.79999999999998!",width=1.55,height=.45];
+Patient_0 [label=<<U>patient_id</U>>,pos="0,-219.6!",height=.36]; Patient -- Patient_0;
+Patient_1 [label=<physician_id <FONT POINT-SIZE="9">(FK)</FONT>>,pos="0,-270.0!",height=.36]; Patient -- Patient_1;
+Patient_2 [label=<patient_ref>,pos="403.2,-219.6!",height=.36]; Patient -- Patient_2;
+Patient_3 [label=<context_text>,pos="403.2,-270.0!",height=.36]; Patient -- Patient_3;
+Encounter [shape=box,fillcolor="#DDF0E7",color="#368D7D",fontsize=14,label="Encounter",pos="201.6,-489.59999999999997!",width=1.55,height=.45];
+Encounter_0 [label=<<U>encounter_id</U>>,pos="0,-464.40000000000003!",height=.36]; Encounter -- Encounter_0;
+Encounter_1 [label=<patient_id <FONT POINT-SIZE="9">(FK)</FONT>>,pos="0,-514.8!",height=.36]; Encounter -- Encounter_1;
+Encounter_2 [label=<recorded_at>,pos="403.2,-489.59999999999997!",height=.36]; Encounter -- Encounter_2;
+}

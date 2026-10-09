@@ -1,76 +1,156 @@
 @startuml
-' Owner: Kashaf Ali. Logical schema supporting complete-system requirements.
-top to bottom direction
-skinparam backgroundColor white
-skinparam shadowing false
-skinparam dpi 180
-skinparam defaultFontName Arial
-skinparam defaultFontSize 14
-skinparam nodesep 25
-skinparam ranksep 35
+' Owner: Kashaf. Complete schema; Chen report figures rendered from DOT.
 hide circle
-hide methods
-entity "Physician" {
- physician_id : UUID <<PK>>
+skinparam backgroundColor white
+skinparam entityBackgroundColor #E0F2EB
+skinparam entityBorderColor #368D7D
+skinparam ArrowColor #7C9690
+entity Physician {
+  physician_id : UUID <<PK>>
+  full_name : text
+  email : text
+  password_hash : text
+  created_at : timestamptz
 }
-entity "Patient" {
- patient_id : UUID <<PK>>
+entity Patient {
+  patient_id : UUID <<PK>>
+  physician_id : UUID <<FK>>
+  patient_ref : text
+  context_text : text
 }
-entity "Encounter" {
- encounter_id : UUID <<PK>>
- patient_id : UUID <<FK>>
+entity Encounter {
+  encounter_id : UUID <<PK>>
+  patient_id : UUID <<FK>>
+  recorded_at : timestamptz
 }
-entity "ClinicalInput" {
- input_id : UUID <<PK>>
- encounter_id : UUID <<FK>>
- revision_no : integer
+entity ClinicalInput {
+  input_id : UUID <<PK>>
+  encounter_id : UUID <<FK>>
+  input_kind : text
 }
-entity "Proposal" {
- proposal_id : UUID <<PK>>
- encounter_id : UUID <<FK>>
- revision_no : integer
- proposal_status : text
+entity InputRevision {
+  input_id : UUID <<PK>> <<FK>>
+  revision_no : integer <<PK>>
+  content_text : text
+  file_ref : text
+  recorded_at : timestamptz
 }
-entity "EvidenceItem" {
- evidence_id : UUID <<PK>>
+entity SpecialistFinding {
+  finding_id : UUID <<PK>>
+  input_id : UUID <<FK>>
+  input_revision : integer <<FK>>
+  agent_kind : text
+  model_ref : text
+  finding_text : text
+  processing_status : text
+  processed_at : timestamptz
 }
-entity "ProposalEvidence" {
- proposal_id : UUID <<PK,FK>>
- revision_no : integer <<PK>>
- evidence_id : UUID <<PK,FK>>
+entity Proposal {
+  proposal_id : UUID <<PK>>
+  encounter_id : UUID <<FK>>
+  created_at : timestamptz
 }
-entity "PhysicianAction" {
- action_id : UUID <<PK>>
- proposal_id : UUID <<FK>>
- physician_id : UUID <<FK>>
- revision_no : integer
+entity ProposalRevision {
+  proposal_id : UUID <<PK>> <<FK>>
+  revision_no : integer <<PK>>
+  diagnosis_text : text
+  treatment_text : text
+  review_status : text
+  created_at : timestamptz
 }
-entity "ClinicalDecision" {
- decision_id : UUID <<PK>>
- proposal_id : UUID <<FK>>
- approved_revision : integer
- approval_action_id : UUID <<FK,unique>>
+entity ProposalInput {
+  proposal_id : UUID <<PK>> <<FK>>
+  proposal_revision : integer <<PK>> <<FK>>
+  input_id : UUID <<PK>> <<FK>>
+  input_revision : integer <<PK>> <<FK>>
 }
-entity "SemanticMemory" {
- memory_id : UUID <<PK>>
- input_id : UUID <<FK,optional>>
- decision_id : UUID <<FK,optional>>
+entity CriticReview {
+  critic_id : UUID <<PK>>
+  proposal_id : UUID <<FK>>
+  proposal_revision : integer <<FK>>
+  review_status : text
+  findings_text : text
+  reviewed_at : timestamptz
 }
-Patient ||--o{ Encounter
-Encounter ||--o{ ClinicalInput
-Encounter ||--o{ Proposal
-Proposal ||--o{ ProposalEvidence
-EvidenceItem ||--o{ ProposalEvidence
-Proposal ||--o{ PhysicianAction
-Physician ||--o{ PhysicianAction
-Proposal ||--o{ ClinicalDecision
-PhysicianAction ||--o| ClinicalDecision
-ClinicalInput |o--o{ SemanticMemory
-ClinicalDecision |o--o{ SemanticMemory
-legend bottom
- Approval binds the draft revision and reviewed content.
- A draft/revision pair identifies an accepted decision version.
- SemanticMemory has one source: input or approved decision.
- The data dictionary supplies complete fields and constraints.
-endlegend
+entity EvidenceItem {
+  evidence_id : UUID <<PK>>
+  source_ref : text
+  passage_text : text
+  retrieved_at : timestamptz
+}
+entity ProposalEvidence {
+  proposal_id : UUID <<PK>> <<FK>>
+  proposal_revision : integer <<PK>> <<FK>>
+  evidence_id : UUID <<PK>> <<FK>>
+}
+entity PhysicianAction {
+  action_id : UUID <<PK>>
+  proposal_id : UUID <<FK>>
+  proposal_revision : integer <<FK>>
+  physician_id : UUID <<FK>>
+  action_kind : text
+  reviewed_text : text
+  action_at : timestamptz
+}
+entity ClinicalDecision {
+  decision_id : UUID <<PK>>
+  proposal_id : UUID <<FK>>
+  approved_revision : integer <<FK>>
+  approval_action_id : UUID <<FK>>
+  decision_text : text
+  recorded_at : timestamptz
+}
+entity SemanticMemory {
+  memory_id : UUID <<PK>>
+  input_id : UUID <<FK>>
+  input_revision : integer <<FK>>
+  decision_id : UUID <<FK>>
+  embedding : vector(TBD)
+  model_ref : text
+  indexed_at : timestamptz
+}
+entity EvaluationCase {
+  case_id : UUID <<PK>>
+  encounter_id : UUID <<FK>>
+  source_ref : text
+  reference_text : text
+}
+entity EvaluationRun {
+  run_id : UUID <<PK>>
+  variant : text
+  critic_enabled : boolean
+  multimodal_enabled : boolean
+  configuration : jsonb
+  run_status : text
+  started_at : timestamptz
+}
+entity EvaluationOutput {
+  output_id : UUID <<PK>>
+  run_id : UUID <<FK>>
+  case_id : UUID <<FK>>
+  output_text : text
+  output_status : text
+  elapsed_ms : numeric
+}
+Physician "1" -- "0..N" Patient : owns
+Patient "1" -- "0..N" Encounter : has
+Encounter "1" -- "0..N" ClinicalInput : contains
+ClinicalInput "1" -- "1..N" InputRevision : versions
+InputRevision "1" -- "0..N" SpecialistFinding : analysed by
+Encounter "1" -- "0..N" Proposal : produces
+Proposal "1" -- "1..N" ProposalRevision : versions
+ProposalRevision "1" -- "0..N" ProposalInput : uses
+InputRevision "1" -- "0..N" ProposalInput : supplies
+ProposalRevision "1" -- "0..N" CriticReview : assessed by
+ProposalRevision "1" -- "0..N" ProposalEvidence : supports
+EvidenceItem "1" -- "0..N" ProposalEvidence : linked by
+Physician "1" -- "0..N" PhysicianAction : performs
+ProposalRevision "1" -- "0..N" PhysicianAction : reviewed in
+PhysicianAction "1" -- "0..1" ClinicalDecision : authorises
+ProposalRevision "1" -- "0..1" ClinicalDecision : accepted as
+InputRevision "0..1" -- "0..N" SemanticMemory : represented by
+ClinicalDecision "0..1" -- "0..N" SemanticMemory : represented by
+Encounter "1" -- "0..N" EvaluationCase : provides
+EvaluationCase "1" -- "0..N" EvaluationOutput : evaluated in
+EvaluationRun "1" -- "0..N" EvaluationOutput : records
 @enduml

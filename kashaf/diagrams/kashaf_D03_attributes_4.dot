@@ -1,0 +1,21 @@
+graph Attributes {
+graph [layout=neato,overlap=true,splines=line,bgcolor="white",pad="0.20",dpi=200];
+node [fontname="Arial",fontsize=12,pin=true,style=filled,color="#B3C8C0",fillcolor="#F2F8F5",shape=ellipse];
+edge [color="#A1B8AF",penwidth=1.0];
+CriticReview [shape=box,fillcolor="#DDF0E7",color="#368D7D",fontsize=14,label="CriticReview",pos="201.6,0.0!",width=1.55,height=.45];
+CriticReview_0 [label=<<U>critic_id</U>>,pos="0,50.4!",height=.36]; CriticReview -- CriticReview_0;
+CriticReview_1 [label=<proposal_id <FONT POINT-SIZE="9">(FK)</FONT>>,pos="0,0.0!",height=.36]; CriticReview -- CriticReview_1;
+CriticReview_2 [label=<proposal_revision <FONT POINT-SIZE="9">(FK)</FONT>>,pos="0,-50.4!",height=.36]; CriticReview -- CriticReview_2;
+CriticReview_3 [label=<review_status>,pos="403.2,50.4!",height=.36]; CriticReview -- CriticReview_3;
+CriticReview_4 [label=<findings_text>,pos="403.2,0.0!",height=.36]; CriticReview -- CriticReview_4;
+CriticReview_5 [label=<reviewed_at>,pos="403.2,-50.4!",height=.36]; CriticReview -- CriticReview_5;
+EvidenceItem [shape=box,fillcolor="#DDF0E7",color="#368D7D",fontsize=14,label="EvidenceItem",pos="201.6,-244.79999999999998!",width=1.55,height=.45];
+EvidenceItem_0 [label=<<U>evidence_id</U>>,pos="0,-219.6!",height=.36]; EvidenceItem -- EvidenceItem_0;
+EvidenceItem_1 [label=<source_ref>,pos="0,-270.0!",height=.36]; EvidenceItem -- EvidenceItem_1;
+EvidenceItem_2 [label=<passage_text>,pos="403.2,-219.6!",height=.36]; EvidenceItem -- EvidenceItem_2;
+EvidenceItem_3 [label=<retrieved_at>,pos="403.2,-270.0!",height=.36]; EvidenceItem -- EvidenceItem_3;
+ProposalEvidence [shape=box,fillcolor="#DDF0E7",color="#368D7D",fontsize=14,label="ProposalEvidence",pos="201.6,-489.59999999999997!",width=1.55,height=.45];
+ProposalEvidence_0 [label=<<U>proposal_id</U> <FONT POINT-SIZE="9">(FK)</FONT>>,pos="0,-464.40000000000003!",height=.36]; ProposalEvidence -- ProposalEvidence_0;
+ProposalEvidence_1 [label=<<U>proposal_revision</U> <FONT POINT-SIZE="9">(FK)</FONT>>,pos="0,-514.8!",height=.36]; ProposalEvidence -- ProposalEvidence_1;
+ProposalEvidence_2 [label=<<U>evidence_id</U> <FONT POINT-SIZE="9">(FK)</FONT>>,pos="403.2,-489.59999999999997!",height=.36]; ProposalEvidence -- ProposalEvidence_2;
+}

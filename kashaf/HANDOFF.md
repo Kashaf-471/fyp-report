@@ -111,3 +111,63 @@ FR identifiers now run consecutively from FR01 to FR38 in workflow/table order. 
 
 
 Feature-list presentation: at the user's request, Chapter 4 List of Features now uses concise one-line bullets instead of the explanatory paragraph and feature table. Feature coverage and FR identifiers are unchanged. The removed table reference was removed with its paragraph.
+
+
+## Approved concise rewrite and complete use-case audit
+
+The user approved the implementation plan and explicitly changed substantive paragraph length to 100?120 words, overriding the 150-word minimum for Kashaf's chapters. Chapters 1/2/4 now use concise relevant prose. The Introduction has two focused opening paragraphs and no detailed paper discussion. Definitions and stakeholder-summary sections use brief table references; unnecessary narration before requirement tables and design figures was removed. QA headings and the template's bold Times style remain. Original retained headings/order are preserved.
+
+The user further specified that every physician has their own patient records. Requirements, confidentiality constraints and all patient/encounter use cases now restrict access and processing to that physician's records. Patient creation/import and assignment of ownership are open workflow decisions, documented in USE_CASE_AUDIT.md. No administrative or external data integration was invented.
+
+The current inventory has 44 sequential FRs and 22 sequential UCs. Sign Up uses name/email/password, invalid/missing field validation, duplicate-email rejection and a subsequent login path. Separate cases cover analysis findings, critic findings and approved decisions. Modify is separate from Approve; saving never implies approval. Tables use actual Special Requirements constraints, paired actor/system steps and branch identifiers such as 4-A/4-B. A Research team actor covers comparative evaluation, without adding a clinical application role. The single-boundary PlantUML diagram includes mandatory processing and conditional review relationships; all actors are outside.
+
+Read USE_CASE_AUDIT.md for objective coverage and unresolved additions. This audit does not assert that unspecified CRUD, password recovery, exporting, notifications or profile editing are required. Navigation, ERD/dictionary structure and GUI assets are unchanged for their later review. Textual GUI mappings use current UC IDs; the earlier navigation itself still requires alignment. Registration name/email storage and physician-to-patient ownership need data-design alignment before implementation.
+
+FR migration from the immediately preceding draft: FR41 -> FR01, FR42 -> FR02, FR43 -> FR03, FR44 -> FR04, FR45 -> FR05, FR01 -> FR06, FR02 -> FR07, FR03 -> FR08, FR04 -> FR09, FR05 -> FR10, FR06 -> FR11, FR07 -> FR12, FR08 -> FR13, FR09 -> FR14, FR10 -> FR15, FR11 -> FR16, FR12 -> FR17, FR13 -> FR18, FR14 -> FR19, FR15 -> FR20, FR16 -> FR21, FR17 -> FR22, FR18 -> FR23, FR19 -> FR24, FR20 -> FR25, FR21 -> FR26, FR22 -> FR27, FR23 -> FR28, FR24 -> FR29, FR25 -> FR30, FR26 -> FR31, FR27 -> FR32, FR28 -> FR33, FR29 -> FR34, FR30 -> FR35, FR31 -> FR36, FR32 -> FR37, FR33 -> FR38, FR34 -> FR39, FR35 -> FR40, FR36 -> FR41, FR37 -> FR42, FR38 -> FR43, FR46 -> FR44. New registration and ownership rows were inserted before login; approved-decision browsing was added at the end.
+
+UC migration: UC09 -> UC02, UC11 -> UC03, UC12 -> UC04, UC01 -> UC05, UC13 -> UC06, UC02 -> UC07, UC14 -> UC08, UC15 -> UC09, UC16 -> UC10, UC17 -> UC11, UC04 -> UC13, UC18 -> UC14, UC06 -> UC16, UC05 -> UC17, UC07 -> UC18, UC08 -> UC20, UC10 -> UC21. UC06 from the old draft now means Modify only (UC16); approval is UC17. New cases are listed in the audit. Downstream chapters must use the current identifiers and physician ownership rule.
+
+Final assembly is 63 pages. Visual review covered shortened Introduction, use-case diagram and account/patient tables. Compilation has no overfull boxes, oversized floats, missing characters or undefined references/citations. Shared main.tex/class and Fatima/Esha files, navigation/ERD/GUI source and images are unchanged. No commit or push was made.
+
+
+## Float placement correction, 6 October 2026
+
+User reported FR tables after Quality Attributes and ER/data-dictionary floats crossing their headings. Added native LaTeX clearpage boundaries after float-bearing sections/subsections and before following headings in Kashaf's Chapters 1/2/4, including chapter-file endings. Tables and figures remain normal floats within their own sections and are not forced onto the prose page. No class/package/shared-file changes were needed. This is a layout correction, with content, numbering and diagram assets unchanged.
+
+
+## Simplified imported GUI screens, 6 October 2026
+
+User authorized editing all screens in diagrams/stitch_zeest_clinical_support_system/stitch_zeest_clinical_support_system to match the simple SynapSure/ImageSense sample presentation. Rebuilt all 11 imported HTML files and added the missing Login page: 12 HTML layouts including edit/approval/rejection variants. Kept the imported folder structure. Shared styles.css and preview.js are local, with working preview navigation and tabs. No clinical backend, authentication, recording, saving, approval or evaluation is simulated.
+
+Removed invented ward/bed data, clinician identity, citations, clinical findings, numeric confidence scores, protocol banners, version strings and compliance claims. Screens use neutral sample references and empty clinical content. The restrained white/teal visual style uses plain forms, tables, two-column layouts and compact dialogs. Visually compared sample GUI pages (SynapSure PDF page 45 and ImageSense PDF page 45). Generated each screen.png at 1366 by 1000 and four additional tab screenshots for laboratory, medication, critic and audit coverage. SCREENS.md maps every UC01?UC22 to a screen; local link and asset targets verified.
+
+This task updates HTML sources and their screenshots only. Report chapter/figure insertion, colourful navigation and ERD changes remain separate work. Previous three-screen report figures and main.tex/class/other member files are unchanged. Read the new folder SCREENS.md instead of the original generated design instructions. No commit or push made.
+
+GUI visual refinement: user requested visuals. Added local SVG medical-record illustration to Sign Up/Login, task pictograms, tab icons, upload visual and symbolic empty states. Regenerated all screen PNGs and tab variants. Screens remain simple static prototype designs; no clinical imagery or results were invented. Report and other owners' files are unchanged.
+
+User clarified that a prominent background image was required. Created decorative healthcare illustration using built-in image generation, saved under the new GUI folder assets/medical-background.png and applied visibly to Sign Up/Login. White forms sit on the left; physician illustration stays visible on the right. Regenerated and visually inspected screenshots. SCREENS.md records asset provenance and prompt. Report files remain unchanged.
+
+
+## GUI, navigation and complete database section integrated, 6 October 2026
+
+User approved report insertion of the visual screen designs, mapped users/use cases, colourful navigation and a complete Chen-style ERD/dictionary. Chapter 4 now includes sixteen owner-prefixed screen/state images, two navigation figures, four domain relationship views and six attribute sheets. Current template chapter/section/subsection headings and order remain unchanged. Each screen caption and coverage-table row identifies its actor and UC coverage. All UC01?UC22 are covered; input-screen generation controls also map to UC13. Decorative medical background is included on authentication pages. Designs remain explicitly PLANNED and contain no executed results or invented clinical information.
+
+Schema is now complete at the logical design level: eighteen entities, ninety-one attributes, twenty-one relationships. Physician stores registration name/email/hash; Patient has physician ownership. ClinicalInput/InputRevision preserve corrected input versions; SpecialistFinding identifies analysed input revisions. Proposal/ProposalRevision preserve draft revisions; ProposalInput connects source input versions. CriticReview and ProposalEvidence identify the assessed/supported revision. PhysicianAction and ClinicalDecision enforce explicit revision-specific acceptance. SemanticMemory has exactly one source. EvaluationCase/EvaluationRun/EvaluationOutput support UC22 and RR01?RR04 without fabricated outputs. This supersedes the old ten-entity dictionary. Esha must align Chapter 6 to the current schema and constraints; Fatima should align research configuration/output descriptions. No changes were made to their files.
+
+All diagram attributes and dictionary rows were checked against diagrams/kashaf_schema.json; all twenty-one relationships appear in the domain diagrams. Graphviz is used for the requested Chen appearance, with editable DOT and an alternative PlantUML model source. Source/asset details are in diagrams/REPORT_VISUALS.md. Patient creation, encounter creation and ownership-assignment UI remain separate open scope decisions; they were not invented.
+
+Verification: final assembled PDF is 98 pages. Visual review covered screen mappings, illustrated signup, primary/research navigation, ER relationships, attribute sheets, dictionary tables and section transitions. No overfull boxes, oversized floats, missing characters or undefined references/citations. ER figures finish before Data Dictionary, and dictionary tables finish before Risk Analysis. Shared main.tex/class and all Fatima/Esha files are unchanged. Existing font substitutions, underfull warnings and duplicate front-matter page anchor remain template/build issues. No commit or push made.
+
+
+## Navigation retained and ERD appearance corrected
+
+User required keeping the swimlane along with the thumbnail flow and rejected separated entity/relationship and attribute diagrams. Report now includes both the primary thumbnail flow and the coloured Physician/Zeest swimlane. Research navigation also remains.
+
+ERD is replaced with a single grouped conceptual model combining blue entity rectangles, green attribute ovals and amber relationship diamonds, following the supplied Hikari/coloured Chen examples. The complete model includes all eighteen entities, ninety-one attributes and twenty-one relationships. Four enlarged regions preserve readable labels; cross-region connections appear in the complete model. Primary keys remain underlined, FKs labelled and cardinalities shown. Native SVG sources and vector-PDF renderings provide predictable grouping and sharp zooming. Earlier Graphviz/separated sheets are superseded drafts. Data dictionary remains unchanged and was rechecked against schema JSON.
+
+Final report compiles to 95 pages with no overfull boxes, oversized floats, missing characters or undefined references/citations. Main/class and other owners' files remain untouched. See diagrams/REPORT_VISUALS.md for current sources.
+
+
+## Feedback audit, 8 October 2026
+
+Read all three feedback pages and audited Chapters 1/2/4, with read-only checks of supplementary drafts/front matter. FEEDBACK_REVIEW.md records confirmed defects, passes, conflicts and proposed corrections. Several mistakes remain despite a clean compile. No report text, images, bibliography, shared files or other members' files changed during this audit.

@@ -1,0 +1,83 @@
+digraph Chen {
+graph [rankdir=LR,compound=true,bgcolor="white",pad="0.25",nodesep="0.15",ranksep="0.30",dpi=240];
+node [fontname="Arial",fontsize=12,penwidth=1.1];
+edge [fontname="Arial",fontsize=10,color="#779289",dir=none];
+Physician [shape=box,style=filled,fillcolor="#72A8DC",fontcolor="white",color="#4E83B7",label="Physician"];
+Physician_a0 [shape=ellipse,style=filled,fillcolor="#D9EEDD",color="#8DBD98",label=<<U>physician_id</U>>,fontsize=10];
+Physician -> Physician_a0 [color="#B7C7BB",penwidth=.7];
+Physician_a1 [shape=ellipse,style=filled,fillcolor="#D9EEDD",color="#8DBD98",label=<full_name>,fontsize=10];
+Physician -> Physician_a1 [color="#B7C7BB",penwidth=.7];
+Physician_a2 [shape=ellipse,style=filled,fillcolor="#D9EEDD",color="#8DBD98",label=<email>,fontsize=10];
+Physician -> Physician_a2 [color="#B7C7BB",penwidth=.7];
+Physician_a3 [shape=ellipse,style=filled,fillcolor="#D9EEDD",color="#8DBD98",label=<password_hash>,fontsize=10];
+Physician -> Physician_a3 [color="#B7C7BB",penwidth=.7];
+Physician_a4 [shape=ellipse,style=filled,fillcolor="#D9EEDD",color="#8DBD98",label=<created_at>,fontsize=10];
+Physician -> Physician_a4 [color="#B7C7BB",penwidth=.7];
+{rank=same; Physician_a0;Physician_a1;Physician_a2;Physician_a3;Physician_a4;}
+Patient [shape=box,style=filled,fillcolor="#72A8DC",fontcolor="white",color="#4E83B7",label="Patient"];
+Patient_a0 [shape=ellipse,style=filled,fillcolor="#D9EEDD",color="#8DBD98",label=<<U>patient_id</U>>,fontsize=10];
+Patient -> Patient_a0 [color="#B7C7BB",penwidth=.7];
+Patient_a1 [shape=ellipse,style=filled,fillcolor="#D9EEDD",color="#8DBD98",label=<physician_id <FONT POINT-SIZE="9">FK</FONT>>,fontsize=10];
+Patient -> Patient_a1 [color="#B7C7BB",penwidth=.7];
+Patient_a2 [shape=ellipse,style=filled,fillcolor="#D9EEDD",color="#8DBD98",label=<patient_ref>,fontsize=10];
+Patient -> Patient_a2 [color="#B7C7BB",penwidth=.7];
+Patient_a3 [shape=ellipse,style=filled,fillcolor="#D9EEDD",color="#8DBD98",label=<context_text>,fontsize=10];
+Patient -> Patient_a3 [color="#B7C7BB",penwidth=.7];
+{rank=same; Patient_a0;Patient_a1;Patient_a2;Patient_a3;}
+Encounter [shape=box,style=filled,fillcolor="#72A8DC",fontcolor="white",color="#4E83B7",label="Encounter"];
+Encounter_a0 [shape=ellipse,style=filled,fillcolor="#D9EEDD",color="#8DBD98",label=<<U>encounter_id</U>>,fontsize=10];
+Encounter -> Encounter_a0 [color="#B7C7BB",penwidth=.7];
+Encounter_a1 [shape=ellipse,style=filled,fillcolor="#D9EEDD",color="#8DBD98",label=<patient_id <FONT POINT-SIZE="9">FK</FONT>>,fontsize=10];
+Encounter -> Encounter_a1 [color="#B7C7BB",penwidth=.7];
+Encounter_a2 [shape=ellipse,style=filled,fillcolor="#D9EEDD",color="#8DBD98",label=<recorded_at>,fontsize=10];
+Encounter -> Encounter_a2 [color="#B7C7BB",penwidth=.7];
+{rank=same; Encounter_a0;Encounter_a1;Encounter_a2;}
+ClinicalInput [shape=box,style=filled,fillcolor="#72A8DC",fontcolor="white",color="#4E83B7",label="ClinicalInput"];
+ClinicalInput_a0 [shape=ellipse,style=filled,fillcolor="#D9EEDD",color="#8DBD98",label=<<U>input_id</U>>,fontsize=10];
+ClinicalInput -> ClinicalInput_a0 [color="#B7C7BB",penwidth=.7];
+ClinicalInput_a1 [shape=ellipse,style=filled,fillcolor="#D9EEDD",color="#8DBD98",label=<encounter_id <FONT POINT-SIZE="9">FK</FONT>>,fontsize=10];
+ClinicalInput -> ClinicalInput_a1 [color="#B7C7BB",penwidth=.7];
+ClinicalInput_a2 [shape=ellipse,style=filled,fillcolor="#D9EEDD",color="#8DBD98",label=<input_kind>,fontsize=10];
+ClinicalInput -> ClinicalInput_a2 [color="#B7C7BB",penwidth=.7];
+{rank=same; ClinicalInput_a0;ClinicalInput_a1;ClinicalInput_a2;}
+InputRevision [shape=box,style=filled,fillcolor="#72A8DC",fontcolor="white",color="#4E83B7",label="InputRevision"];
+InputRevision_a0 [shape=ellipse,style=filled,fillcolor="#D9EEDD",color="#8DBD98",label=<<U>input_id</U> <FONT POINT-SIZE="9">FK</FONT>>,fontsize=10];
+InputRevision -> InputRevision_a0 [color="#B7C7BB",penwidth=.7];
+InputRevision_a1 [shape=ellipse,style=filled,fillcolor="#D9EEDD",color="#8DBD98",label=<<U>revision_no</U>>,fontsize=10];
+InputRevision -> InputRevision_a1 [color="#B7C7BB",penwidth=.7];
+InputRevision_a2 [shape=ellipse,style=filled,fillcolor="#D9EEDD",color="#8DBD98",label=<content_text>,fontsize=10];
+InputRevision -> InputRevision_a2 [color="#B7C7BB",penwidth=.7];
+InputRevision_a3 [shape=ellipse,style=filled,fillcolor="#D9EEDD",color="#8DBD98",label=<file_ref>,fontsize=10];
+InputRevision -> InputRevision_a3 [color="#B7C7BB",penwidth=.7];
+InputRevision_a4 [shape=ellipse,style=filled,fillcolor="#D9EEDD",color="#8DBD98",label=<recorded_at>,fontsize=10];
+InputRevision -> InputRevision_a4 [color="#B7C7BB",penwidth=.7];
+{rank=same; InputRevision_a0;InputRevision_a1;InputRevision_a2;InputRevision_a3;InputRevision_a4;}
+SpecialistFinding [shape=box,style=filled,fillcolor="#72A8DC",fontcolor="white",color="#4E83B7",label="SpecialistFinding"];
+SpecialistFinding_a0 [shape=ellipse,style=filled,fillcolor="#D9EEDD",color="#8DBD98",label=<<U>finding_id</U>>,fontsize=10];
+SpecialistFinding -> SpecialistFinding_a0 [color="#B7C7BB",penwidth=.7];
+SpecialistFinding_a1 [shape=ellipse,style=filled,fillcolor="#D9EEDD",color="#8DBD98",label=<input_id <FONT POINT-SIZE="9">FK</FONT>>,fontsize=10];
+SpecialistFinding -> SpecialistFinding_a1 [color="#B7C7BB",penwidth=.7];
+SpecialistFinding_a2 [shape=ellipse,style=filled,fillcolor="#D9EEDD",color="#8DBD98",label=<input_revision <FONT POINT-SIZE="9">FK</FONT>>,fontsize=10];
+SpecialistFinding -> SpecialistFinding_a2 [color="#B7C7BB",penwidth=.7];
+SpecialistFinding_a3 [shape=ellipse,style=filled,fillcolor="#D9EEDD",color="#8DBD98",label=<agent_kind>,fontsize=10];
+SpecialistFinding -> SpecialistFinding_a3 [color="#B7C7BB",penwidth=.7];
+SpecialistFinding_a4 [shape=ellipse,style=filled,fillcolor="#D9EEDD",color="#8DBD98",label=<model_ref>,fontsize=10];
+SpecialistFinding -> SpecialistFinding_a4 [color="#B7C7BB",penwidth=.7];
+SpecialistFinding_a5 [shape=ellipse,style=filled,fillcolor="#D9EEDD",color="#8DBD98",label=<finding_text>,fontsize=10];
+SpecialistFinding -> SpecialistFinding_a5 [color="#B7C7BB",penwidth=.7];
+SpecialistFinding_a6 [shape=ellipse,style=filled,fillcolor="#D9EEDD",color="#8DBD98",label=<processing_status>,fontsize=10];
+SpecialistFinding -> SpecialistFinding_a6 [color="#B7C7BB",penwidth=.7];
+SpecialistFinding_a7 [shape=ellipse,style=filled,fillcolor="#D9EEDD",color="#8DBD98",label=<processed_at>,fontsize=10];
+SpecialistFinding -> SpecialistFinding_a7 [color="#B7C7BB",penwidth=.7];
+{rank=same; SpecialistFinding_a0;SpecialistFinding_a1;SpecialistFinding_a2;SpecialistFinding_a3;SpecialistFinding_a4;SpecialistFinding_a5;SpecialistFinding_a6;SpecialistFinding_a7;}
+r0 [shape=diamond,style=filled,fillcolor="#F1D8AC",color="#C59D60",label="owns",fontsize=10];
+Physician -> r0 [taillabel="1",labeldistance=1.6]; r0 -> Patient [headlabel="0..N",labeldistance=1.6];
+r1 [shape=diamond,style=filled,fillcolor="#F1D8AC",color="#C59D60",label="has",fontsize=10];
+Patient -> r1 [taillabel="1",labeldistance=1.6]; r1 -> Encounter [headlabel="0..N",labeldistance=1.6];
+r2 [shape=diamond,style=filled,fillcolor="#F1D8AC",color="#C59D60",label="contains",fontsize=10];
+Encounter -> r2 [taillabel="1",labeldistance=1.6]; r2 -> ClinicalInput [headlabel="0..N",labeldistance=1.6];
+r3 [shape=diamond,style=filled,fillcolor="#F1D8AC",color="#C59D60",label="versions",fontsize=10];
+ClinicalInput -> r3 [taillabel="1",labeldistance=1.6]; r3 -> InputRevision [headlabel="1..N",labeldistance=1.6];
+r4 [shape=diamond,style=filled,fillcolor="#F1D8AC",color="#C59D60",label="analysed by",fontsize=10];
+InputRevision -> r4 [taillabel="1",labeldistance=1.6]; r4 -> SpecialistFinding [headlabel="0..N",labeldistance=1.6];
+}

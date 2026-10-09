@@ -1,0 +1,27 @@
+digraph ER {
+graph [rankdir=TB,bgcolor="white",pad="0.25",nodesep="0.40",ranksep="0.6",dpi=200];
+node [fontname="Arial",fontsize=16,shape=box,style=filled,fillcolor="#DDF0E7",color="#368D7D",penwidth=1.4,margin="0.14,0.1"];
+edge [fontname="Arial",fontsize=13,color="#7C9690",dir=none];
+Physician;
+Patient;
+Encounter;
+ClinicalInput;
+InputRevision;
+SpecialistFinding;
+Proposal;
+ProposalRevision;
+r0 [shape=diamond,fillcolor="#FFF0CC",color="#C89C4F",label="owns",fontsize=13];
+Physician -> r0 [taillabel="1",labeldistance=1.6]; r0 -> Patient [headlabel="0..N",labeldistance=1.6];
+r1 [shape=diamond,fillcolor="#FFF0CC",color="#C89C4F",label="has",fontsize=13];
+Patient -> r1 [taillabel="1",labeldistance=1.6]; r1 -> Encounter [headlabel="0..N",labeldistance=1.6];
+r2 [shape=diamond,fillcolor="#FFF0CC",color="#C89C4F",label="contains",fontsize=13];
+Encounter -> r2 [taillabel="1",labeldistance=1.6]; r2 -> ClinicalInput [headlabel="0..N",labeldistance=1.6];
+r3 [shape=diamond,fillcolor="#FFF0CC",color="#C89C4F",label="versions",fontsize=13];
+ClinicalInput -> r3 [taillabel="1",labeldistance=1.6]; r3 -> InputRevision [headlabel="1..N",labeldistance=1.6];
+r4 [shape=diamond,fillcolor="#FFF0CC",color="#C89C4F",label="analysed by",fontsize=13];
+InputRevision -> r4 [taillabel="1",labeldistance=1.6]; r4 -> SpecialistFinding [headlabel="0..N",labeldistance=1.6];
+r5 [shape=diamond,fillcolor="#FFF0CC",color="#C89C4F",label="produces",fontsize=13];
+Encounter -> r5 [taillabel="1",labeldistance=1.6]; r5 -> Proposal [headlabel="0..N",labeldistance=1.6];
+r6 [shape=diamond,fillcolor="#FFF0CC",color="#C89C4F",label="versions",fontsize=13];
+Proposal -> r6 [taillabel="1",labeldistance=1.6]; r6 -> ProposalRevision [headlabel="1..N",labeldistance=1.6];
+}

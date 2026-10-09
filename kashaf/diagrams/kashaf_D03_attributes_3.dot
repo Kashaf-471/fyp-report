@@ -1,0 +1,21 @@
+graph Attributes {
+graph [layout=neato,overlap=true,splines=line,bgcolor="white",pad="0.20",dpi=200];
+node [fontname="Arial",fontsize=12,pin=true,style=filled,color="#B3C8C0",fillcolor="#F2F8F5",shape=ellipse];
+edge [color="#A1B8AF",penwidth=1.0];
+Proposal [shape=box,fillcolor="#DDF0E7",color="#368D7D",fontsize=14,label="Proposal",pos="201.6,0.0!",width=1.55,height=.45];
+Proposal_0 [label=<<U>proposal_id</U>>,pos="0,25.2!",height=.36]; Proposal -- Proposal_0;
+Proposal_1 [label=<encounter_id <FONT POINT-SIZE="9">(FK)</FONT>>,pos="0,-25.2!",height=.36]; Proposal -- Proposal_1;
+Proposal_2 [label=<created_at>,pos="403.2,0.0!",height=.36]; Proposal -- Proposal_2;
+ProposalRevision [shape=box,fillcolor="#DDF0E7",color="#368D7D",fontsize=14,label="ProposalRevision",pos="201.6,-244.79999999999998!",width=1.55,height=.45];
+ProposalRevision_0 [label=<<U>proposal_id</U> <FONT POINT-SIZE="9">(FK)</FONT>>,pos="0,-194.4!",height=.36]; ProposalRevision -- ProposalRevision_0;
+ProposalRevision_1 [label=<<U>revision_no</U>>,pos="0,-244.79999999999998!",height=.36]; ProposalRevision -- ProposalRevision_1;
+ProposalRevision_2 [label=<diagnosis_text>,pos="0,-295.2!",height=.36]; ProposalRevision -- ProposalRevision_2;
+ProposalRevision_3 [label=<treatment_text>,pos="403.2,-194.4!",height=.36]; ProposalRevision -- ProposalRevision_3;
+ProposalRevision_4 [label=<review_status>,pos="403.2,-244.79999999999998!",height=.36]; ProposalRevision -- ProposalRevision_4;
+ProposalRevision_5 [label=<created_at>,pos="403.2,-295.2!",height=.36]; ProposalRevision -- ProposalRevision_5;
+ProposalInput [shape=box,fillcolor="#DDF0E7",color="#368D7D",fontsize=14,label="ProposalInput",pos="201.6,-489.59999999999997!",width=1.55,height=.45];
+ProposalInput_0 [label=<<U>proposal_id</U> <FONT POINT-SIZE="9">(FK)</FONT>>,pos="0,-464.40000000000003!",height=.36]; ProposalInput -- ProposalInput_0;
+ProposalInput_1 [label=<<U>proposal_revision</U> <FONT POINT-SIZE="9">(FK)</FONT>>,pos="0,-514.8!",height=.36]; ProposalInput -- ProposalInput_1;
+ProposalInput_2 [label=<<U>input_id</U> <FONT POINT-SIZE="9">(FK)</FONT>>,pos="403.2,-464.40000000000003!",height=.36]; ProposalInput -- ProposalInput_2;
+ProposalInput_3 [label=<<U>input_revision</U> <FONT POINT-SIZE="9">(FK)</FONT>>,pos="403.2,-514.8!",height=.36]; ProposalInput -- ProposalInput_3;
+}

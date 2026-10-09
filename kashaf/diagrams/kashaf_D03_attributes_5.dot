@@ -1,0 +1,28 @@
+graph Attributes {
+graph [layout=neato,overlap=true,splines=line,bgcolor="white",pad="0.20",dpi=200];
+node [fontname="Arial",fontsize=12,pin=true,style=filled,color="#B3C8C0",fillcolor="#F2F8F5",shape=ellipse];
+edge [color="#A1B8AF",penwidth=1.0];
+PhysicianAction [shape=box,fillcolor="#DDF0E7",color="#368D7D",fontsize=14,label="PhysicianAction",pos="201.6,0.0!",width=1.55,height=.45];
+PhysicianAction_0 [label=<<U>action_id</U>>,pos="0,75.6!",height=.36]; PhysicianAction -- PhysicianAction_0;
+PhysicianAction_1 [label=<proposal_id <FONT POINT-SIZE="9">(FK)</FONT>>,pos="0,25.2!",height=.36]; PhysicianAction -- PhysicianAction_1;
+PhysicianAction_2 [label=<proposal_revision <FONT POINT-SIZE="9">(FK)</FONT>>,pos="0,-25.2!",height=.36]; PhysicianAction -- PhysicianAction_2;
+PhysicianAction_3 [label=<physician_id <FONT POINT-SIZE="9">(FK)</FONT>>,pos="0,-75.6!",height=.36]; PhysicianAction -- PhysicianAction_3;
+PhysicianAction_4 [label=<action_kind>,pos="403.2,50.4!",height=.36]; PhysicianAction -- PhysicianAction_4;
+PhysicianAction_5 [label=<reviewed_text>,pos="403.2,0.0!",height=.36]; PhysicianAction -- PhysicianAction_5;
+PhysicianAction_6 [label=<action_at>,pos="403.2,-50.4!",height=.36]; PhysicianAction -- PhysicianAction_6;
+ClinicalDecision [shape=box,fillcolor="#DDF0E7",color="#368D7D",fontsize=14,label="ClinicalDecision",pos="201.6,-244.79999999999998!",width=1.55,height=.45];
+ClinicalDecision_0 [label=<<U>decision_id</U>>,pos="0,-194.4!",height=.36]; ClinicalDecision -- ClinicalDecision_0;
+ClinicalDecision_1 [label=<proposal_id <FONT POINT-SIZE="9">(FK)</FONT>>,pos="0,-244.79999999999998!",height=.36]; ClinicalDecision -- ClinicalDecision_1;
+ClinicalDecision_2 [label=<approved_revision <FONT POINT-SIZE="9">(FK)</FONT>>,pos="0,-295.2!",height=.36]; ClinicalDecision -- ClinicalDecision_2;
+ClinicalDecision_3 [label=<approval_action_id <FONT POINT-SIZE="9">(FK)</FONT>>,pos="403.2,-194.4!",height=.36]; ClinicalDecision -- ClinicalDecision_3;
+ClinicalDecision_4 [label=<decision_text>,pos="403.2,-244.79999999999998!",height=.36]; ClinicalDecision -- ClinicalDecision_4;
+ClinicalDecision_5 [label=<recorded_at>,pos="403.2,-295.2!",height=.36]; ClinicalDecision -- ClinicalDecision_5;
+SemanticMemory [shape=box,fillcolor="#DDF0E7",color="#368D7D",fontsize=14,label="SemanticMemory",pos="201.6,-489.59999999999997!",width=1.55,height=.45];
+SemanticMemory_0 [label=<<U>memory_id</U>>,pos="0,-414.0!",height=.36]; SemanticMemory -- SemanticMemory_0;
+SemanticMemory_1 [label=<input_id <FONT POINT-SIZE="9">(FK)</FONT>>,pos="0,-464.40000000000003!",height=.36]; SemanticMemory -- SemanticMemory_1;
+SemanticMemory_2 [label=<input_revision <FONT POINT-SIZE="9">(FK)</FONT>>,pos="0,-514.8!",height=.36]; SemanticMemory -- SemanticMemory_2;
+SemanticMemory_3 [label=<decision_id <FONT POINT-SIZE="9">(FK)</FONT>>,pos="0,-565.1999999999999!",height=.36]; SemanticMemory -- SemanticMemory_3;
+SemanticMemory_4 [label=<embedding>,pos="403.2,-439.2!",height=.36]; SemanticMemory -- SemanticMemory_4;
+SemanticMemory_5 [label=<model_ref>,pos="403.2,-489.59999999999997!",height=.36]; SemanticMemory -- SemanticMemory_5;
+SemanticMemory_6 [label=<indexed_at>,pos="403.2,-540.0!",height=.36]; SemanticMemory -- SemanticMemory_6;
+}

@@ -1,0 +1,826 @@
+{
+  "entities": {
+    "Physician": [
+      {
+        "field": "physician_id",
+        "type": "UUID",
+        "nullable": "No",
+        "key": "PK",
+        "meaning": "Unique physician account."
+      },
+      {
+        "field": "full_name",
+        "type": "text",
+        "nullable": "No",
+        "key": "Required",
+        "meaning": "Name supplied at registration."
+      },
+      {
+        "field": "email",
+        "type": "text",
+        "nullable": "No",
+        "key": "Unique",
+        "meaning": "Normalised registration and login email."
+      },
+      {
+        "field": "password_hash",
+        "type": "text",
+        "nullable": "No",
+        "key": "Required",
+        "meaning": "Salted hash; plaintext passwords are never stored."
+      },
+      {
+        "field": "created_at",
+        "type": "timestamptz",
+        "nullable": "No",
+        "key": "Required",
+        "meaning": "Account creation time."
+      }
+    ],
+    "Patient": [
+      {
+        "field": "patient_id",
+        "type": "UUID",
+        "nullable": "No",
+        "key": "PK",
+        "meaning": "Unique patient record."
+      },
+      {
+        "field": "physician_id",
+        "type": "UUID",
+        "nullable": "No",
+        "key": "FK",
+        "meaning": "Physician who owns the record."
+      },
+      {
+        "field": "patient_ref",
+        "type": "text",
+        "nullable": "No",
+        "key": "Unique",
+        "meaning": "De-identified or synthetic reference."
+      },
+      {
+        "field": "context_text",
+        "type": "text",
+        "nullable": "Yes",
+        "key": "Optional",
+        "meaning": "Available patient context."
+      }
+    ],
+    "Encounter": [
+      {
+        "field": "encounter_id",
+        "type": "UUID",
+        "nullable": "No",
+        "key": "PK",
+        "meaning": "Unique encounter."
+      },
+      {
+        "field": "patient_id",
+        "type": "UUID",
+        "nullable": "No",
+        "key": "FK",
+        "meaning": "Patient associated with this encounter."
+      },
+      {
+        "field": "recorded_at",
+        "type": "timestamptz",
+        "nullable": "No",
+        "key": "Required",
+        "meaning": "Encounter date and time."
+      }
+    ],
+    "ClinicalInput": [
+      {
+        "field": "input_id",
+        "type": "UUID",
+        "nullable": "No",
+        "key": "PK",
+        "meaning": "Stable identifier of the supplied input."
+      },
+      {
+        "field": "encounter_id",
+        "type": "UUID",
+        "nullable": "No",
+        "key": "FK",
+        "meaning": "Encounter where the input originates."
+      },
+      {
+        "field": "input_kind",
+        "type": "text",
+        "nullable": "No",
+        "key": "Check",
+        "meaning": "Notes, imaging, laboratory or medication."
+      }
+    ],
+    "InputRevision": [
+      {
+        "field": "input_id",
+        "type": "UUID",
+        "nullable": "No",
+        "key": "PK/FK",
+        "meaning": "Clinical input being versioned."
+      },
+      {
+        "field": "revision_no",
+        "type": "integer",
+        "nullable": "No",
+        "key": "PK; >0",
+        "meaning": "Saved revision of this input."
+      },
+      {
+        "field": "content_text",
+        "type": "text",
+        "nullable": "Conditional",
+        "key": "Check",
+        "meaning": "Text content where applicable."
+      },
+      {
+        "field": "file_ref",
+        "type": "text",
+        "nullable": "Conditional",
+        "key": "Check",
+        "meaning": "Stored file reference where applicable."
+      },
+      {
+        "field": "recorded_at",
+        "type": "timestamptz",
+        "nullable": "No",
+        "key": "Required",
+        "meaning": "Revision recording time."
+      }
+    ],
+    "SpecialistFinding": [
+      {
+        "field": "finding_id",
+        "type": "UUID",
+        "nullable": "No",
+        "key": "PK",
+        "meaning": "Unique analysis finding or processing record."
+      },
+      {
+        "field": "input_id",
+        "type": "UUID",
+        "nullable": "No",
+        "key": "FK pair",
+        "meaning": "Source clinical input."
+      },
+      {
+        "field": "input_revision",
+        "type": "integer",
+        "nullable": "No",
+        "key": "FK pair",
+        "meaning": "Exact analysed input revision."
+      },
+      {
+        "field": "agent_kind",
+        "type": "text",
+        "nullable": "No",
+        "key": "Check",
+        "meaning": "Imaging, laboratory or medication agent."
+      },
+      {
+        "field": "model_ref",
+        "type": "text",
+        "nullable": "Yes",
+        "key": "Optional",
+        "meaning": "Model/resource identifier where applicable."
+      },
+      {
+        "field": "finding_text",
+        "type": "text",
+        "nullable": "Conditional",
+        "key": "Check",
+        "meaning": "Available specialist findings."
+      },
+      {
+        "field": "processing_status",
+        "type": "text",
+        "nullable": "No",
+        "key": "Check",
+        "meaning": "Pending, complete or failed."
+      },
+      {
+        "field": "processed_at",
+        "type": "timestamptz",
+        "nullable": "Yes",
+        "key": "Optional",
+        "meaning": "Completion or failure time."
+      }
+    ],
+    "Proposal": [
+      {
+        "field": "proposal_id",
+        "type": "UUID",
+        "nullable": "No",
+        "key": "PK",
+        "meaning": "Stable identifier of a clinical draft."
+      },
+      {
+        "field": "encounter_id",
+        "type": "UUID",
+        "nullable": "No",
+        "key": "FK",
+        "meaning": "Encounter for which the draft is generated."
+      },
+      {
+        "field": "created_at",
+        "type": "timestamptz",
+        "nullable": "No",
+        "key": "Required",
+        "meaning": "Draft creation time."
+      }
+    ],
+    "ProposalRevision": [
+      {
+        "field": "proposal_id",
+        "type": "UUID",
+        "nullable": "No",
+        "key": "PK/FK",
+        "meaning": "Draft being versioned."
+      },
+      {
+        "field": "revision_no",
+        "type": "integer",
+        "nullable": "No",
+        "key": "PK; >0",
+        "meaning": "Saved draft revision."
+      },
+      {
+        "field": "diagnosis_text",
+        "type": "text",
+        "nullable": "No",
+        "key": "Required",
+        "meaning": "Generated or physician-edited diagnosis draft."
+      },
+      {
+        "field": "treatment_text",
+        "type": "text",
+        "nullable": "No",
+        "key": "Required",
+        "meaning": "Generated or physician-edited treatment draft."
+      },
+      {
+        "field": "review_status",
+        "type": "text",
+        "nullable": "No",
+        "key": "Check",
+        "meaning": "Pending, approved or rejected."
+      },
+      {
+        "field": "created_at",
+        "type": "timestamptz",
+        "nullable": "No",
+        "key": "Required",
+        "meaning": "Time this revision is saved."
+      }
+    ],
+    "ProposalInput": [
+      {
+        "field": "proposal_id",
+        "type": "UUID",
+        "nullable": "No",
+        "key": "PK/FK pair",
+        "meaning": "Draft using the input."
+      },
+      {
+        "field": "proposal_revision",
+        "type": "integer",
+        "nullable": "No",
+        "key": "PK/FK pair",
+        "meaning": "Exact draft revision."
+      },
+      {
+        "field": "input_id",
+        "type": "UUID",
+        "nullable": "No",
+        "key": "PK/FK pair",
+        "meaning": "Current or historical source input."
+      },
+      {
+        "field": "input_revision",
+        "type": "integer",
+        "nullable": "No",
+        "key": "PK/FK pair",
+        "meaning": "Exact source input revision used."
+      }
+    ],
+    "CriticReview": [
+      {
+        "field": "critic_id",
+        "type": "UUID",
+        "nullable": "No",
+        "key": "PK",
+        "meaning": "Unique critic-review operation."
+      },
+      {
+        "field": "proposal_id",
+        "type": "UUID",
+        "nullable": "No",
+        "key": "FK pair",
+        "meaning": "Assessed clinical draft."
+      },
+      {
+        "field": "proposal_revision",
+        "type": "integer",
+        "nullable": "No",
+        "key": "FK pair",
+        "meaning": "Exact assessed revision."
+      },
+      {
+        "field": "review_status",
+        "type": "text",
+        "nullable": "No",
+        "key": "Check",
+        "meaning": "Pending, complete or failed."
+      },
+      {
+        "field": "findings_text",
+        "type": "text",
+        "nullable": "Conditional",
+        "key": "Check",
+        "meaning": "Safety and consistency findings when complete."
+      },
+      {
+        "field": "reviewed_at",
+        "type": "timestamptz",
+        "nullable": "Yes",
+        "key": "Optional",
+        "meaning": "Time the review completes or fails."
+      }
+    ],
+    "EvidenceItem": [
+      {
+        "field": "evidence_id",
+        "type": "UUID",
+        "nullable": "No",
+        "key": "PK",
+        "meaning": "Unique retrieved evidence item."
+      },
+      {
+        "field": "source_ref",
+        "type": "text",
+        "nullable": "No",
+        "key": "Required",
+        "meaning": "Citation or source reference."
+      },
+      {
+        "field": "passage_text",
+        "type": "text",
+        "nullable": "No",
+        "key": "Required",
+        "meaning": "Retrieved supporting passage."
+      },
+      {
+        "field": "retrieved_at",
+        "type": "timestamptz",
+        "nullable": "No",
+        "key": "Required",
+        "meaning": "Evidence retrieval time."
+      }
+    ],
+    "ProposalEvidence": [
+      {
+        "field": "proposal_id",
+        "type": "UUID",
+        "nullable": "No",
+        "key": "PK/FK pair",
+        "meaning": "Draft supported by evidence."
+      },
+      {
+        "field": "proposal_revision",
+        "type": "integer",
+        "nullable": "No",
+        "key": "PK/FK pair",
+        "meaning": "Exact supported revision."
+      },
+      {
+        "field": "evidence_id",
+        "type": "UUID",
+        "nullable": "No",
+        "key": "PK/FK",
+        "meaning": "Retrieved evidence item."
+      }
+    ],
+    "PhysicianAction": [
+      {
+        "field": "action_id",
+        "type": "UUID",
+        "nullable": "No",
+        "key": "PK",
+        "meaning": "Unique physician review action."
+      },
+      {
+        "field": "proposal_id",
+        "type": "UUID",
+        "nullable": "No",
+        "key": "FK pair",
+        "meaning": "Clinical draft being reviewed."
+      },
+      {
+        "field": "proposal_revision",
+        "type": "integer",
+        "nullable": "No",
+        "key": "FK pair",
+        "meaning": "Exact reviewed revision."
+      },
+      {
+        "field": "physician_id",
+        "type": "UUID",
+        "nullable": "No",
+        "key": "FK",
+        "meaning": "Physician performing the action."
+      },
+      {
+        "field": "action_kind",
+        "type": "text",
+        "nullable": "No",
+        "key": "Check",
+        "meaning": "Modify, approve or reject."
+      },
+      {
+        "field": "reviewed_text",
+        "type": "text",
+        "nullable": "No",
+        "key": "Required",
+        "meaning": "Snapshot of the content associated with the action."
+      },
+      {
+        "field": "action_at",
+        "type": "timestamptz",
+        "nullable": "No",
+        "key": "Required",
+        "meaning": "Action recording time."
+      }
+    ],
+    "ClinicalDecision": [
+      {
+        "field": "decision_id",
+        "type": "UUID",
+        "nullable": "No",
+        "key": "PK",
+        "meaning": "Unique approved clinical decision."
+      },
+      {
+        "field": "proposal_id",
+        "type": "UUID",
+        "nullable": "No",
+        "key": "FK pair",
+        "meaning": "Originating clinical draft."
+      },
+      {
+        "field": "approved_revision",
+        "type": "integer",
+        "nullable": "No",
+        "key": "FK pair; unique pair",
+        "meaning": "Explicitly accepted draft revision."
+      },
+      {
+        "field": "approval_action_id",
+        "type": "UUID",
+        "nullable": "No",
+        "key": "Unique FK",
+        "meaning": "Matching physician approval action."
+      },
+      {
+        "field": "decision_text",
+        "type": "text",
+        "nullable": "No",
+        "key": "Required",
+        "meaning": "Exact accepted diagnosis and treatment content."
+      },
+      {
+        "field": "recorded_at",
+        "type": "timestamptz",
+        "nullable": "No",
+        "key": "Required",
+        "meaning": "Decision recording time."
+      }
+    ],
+    "SemanticMemory": [
+      {
+        "field": "memory_id",
+        "type": "UUID",
+        "nullable": "No",
+        "key": "PK",
+        "meaning": "Unique semantic representation."
+      },
+      {
+        "field": "input_id",
+        "type": "UUID",
+        "nullable": "Conditional",
+        "key": "FK pair",
+        "meaning": "Input source when applicable."
+      },
+      {
+        "field": "input_revision",
+        "type": "integer",
+        "nullable": "Conditional",
+        "key": "FK pair",
+        "meaning": "Exact input-source revision."
+      },
+      {
+        "field": "decision_id",
+        "type": "UUID",
+        "nullable": "Conditional",
+        "key": "FK",
+        "meaning": "Approved-decision source when applicable."
+      },
+      {
+        "field": "embedding",
+        "type": "vector(TBD)",
+        "nullable": "No",
+        "key": "Required",
+        "meaning": "Vector using the selected embedding dimension."
+      },
+      {
+        "field": "model_ref",
+        "type": "text",
+        "nullable": "No",
+        "key": "Required",
+        "meaning": "Embedding model identifier and version."
+      },
+      {
+        "field": "indexed_at",
+        "type": "timestamptz",
+        "nullable": "No",
+        "key": "Required",
+        "meaning": "Indexing time."
+      }
+    ],
+    "EvaluationCase": [
+      {
+        "field": "case_id",
+        "type": "UUID",
+        "nullable": "No",
+        "key": "PK",
+        "meaning": "Unique permitted evaluation case."
+      },
+      {
+        "field": "encounter_id",
+        "type": "UUID",
+        "nullable": "No",
+        "key": "FK",
+        "meaning": "Case encounter supplying clinical context."
+      },
+      {
+        "field": "source_ref",
+        "type": "text",
+        "nullable": "No",
+        "key": "Required",
+        "meaning": "Dataset or synthetic-case provenance."
+      },
+      {
+        "field": "reference_text",
+        "type": "text",
+        "nullable": "Yes",
+        "key": "Optional",
+        "meaning": "Reference assessment when established."
+      }
+    ],
+    "EvaluationRun": [
+      {
+        "field": "run_id",
+        "type": "UUID",
+        "nullable": "No",
+        "key": "PK",
+        "meaning": "Unique configured research run."
+      },
+      {
+        "field": "variant",
+        "type": "text",
+        "nullable": "No",
+        "key": "Check",
+        "meaning": "Single LLM, memory-augmented or full Zeest."
+      },
+      {
+        "field": "critic_enabled",
+        "type": "boolean",
+        "nullable": "No",
+        "key": "Required",
+        "meaning": "Declared critic configuration."
+      },
+      {
+        "field": "multimodal_enabled",
+        "type": "boolean",
+        "nullable": "No",
+        "key": "Required",
+        "meaning": "Declared multimodal configuration."
+      },
+      {
+        "field": "configuration",
+        "type": "jsonb",
+        "nullable": "No",
+        "key": "Required",
+        "meaning": "Model/resource versions and comparison settings."
+      },
+      {
+        "field": "run_status",
+        "type": "text",
+        "nullable": "No",
+        "key": "Check",
+        "meaning": "Configured, running, complete or failed."
+      },
+      {
+        "field": "started_at",
+        "type": "timestamptz",
+        "nullable": "Yes",
+        "key": "Optional",
+        "meaning": "Actual run start time, when executed."
+      }
+    ],
+    "EvaluationOutput": [
+      {
+        "field": "output_id",
+        "type": "UUID",
+        "nullable": "No",
+        "key": "PK",
+        "meaning": "Unique run/case output."
+      },
+      {
+        "field": "run_id",
+        "type": "UUID",
+        "nullable": "No",
+        "key": "FK; unique pair",
+        "meaning": "Research run producing this output."
+      },
+      {
+        "field": "case_id",
+        "type": "UUID",
+        "nullable": "No",
+        "key": "FK; unique pair",
+        "meaning": "Evaluation case used by the run."
+      },
+      {
+        "field": "output_text",
+        "type": "text",
+        "nullable": "Conditional",
+        "key": "Check",
+        "meaning": "Recorded system output after execution."
+      },
+      {
+        "field": "output_status",
+        "type": "text",
+        "nullable": "No",
+        "key": "Check",
+        "meaning": "Pending, complete or failed."
+      },
+      {
+        "field": "elapsed_ms",
+        "type": "numeric",
+        "nullable": "Yes",
+        "key": "Optional; >=0",
+        "meaning": "Measured duration only when available."
+      }
+    ]
+  },
+  "relationships": [
+    [
+      "Physician",
+      "owns",
+      "Patient",
+      "1",
+      "0..N"
+    ],
+    [
+      "Patient",
+      "has",
+      "Encounter",
+      "1",
+      "0..N"
+    ],
+    [
+      "Encounter",
+      "contains",
+      "ClinicalInput",
+      "1",
+      "0..N"
+    ],
+    [
+      "ClinicalInput",
+      "versions",
+      "InputRevision",
+      "1",
+      "1..N"
+    ],
+    [
+      "InputRevision",
+      "analysed by",
+      "SpecialistFinding",
+      "1",
+      "0..N"
+    ],
+    [
+      "Encounter",
+      "produces",
+      "Proposal",
+      "1",
+      "0..N"
+    ],
+    [
+      "Proposal",
+      "versions",
+      "ProposalRevision",
+      "1",
+      "1..N"
+    ],
+    [
+      "ProposalRevision",
+      "uses",
+      "ProposalInput",
+      "1",
+      "0..N"
+    ],
+    [
+      "InputRevision",
+      "supplies",
+      "ProposalInput",
+      "1",
+      "0..N"
+    ],
+    [
+      "ProposalRevision",
+      "assessed by",
+      "CriticReview",
+      "1",
+      "0..N"
+    ],
+    [
+      "ProposalRevision",
+      "supports",
+      "ProposalEvidence",
+      "1",
+      "0..N"
+    ],
+    [
+      "EvidenceItem",
+      "linked by",
+      "ProposalEvidence",
+      "1",
+      "0..N"
+    ],
+    [
+      "Physician",
+      "performs",
+      "PhysicianAction",
+      "1",
+      "0..N"
+    ],
+    [
+      "ProposalRevision",
+      "reviewed in",
+      "PhysicianAction",
+      "1",
+      "0..N"
+    ],
+    [
+      "PhysicianAction",
+      "authorises",
+      "ClinicalDecision",
+      "1",
+      "0..1"
+    ],
+    [
+      "ProposalRevision",
+      "accepted as",
+      "ClinicalDecision",
+      "1",
+      "0..1"
+    ],
+    [
+      "InputRevision",
+      "represented by",
+      "SemanticMemory",
+      "0..1",
+      "0..N"
+    ],
+    [
+      "ClinicalDecision",
+      "represented by",
+      "SemanticMemory",
+      "0..1",
+      "0..N"
+    ],
+    [
+      "Encounter",
+      "provides",
+      "EvaluationCase",
+      "1",
+      "0..N"
+    ],
+    [
+      "EvaluationCase",
+      "evaluated in",
+      "EvaluationOutput",
+      "1",
+      "0..N"
+    ],
+    [
+      "EvaluationRun",
+      "records",
+      "EvaluationOutput",
+      "1",
+      "0..N"
+    ]
+  ]
+}

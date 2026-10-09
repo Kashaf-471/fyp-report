@@ -1,48 +1,67 @@
 @startuml
-' Owner: Kashaf Ali. Required navigation; GUI images reviewed separately.
+' Owner: Kashaf. Physician/System swimlane retained alongside thumbnails.
 skinparam backgroundColor white
 skinparam shadowing false
-skinparam dpi 180
-skinparam defaultFontName Arial
-skinparam defaultFontSize 16
+skinparam activityBackgroundColor #E2F1EA
+skinparam activityBorderColor #258B76
+skinparam ArrowColor #258B76
+|#EDF6F1|Physician|
 start
-:Log in (UC09);
-:View all patients and patient information
-(UC11, UC12);
-:Review history and open encounter
-(UC01, UC13);
+:Sign Up or Log In
+UC01-UC02;
+|#EDF2FB|Zeest|
+:Validate account and establish session;
+:Display the physician's own patients;
+|Physician|
+:Select patient and existing encounter
+UC03-UC06;
 :Record consultation and correct notes
-(UC02, UC14);
-:Supply available imaging, laboratory
-and medication context
-(UC15, UC16, UC17);
-:Generate and review clinical draft
-(UC04);
-:Inspect evidence and critic findings
-(UC18, UC04);
-if (Physician decision?) then (approve)
- :Approve saved draft revision (UC05);
-else (other action)
- if (Modify?) then (yes)
-  :Save revised draft (UC06);
-  if (Explicitly approve revision?) then (yes)
-   :Approve reviewed revision (UC06);
-  else (no)
-   :Keep revision pending;
-   :Inspect audit history (UC08);
-   :Log out (UC10);
-   stop
-  endif
- else (reject)
-  :Reject draft (UC07);
-  :Retain rejection action;
-  :Inspect audit history (UC08);
-  :Log out (UC10);
-  stop
- endif
+UC07-UC08;
+:Supply clinical inputs
+UC09-UC11;
+|Zeest|
+:Retain input revisions and analyse;
+:Display specialist findings
+UC12;
+|Physician|
+:Request clinical draft
+UC13;
+|Zeest|
+:Retrieve patient history and guidelines;
+:Generate diagnosis and treatment draft;
+:Perform critic review;
+|Physician|
+:Inspect draft, evidence and critic findings
+UC13-UC15;
+while (Modify draft?) is (yes)
+ :Edit and save modification
+UC16;
+ |Zeest|
+ :Retain revised draft as pending;
+ |Physician|
+ :Review revised content;
+endwhile (no)
+if (Approve?) then (yes)
+ :Confirm approval
+UC17;
+ |Zeest|
+ :Validate reviewed revision and record decision;
+ :Record approval action;
+ |Physician|
+ :View approved decision
+UC19;
+else (reject)
+ :Confirm rejection
+UC18;
+ |Zeest|
+ :Retain rejected state and record action;
 endif
-:Record approved revision and audit action;
-:Inspect audit history (UC08);
-:Log out (UC10);
+|Physician|
+:Inspect audit history
+UC20;
+:Log Out
+UC21;
+|Zeest|
+:End session;
 stop
 @enduml

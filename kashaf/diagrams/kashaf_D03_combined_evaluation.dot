@@ -1,0 +1,59 @@
+digraph Chen {
+graph [rankdir=LR,compound=true,bgcolor="white",pad="0.25",nodesep="0.15",ranksep="0.30",dpi=240];
+node [fontname="Arial",fontsize=12,penwidth=1.1];
+edge [fontname="Arial",fontsize=10,color="#779289",dir=none];
+EvaluationCase [shape=box,style=filled,fillcolor="#72A8DC",fontcolor="white",color="#4E83B7",label="EvaluationCase"];
+EvaluationCase_a0 [shape=ellipse,style=filled,fillcolor="#D9EEDD",color="#8DBD98",label=<<U>case_id</U>>,fontsize=10];
+EvaluationCase -> EvaluationCase_a0 [color="#B7C7BB",penwidth=.7];
+EvaluationCase_a1 [shape=ellipse,style=filled,fillcolor="#D9EEDD",color="#8DBD98",label=<encounter_id <FONT POINT-SIZE="9">FK</FONT>>,fontsize=10];
+EvaluationCase -> EvaluationCase_a1 [color="#B7C7BB",penwidth=.7];
+EvaluationCase_a2 [shape=ellipse,style=filled,fillcolor="#D9EEDD",color="#8DBD98",label=<source_ref>,fontsize=10];
+EvaluationCase -> EvaluationCase_a2 [color="#B7C7BB",penwidth=.7];
+EvaluationCase_a3 [shape=ellipse,style=filled,fillcolor="#D9EEDD",color="#8DBD98",label=<reference_text>,fontsize=10];
+EvaluationCase -> EvaluationCase_a3 [color="#B7C7BB",penwidth=.7];
+{rank=same; EvaluationCase_a0;EvaluationCase_a1;EvaluationCase_a2;EvaluationCase_a3;}
+EvaluationRun [shape=box,style=filled,fillcolor="#72A8DC",fontcolor="white",color="#4E83B7",label="EvaluationRun"];
+EvaluationRun_a0 [shape=ellipse,style=filled,fillcolor="#D9EEDD",color="#8DBD98",label=<<U>run_id</U>>,fontsize=10];
+EvaluationRun -> EvaluationRun_a0 [color="#B7C7BB",penwidth=.7];
+EvaluationRun_a1 [shape=ellipse,style=filled,fillcolor="#D9EEDD",color="#8DBD98",label=<variant>,fontsize=10];
+EvaluationRun -> EvaluationRun_a1 [color="#B7C7BB",penwidth=.7];
+EvaluationRun_a2 [shape=ellipse,style=filled,fillcolor="#D9EEDD",color="#8DBD98",label=<critic_enabled>,fontsize=10];
+EvaluationRun -> EvaluationRun_a2 [color="#B7C7BB",penwidth=.7];
+EvaluationRun_a3 [shape=ellipse,style=filled,fillcolor="#D9EEDD",color="#8DBD98",label=<multimodal_enabled>,fontsize=10];
+EvaluationRun -> EvaluationRun_a3 [color="#B7C7BB",penwidth=.7];
+EvaluationRun_a4 [shape=ellipse,style=filled,fillcolor="#D9EEDD",color="#8DBD98",label=<configuration>,fontsize=10];
+EvaluationRun -> EvaluationRun_a4 [color="#B7C7BB",penwidth=.7];
+EvaluationRun_a5 [shape=ellipse,style=filled,fillcolor="#D9EEDD",color="#8DBD98",label=<run_status>,fontsize=10];
+EvaluationRun -> EvaluationRun_a5 [color="#B7C7BB",penwidth=.7];
+EvaluationRun_a6 [shape=ellipse,style=filled,fillcolor="#D9EEDD",color="#8DBD98",label=<started_at>,fontsize=10];
+EvaluationRun -> EvaluationRun_a6 [color="#B7C7BB",penwidth=.7];
+{rank=same; EvaluationRun_a0;EvaluationRun_a1;EvaluationRun_a2;EvaluationRun_a3;EvaluationRun_a4;EvaluationRun_a5;EvaluationRun_a6;}
+EvaluationOutput [shape=box,style=filled,fillcolor="#72A8DC",fontcolor="white",color="#4E83B7",label="EvaluationOutput"];
+EvaluationOutput_a0 [shape=ellipse,style=filled,fillcolor="#D9EEDD",color="#8DBD98",label=<<U>output_id</U>>,fontsize=10];
+EvaluationOutput -> EvaluationOutput_a0 [color="#B7C7BB",penwidth=.7];
+EvaluationOutput_a1 [shape=ellipse,style=filled,fillcolor="#D9EEDD",color="#8DBD98",label=<run_id <FONT POINT-SIZE="9">FK</FONT>>,fontsize=10];
+EvaluationOutput -> EvaluationOutput_a1 [color="#B7C7BB",penwidth=.7];
+EvaluationOutput_a2 [shape=ellipse,style=filled,fillcolor="#D9EEDD",color="#8DBD98",label=<case_id <FONT POINT-SIZE="9">FK</FONT>>,fontsize=10];
+EvaluationOutput -> EvaluationOutput_a2 [color="#B7C7BB",penwidth=.7];
+EvaluationOutput_a3 [shape=ellipse,style=filled,fillcolor="#D9EEDD",color="#8DBD98",label=<output_text>,fontsize=10];
+EvaluationOutput -> EvaluationOutput_a3 [color="#B7C7BB",penwidth=.7];
+EvaluationOutput_a4 [shape=ellipse,style=filled,fillcolor="#D9EEDD",color="#8DBD98",label=<output_status>,fontsize=10];
+EvaluationOutput -> EvaluationOutput_a4 [color="#B7C7BB",penwidth=.7];
+EvaluationOutput_a5 [shape=ellipse,style=filled,fillcolor="#D9EEDD",color="#8DBD98",label=<elapsed_ms>,fontsize=10];
+EvaluationOutput -> EvaluationOutput_a5 [color="#B7C7BB",penwidth=.7];
+{rank=same; EvaluationOutput_a0;EvaluationOutput_a1;EvaluationOutput_a2;EvaluationOutput_a3;EvaluationOutput_a4;EvaluationOutput_a5;}
+Encounter [shape=box,style=filled,fillcolor="#72A8DC",fontcolor="white",color="#4E83B7",label="Encounter"];
+Encounter_a0 [shape=ellipse,style=filled,fillcolor="#D9EEDD",color="#8DBD98",label=<<U>encounter_id</U>>,fontsize=10];
+Encounter -> Encounter_a0 [color="#B7C7BB",penwidth=.7];
+Encounter_a1 [shape=ellipse,style=filled,fillcolor="#D9EEDD",color="#8DBD98",label=<patient_id <FONT POINT-SIZE="9">FK</FONT>>,fontsize=10];
+Encounter -> Encounter_a1 [color="#B7C7BB",penwidth=.7];
+Encounter_a2 [shape=ellipse,style=filled,fillcolor="#D9EEDD",color="#8DBD98",label=<recorded_at>,fontsize=10];
+Encounter -> Encounter_a2 [color="#B7C7BB",penwidth=.7];
+{rank=same; Encounter_a0;Encounter_a1;Encounter_a2;}
+r18 [shape=diamond,style=filled,fillcolor="#F1D8AC",color="#C59D60",label="provides",fontsize=10];
+Encounter -> r18 [taillabel="1",labeldistance=1.6]; r18 -> EvaluationCase [headlabel="0..N",labeldistance=1.6];
+r19 [shape=diamond,style=filled,fillcolor="#F1D8AC",color="#C59D60",label="evaluated in",fontsize=10];
+EvaluationCase -> r19 [taillabel="1",labeldistance=1.6]; r19 -> EvaluationOutput [headlabel="0..N",labeldistance=1.6];
+r20 [shape=diamond,style=filled,fillcolor="#F1D8AC",color="#C59D60",label="records",fontsize=10];
+EvaluationRun -> r20 [taillabel="1",labeldistance=1.6]; r20 -> EvaluationOutput [headlabel="0..N",labeldistance=1.6];
+}

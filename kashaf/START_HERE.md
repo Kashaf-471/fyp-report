@@ -36,3 +36,11 @@ Use a separate clone and branch `report/kashaf`. Consult others' HANDOFF.md file
 ## Kashaf approval and style rules
 
 Review two chapters at a time. Obtain approval for the outline before drafting, then show the draft in chat and obtain explicit approval before saving. Do not change shared files during chapter writing. Use Zeest with capital Z; do not use em dashes in authored prose. The user approved direct file writing for Chapters 1, 2 and both halves of Chapter 4. Obtain approval before starting any further writing task.
+
+
+## Current chapter revision
+
+Chapters 1/2/4 have been concisely rewritten under user approval. Use the latest HANDOFF.md entry and USE_CASE_AUDIT.md for current FR01?FR44/UC01?UC22 IDs and coverage. Physicians register and access their own patients only. Patient creation/encounter creation and ownership assignment remain decisions to resolve; navigation/ERD/GUI alignment is deferred. Ordinary substantive paragraphs now use the user's approved 100?120-word target, overriding the earlier 150-word rule for these chapters. Other owners' files remain untouched.
+
+
+Current GUI/database integration: Chapter 4 includes all mapped GUI screens, colourful navigation and the eighteen-entity Chen-style ERD/dictionary. Read diagrams/REPORT_VISUALS.md and the latest HANDOFF.md entry; earlier statements that these sections remain deferred are superseded. Source schema is diagrams/kashaf_schema.json.

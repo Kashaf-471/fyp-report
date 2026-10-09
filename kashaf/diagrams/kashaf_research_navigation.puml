@@ -1,0 +1,17 @@
+@startuml
+' Owner: Kashaf. Research navigation, UC22.
+!theme plain
+left to right direction
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam rectangleBorderColor #29796E
+skinparam rectangleBackgroundColor #E5F2EC
+skinparam ArrowColor #29796E
+rectangle "Select permitted cases\nand reference assessments" as A
+rectangle "Select variants\nand comparison settings" as B
+rectangle "Validate configuration\nand run evaluation" as C
+rectangle "Inspect outputs linked\nto case and configuration" as D
+A --> B
+B --> C
+C --> D
+@enduml

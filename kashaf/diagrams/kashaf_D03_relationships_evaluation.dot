@@ -1,0 +1,15 @@
+digraph ER {
+graph [rankdir=TB,bgcolor="white",pad="0.25",nodesep="0.40",ranksep="0.6",dpi=200];
+node [fontname="Arial",fontsize=16,shape=box,style=filled,fillcolor="#DDF0E7",color="#368D7D",penwidth=1.4,margin="0.14,0.1"];
+edge [fontname="Arial",fontsize=13,color="#7C9690",dir=none];
+Encounter;
+EvaluationCase;
+EvaluationRun;
+EvaluationOutput;
+r18 [shape=diamond,fillcolor="#FFF0CC",color="#C89C4F",label="provides",fontsize=13];
+Encounter -> r18 [taillabel="1",labeldistance=1.6]; r18 -> EvaluationCase [headlabel="0..N",labeldistance=1.6];
+r19 [shape=diamond,fillcolor="#FFF0CC",color="#C89C4F",label="evaluated in",fontsize=13];
+EvaluationCase -> r19 [taillabel="1",labeldistance=1.6]; r19 -> EvaluationOutput [headlabel="0..N",labeldistance=1.6];
+r20 [shape=diamond,fillcolor="#FFF0CC",color="#C89C4F",label="records",fontsize=13];
+EvaluationRun -> r20 [taillabel="1",labeldistance=1.6]; r20 -> EvaluationOutput [headlabel="0..N",labeldistance=1.6];
+}

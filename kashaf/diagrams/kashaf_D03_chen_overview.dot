@@ -1,0 +1,68 @@
+digraph ER {
+graph [rankdir=TB,bgcolor="white",pad="0.3",nodesep="0.45",ranksep="0.6",dpi=200];
+node [fontname="Arial",fontsize=15,style="filled",color="#368D7D",fillcolor="#E0F2EB",shape=box,penwidth=1.4,margin="0.15,0.10"];
+edge [fontname="Arial",fontsize=12,color="#7C9690",dir=none];
+Physician [label="Physician"];
+Patient [label="Patient"];
+Encounter [label="Encounter"];
+ClinicalInput [label="ClinicalInput"];
+InputRevision [label="InputRevision"];
+SpecialistFinding [label="SpecialistFinding"];
+Proposal [label="Proposal"];
+ProposalRevision [label="ProposalRevision"];
+ProposalInput [label="ProposalInput"];
+CriticReview [label="CriticReview"];
+EvidenceItem [label="EvidenceItem"];
+ProposalEvidence [label="ProposalEvidence"];
+PhysicianAction [label="PhysicianAction"];
+ClinicalDecision [label="ClinicalDecision"];
+SemanticMemory [label="SemanticMemory"];
+EvaluationCase [label="EvaluationCase"];
+EvaluationRun [label="EvaluationRun"];
+EvaluationOutput [label="EvaluationOutput"];
+r0 [shape=diamond,fillcolor="#FFF0CC",color="#C89C4F",label="owns",fontsize=12];
+Physician -> r0 [taillabel="1",labeldistance=1.6]; r0 -> Patient [headlabel="0..N",labeldistance=1.6];
+r1 [shape=diamond,fillcolor="#FFF0CC",color="#C89C4F",label="has",fontsize=12];
+Patient -> r1 [taillabel="1",labeldistance=1.6]; r1 -> Encounter [headlabel="0..N",labeldistance=1.6];
+r2 [shape=diamond,fillcolor="#FFF0CC",color="#C89C4F",label="contains",fontsize=12];
+Encounter -> r2 [taillabel="1",labeldistance=1.6]; r2 -> ClinicalInput [headlabel="0..N",labeldistance=1.6];
+r3 [shape=diamond,fillcolor="#FFF0CC",color="#C89C4F",label="versions",fontsize=12];
+ClinicalInput -> r3 [taillabel="1",labeldistance=1.6]; r3 -> InputRevision [headlabel="1..N",labeldistance=1.6];
+r4 [shape=diamond,fillcolor="#FFF0CC",color="#C89C4F",label="analysed by",fontsize=12];
+InputRevision -> r4 [taillabel="1",labeldistance=1.6]; r4 -> SpecialistFinding [headlabel="0..N",labeldistance=1.6];
+r5 [shape=diamond,fillcolor="#FFF0CC",color="#C89C4F",label="produces",fontsize=12];
+Encounter -> r5 [taillabel="1",labeldistance=1.6]; r5 -> Proposal [headlabel="0..N",labeldistance=1.6];
+r6 [shape=diamond,fillcolor="#FFF0CC",color="#C89C4F",label="versions",fontsize=12];
+Proposal -> r6 [taillabel="1",labeldistance=1.6]; r6 -> ProposalRevision [headlabel="1..N",labeldistance=1.6];
+r7 [shape=diamond,fillcolor="#FFF0CC",color="#C89C4F",label="uses",fontsize=12];
+ProposalRevision -> r7 [taillabel="1",labeldistance=1.6]; r7 -> ProposalInput [headlabel="0..N",labeldistance=1.6];
+r8 [shape=diamond,fillcolor="#FFF0CC",color="#C89C4F",label="supplies",fontsize=12];
+InputRevision -> r8 [taillabel="1",labeldistance=1.6]; r8 -> ProposalInput [headlabel="0..N",labeldistance=1.6];
+r9 [shape=diamond,fillcolor="#FFF0CC",color="#C89C4F",label="assessed by",fontsize=12];
+ProposalRevision -> r9 [taillabel="1",labeldistance=1.6]; r9 -> CriticReview [headlabel="0..N",labeldistance=1.6];
+r10 [shape=diamond,fillcolor="#FFF0CC",color="#C89C4F",label="supports",fontsize=12];
+ProposalRevision -> r10 [taillabel="1",labeldistance=1.6]; r10 -> ProposalEvidence [headlabel="0..N",labeldistance=1.6];
+r11 [shape=diamond,fillcolor="#FFF0CC",color="#C89C4F",label="linked by",fontsize=12];
+EvidenceItem -> r11 [taillabel="1",labeldistance=1.6]; r11 -> ProposalEvidence [headlabel="0..N",labeldistance=1.6];
+r12 [shape=diamond,fillcolor="#FFF0CC",color="#C89C4F",label="performs",fontsize=12];
+Physician -> r12 [taillabel="1",labeldistance=1.6]; r12 -> PhysicianAction [headlabel="0..N",labeldistance=1.6];
+r13 [shape=diamond,fillcolor="#FFF0CC",color="#C89C4F",label="reviewed in",fontsize=12];
+ProposalRevision -> r13 [taillabel="1",labeldistance=1.6]; r13 -> PhysicianAction [headlabel="0..N",labeldistance=1.6];
+r14 [shape=diamond,fillcolor="#FFF0CC",color="#C89C4F",label="authorises",fontsize=12];
+PhysicianAction -> r14 [taillabel="1",labeldistance=1.6]; r14 -> ClinicalDecision [headlabel="0..1",labeldistance=1.6];
+r15 [shape=diamond,fillcolor="#FFF0CC",color="#C89C4F",label="accepted as",fontsize=12];
+ProposalRevision -> r15 [taillabel="1",labeldistance=1.6]; r15 -> ClinicalDecision [headlabel="0..1",labeldistance=1.6];
+r16 [shape=diamond,fillcolor="#FFF0CC",color="#C89C4F",label="represented by",fontsize=12];
+InputRevision -> r16 [taillabel="0..1",labeldistance=1.6]; r16 -> SemanticMemory [headlabel="0..N",labeldistance=1.6];
+r17 [shape=diamond,fillcolor="#FFF0CC",color="#C89C4F",label="represented by",fontsize=12];
+ClinicalDecision -> r17 [taillabel="0..1",labeldistance=1.6]; r17 -> SemanticMemory [headlabel="0..N",labeldistance=1.6];
+r18 [shape=diamond,fillcolor="#FFF0CC",color="#C89C4F",label="provides",fontsize=12];
+Encounter -> r18 [taillabel="1",labeldistance=1.6]; r18 -> EvaluationCase [headlabel="0..N",labeldistance=1.6];
+r19 [shape=diamond,fillcolor="#FFF0CC",color="#C89C4F",label="evaluated in",fontsize=12];
+EvaluationCase -> r19 [taillabel="1",labeldistance=1.6]; r19 -> EvaluationOutput [headlabel="0..N",labeldistance=1.6];
+r20 [shape=diamond,fillcolor="#FFF0CC",color="#C89C4F",label="records",fontsize=12];
+EvaluationRun -> r20 [taillabel="1",labeldistance=1.6]; r20 -> EvaluationOutput [headlabel="0..N",labeldistance=1.6];
+{rank=same;Physician;Patient;}
+{rank=same;ClinicalInput;Proposal;EvaluationCase;}
+{rank=same;InputRevision;ProposalRevision;EvaluationRun;}
+}

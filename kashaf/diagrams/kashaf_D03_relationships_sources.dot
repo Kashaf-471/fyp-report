@@ -1,0 +1,26 @@
+digraph ER {
+graph [rankdir=TB,bgcolor="white",pad="0.25",nodesep="0.35",ranksep="0.70",dpi=200];
+node [fontname="Arial",fontsize=16,shape=box,style=filled,fillcolor="#DDF0E7",color="#368D7D",penwidth=1.4,margin="0.14,0.1"];
+edge [fontname="Arial",fontsize=13,color="#7C9690",dir=none];
+InputRevision;
+ProposalRevision;
+ProposalInput;
+EvidenceItem;
+ProposalEvidence;
+ClinicalDecision;
+SemanticMemory;
+r7 [shape=diamond,fillcolor="#FFF0CC",color="#C89C4F",label="uses",fontsize=13];
+ProposalRevision -> r7 [taillabel="1",labeldistance=1.6]; r7 -> ProposalInput [headlabel="0..N",labeldistance=1.6];
+r8 [shape=diamond,fillcolor="#FFF0CC",color="#C89C4F",label="supplies",fontsize=13];
+InputRevision -> r8 [taillabel="1",labeldistance=1.6]; r8 -> ProposalInput [headlabel="0..N",labeldistance=1.6];
+r10 [shape=diamond,fillcolor="#FFF0CC",color="#C89C4F",label="supports",fontsize=13];
+ProposalRevision -> r10 [taillabel="1",labeldistance=1.6]; r10 -> ProposalEvidence [headlabel="0..N",labeldistance=1.6];
+r11 [shape=diamond,fillcolor="#FFF0CC",color="#C89C4F",label="linked by",fontsize=13];
+EvidenceItem -> r11 [taillabel="1",labeldistance=1.6]; r11 -> ProposalEvidence [headlabel="0..N",labeldistance=1.6];
+r15 [shape=diamond,fillcolor="#FFF0CC",color="#C89C4F",label="accepted as",fontsize=13];
+ProposalRevision -> r15 [taillabel="1",labeldistance=1.6]; r15 -> ClinicalDecision [headlabel="0..1",labeldistance=1.6];
+r16 [shape=diamond,fillcolor="#FFF0CC",color="#C89C4F",label="represented by",fontsize=13];
+InputRevision -> r16 [taillabel="0..1",labeldistance=1.6]; r16 -> SemanticMemory [headlabel="0..N",labeldistance=1.6];
+r17 [shape=diamond,fillcolor="#FFF0CC",color="#C89C4F",label="represented by",fontsize=13];
+ClinicalDecision -> r17 [taillabel="0..1",labeldistance=1.6]; r17 -> SemanticMemory [headlabel="0..N",labeldistance=1.6];
+}

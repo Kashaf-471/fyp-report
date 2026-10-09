@@ -1,0 +1,20 @@
+digraph ER {
+graph [rankdir=TB,bgcolor="white",pad="0.25",nodesep="0.35",ranksep="0.70",dpi=200];
+node [fontname="Arial",fontsize=16,shape=box,style=filled,fillcolor="#DDF0E7",color="#368D7D",penwidth=1.4,margin="0.14,0.1"];
+edge [fontname="Arial",fontsize=13,color="#7C9690",dir=none];
+Physician;
+ProposalRevision;
+CriticReview;
+PhysicianAction;
+ClinicalDecision;
+r9 [shape=diamond,fillcolor="#FFF0CC",color="#C89C4F",label="assessed by",fontsize=13];
+ProposalRevision -> r9 [taillabel="1",labeldistance=1.6]; r9 -> CriticReview [headlabel="0..N",labeldistance=1.6];
+r12 [shape=diamond,fillcolor="#FFF0CC",color="#C89C4F",label="performs",fontsize=13];
+Physician -> r12 [taillabel="1",labeldistance=1.6]; r12 -> PhysicianAction [headlabel="0..N",labeldistance=1.6];
+r13 [shape=diamond,fillcolor="#FFF0CC",color="#C89C4F",label="reviewed in",fontsize=13];
+ProposalRevision -> r13 [taillabel="1",labeldistance=1.6]; r13 -> PhysicianAction [headlabel="0..N",labeldistance=1.6];
+r14 [shape=diamond,fillcolor="#FFF0CC",color="#C89C4F",label="authorises",fontsize=13];
+PhysicianAction -> r14 [taillabel="1",labeldistance=1.6]; r14 -> ClinicalDecision [headlabel="0..1",labeldistance=1.6];
+r15 [shape=diamond,fillcolor="#FFF0CC",color="#C89C4F",label="accepted as",fontsize=13];
+ProposalRevision -> r15 [taillabel="1",labeldistance=1.6]; r15 -> ClinicalDecision [headlabel="0..1",labeldistance=1.6];
+}

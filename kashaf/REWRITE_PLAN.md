@@ -269,3 +269,13 @@ Approve or adjust login/logout, View All Patients, patient selection, current-en
 ### Implemented presentation adjustment
 
 User requested paragraphs near the 150-word minimum, correctly bold template headings, sequential FR numbering and numbered QA descriptions. Applied within Chapters 1/2/4. Current FR IDs are FR01–FR38 in workflow order; HANDOFF.md records the migration. QA01–QA07 now correspond to seven numbered subsections. Historical plan IDs above are superseded. GUI remains pending separate review.
+
+
+### Approved concise rewrite completed
+
+The subsequently approved plan supersedes the earlier 150-word presentation and numbering sections. Chapters 1/2/4 use substantive paragraphs of approximately 100?120 words and concise leads for tables. Current contracts: FR01?FR44 and UC01?UC22. Sign Up is included, and each physician accesses only their own patients. Read USE_CASE_AUDIT.md and the latest HANDOFF.md entry for coverage, migrations and remaining patient-creation/encounter-creation decisions. Navigation, ERD and GUI revisions are deferred as requested.
+
+
+### GUI/database integration completed
+
+Under the later explicit approval, the revised GUI screens and user/use-case mappings, colourful navigation and complete Chen-style database design are now inserted into Chapter 4. Eighteen entities/ninety-one attributes match the dictionary. See diagrams/REPORT_VISUALS.md and the latest HANDOFF.md entry. Earlier deferral notes above are historical.
