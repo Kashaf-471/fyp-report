@@ -2,7 +2,7 @@
 top to bottom direction
 skinparam backgroundColor #FFFFFF
 skinparam shadowing false
-skinparam defaultFontName Arial
+skinparam defaultFontName "Helvetica", "Arial", sans-serif
 skinparam defaultFontSize 14
 skinparam dpi 160
 skinparam nodesep 30
@@ -44,7 +44,6 @@ component [Workflow Orchestrator\nShared encounter context and status] as Engine
 package "1  Context" as IntakePkg {
     component [Patient Memory Agent\nPatient ID -> relevant history] as PMAgent
     component [Clinical Case Agent\nNotes + history -> case summary] as CCAgent
-    PMAgent --> CCAgent : history
 }
 
 package "2  Specialist Analysis" as SpecialistPkg {
@@ -57,15 +56,20 @@ package "3  Evidence, Synthesis and Review" as GovernancePkg {
     component [Evidence & RAG Agent\nCase query -> cited evidence] as RAGAgent
     component [Clinical Reasoning Agent\nContext + findings + evidence -> draft] as ReasoningAgent
     component [Safety & Critic Agent\nDraft + evidence -> review and flags] as CriticAgent
-    RAGAgent --> ReasoningAgent : citations
-    ReasoningAgent --> CriticAgent : draft
 }
 
 Engine --> PMAgent : retrieve
-IntakePkg --> SpecialistPkg : case context
-SpecialistPkg --> GovernancePkg : multimodal findings
-IntakePkg --> GovernancePkg : case context and evidence query
-CriticAgent --> [Physician Review] : reviewed package
+PMAgent --> CCAgent : history
+CCAgent --> ImgAgent : case context
+CCAgent --> LabAgent
+CCAgent --> MedAgent
+ImgAgent --> ReasoningAgent : findings
+LabAgent --> ReasoningAgent
+MedAgent --> ReasoningAgent
+CCAgent --> RAGAgent : evidence query
+RAGAgent --> ReasoningAgent : citations
+ReasoningAgent --> CriticAgent : draft proposal
+CriticAgent --> Engine : reviewed package
 
 note right of Engine
   Scheduling and failure handling remain proposed.

@@ -1,7 +1,7 @@
 @startuml esha_D11_approval_states
 skinparam backgroundColor #FFFFFF
 skinparam shadowing false
-skinparam defaultFontName Arial
+skinparam defaultFontName "Helvetica", "Arial", sans-serif
 skinparam defaultFontSize 14
 skinparam dpi 160
 skinparam nodesep 32
